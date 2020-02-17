@@ -1,0 +1,24 @@
+cd Desktop
+cd Folder
+
+
+
+git status
+git pull
+
+//u finish something
+
+git add *
+git commit -m "Name, what you did"
+git push
+
+
+
+//u finish something but someone change something before you were done
+git status
+git stash
+git pull
+git stash pop //check code to see if it works
+git add *
+git commit -m "Name, what you did"
+git push

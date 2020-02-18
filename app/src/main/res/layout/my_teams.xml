@@ -5,7 +5,7 @@
 
     <TextView
         android:id="@+id/myTeamText"
-        android:layout_width="168dp"
+        android:layout_width="198dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
@@ -13,12 +13,13 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="138dp"
-        android:layout_marginLeft="138dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginLeft="108dp"
         android:layout_marginTop="38dp"
         android:layout_marginEnd="105dp"
         android:layout_marginRight="105dp"
-        android:text="@string/my_fantasy_teams" />
+        android:text="@string/my_fantasy_teams"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
 
     <Spinner
         android:id="@+id/teamSpinner"

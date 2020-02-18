@@ -16,7 +16,7 @@
         android:text="@string/add_players" />
 
     <SearchView
-        android:id="@+id/searchAddPlayers"
+        android:id="@+id/searchEditPlayers"
         android:layout_width="342dp"
         android:layout_height="41dp"
         android:layout_below="@+id/editPlayersText"
@@ -30,7 +30,7 @@
         android:layout_marginBottom="594dp" />
 
     <ListView
-        android:id="@+id/listAddPlayers"
+        android:id="@+id/listEditPlayers"
         android:layout_width="334dp"
         android:layout_height="508dp"
         android:layout_below="@+id/null"

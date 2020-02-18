@@ -16,7 +16,7 @@
         android:text="@string/create_account" />
 
     <EditText
-        android:id="@+id/emailInput"
+        android:id="@+id/emailInputCreateAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/createAccountText"
@@ -27,10 +27,10 @@
         android:text="@string/email" />
 
     <EditText
-        android:id="@+id/passwordInput"
+        android:id="@+id/passwordInputCreateAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/emailInput"
+        android:layout_below="@+id/emailInputCreateAccount"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="58dp"
         android:ems="10"
@@ -38,17 +38,18 @@
         android:text="@string/password" />
 
     <Button
-        android:id="@+id/signUpButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/passwordInput"
+        android:id="@+id/confirmCreateAccount"
+        android:layout_width="178dp"
+        android:layout_height="78dp"
+        android:layout_below="@+id/passwordInputCreateAccount"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="376dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="42dp"
-        android:text="@string/sign_up" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="165dp"
+        android:layout_marginEnd="114dp"
+        android:layout_marginRight="114dp"
+        android:layout_marginBottom="222dp"
+        android:text="@string/confirm" />
 
 </RelativeLayout>

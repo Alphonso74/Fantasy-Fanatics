@@ -23,7 +23,7 @@
         android:layout_below="@+id/createAccountText"
         android:autofillHints="email"
         android:hint="@string/email"
-        android:inputType="text"
+        android:inputType="textEmailAddress"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="67dp"
         android:ems="10"
@@ -38,9 +38,10 @@
         android:layout_marginTop="58dp"
         android:autofillHints="password"
         android:ems="10"
-        android:inputType="text"
+
         android:hint="@string/password"
-         tools:targetApi="o" />
+         tools:targetApi="o"
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/confirmCreateAccount"

@@ -25,10 +25,10 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         android:autofillHints="email"
-        android:hint="Email"
+        android:hint="@string/email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fantasyFanaticsText" />
+        app:layout_constraintTop_toBottomOf="@+id/fantasyFanaticsText" tools:targetApi="o" />
 
     <EditText
         android:id="@+id/passwordInputMainPage"
@@ -36,11 +36,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Password"
+        android:inputType="textPassword"
+        android:hint="@string/password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailMainPage" />
+        app:layout_constraintTop_toBottomOf="@+id/emailMainPage"
+        android:autofillHints="@string/password" tools:targetApi="o"/>
 
     <Button
         android:id="@+id/confirmCreateAccount"

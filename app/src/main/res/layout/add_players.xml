@@ -15,35 +15,4 @@
         android:layout_marginTop="17dp"
         android:text="@string/add_players" />
 
-    <SearchView
-        android:id="@+id/searchAddPlayers"
-        android:layout_width="342dp"
-        android:layout_height="41dp"
-        android:layout_below="@+id/editPlayersText"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="21dp"
-        android:layout_marginLeft="21dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginBottom="594dp" />
-
-    <ListView
-        android:id="@+id/listAddPlayers"
-        android:layout_width="334dp"
-        android:layout_height="508dp"
-        android:layout_below="@+id/null"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginRight="52dp"
-        android:layout_marginBottom="75dp" />
 </RelativeLayout>

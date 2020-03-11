@@ -20,5 +20,7 @@
     <string name="button">Button</string>
     <string name="back_button">Back</string>
     <string name="delete_button">Delete</string>
+    <string name="add_player">Add Player</string>
+
 
 </resources>

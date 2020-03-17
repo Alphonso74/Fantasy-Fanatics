@@ -45,6 +45,7 @@
 
     <Button
         android:id="@+id/confirmCreateAccount"
+        android:onClick="signupChangePage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="96dp"
@@ -58,6 +59,7 @@
 
     <Button
         android:id="@+id/confirmMainPage"
+        android:onClick="confirmChangePage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"

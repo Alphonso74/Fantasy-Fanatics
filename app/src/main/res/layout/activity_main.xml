@@ -45,12 +45,13 @@
 
     <Button
         android:id="@+id/confirmCreateAccount"
-        android:onClick="signupChangePage"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="96dp"
         android:layout_marginLeft="96dp"
         android:layout_marginTop="80dp"
+        android:onClick="signupChangePage"
         android:text="@string/sign_up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,12 +60,13 @@
 
     <Button
         android:id="@+id/confirmMainPage"
-        android:onClick="confirmChangePage"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="84dp"
         android:layout_marginRight="84dp"
+        android:onClick="confirmChangePage"
         android:text="@string/confirm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

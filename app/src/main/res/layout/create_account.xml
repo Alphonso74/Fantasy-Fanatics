@@ -30,10 +30,23 @@
        tools:targetApi="o" />
 
     <EditText
-        android:id="@+id/passwordInputCreateAccount"
+        android:id="@+id/usernameInputCreateAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/emailInputCreateAccount"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="58dp"
+        android:autofillHints="Username"
+        android:ems="10"
+        android:hint="UserName"
+        android:inputType="text"
+        tools:targetApi="o" />
+
+    <EditText
+        android:id="@+id/passwordInputCreateAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/usernameInputCreateAccount"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="58dp"
         android:autofillHints="password"
@@ -44,18 +57,28 @@
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/confirmCreateAccount"
-        android:layout_width="178dp"
-        android:layout_height="78dp"
+        android:id="@+id/confirmCreateAccount1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/progressBar"
+
         android:layout_below="@+id/passwordInputCreateAccount"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginRight="131dp"
+        android:layout_marginBottom="21dp"
+        android:text="@string/create_account" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="66dp"
-        android:layout_marginEnd="113dp"
-        android:layout_marginRight="113dp"
-        android:layout_marginBottom="321dp"
-        android:text="@string/confirm" />
+        android:layout_marginBottom="196dp" />
 
 </RelativeLayout>

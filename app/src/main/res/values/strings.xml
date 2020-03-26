@@ -6,7 +6,7 @@
     <string name="password">Password</string>
     <string name="sign_up">Sign Up</string>
     <string name="fantasy_fanatics">Fantasy Fanatics</string>
-    <string name="confirm">Confirm</string>
+    <string name="confirm">Sign In</string>
     <string name="my_fantasy_teams">My Fantasy Teams</string>
     <string name="add">Add</string>
     <string name="edit_players">Edit Players</string>
@@ -21,6 +21,8 @@
     <string name="back_button">Back</string>
     <string name="delete_button">Delete</string>
     <string name="add_player">Add Player</string>
+    <string name="title_activity_create_user">createUser</string>
+    <string name="title_activity_my_teams_page">MyTeamsPage</string>
 
 
 </resources>

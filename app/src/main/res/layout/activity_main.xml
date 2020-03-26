@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
+        android:fontFamily="@font/audiowide"
         android:text="@string/fantasy_fanatics"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,29 +20,33 @@
 
     <EditText
         android:id="@+id/emailMainPage"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
         android:autofillHints="email"
+        android:ems="10"
         android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fantasyFanaticsText" tools:targetApi="o" />
+        app:layout_constraintTop_toBottomOf="@+id/fantasyFanaticsText"
+        tools:targetApi="o" />
 
     <EditText
         android:id="@+id/passwordInputMainPage"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
+        android:autofillHints="@string/password"
         android:ems="10"
-        android:inputType="textPassword"
         android:hint="@string/password"
+        android:inputType="textPassword"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailMainPage"
-        android:autofillHints="@string/password" tools:targetApi="o"/>
+        tools:targetApi="o" />
 
     <Button
         android:id="@+id/confirmCreateAccount"
@@ -51,12 +56,13 @@
         android:layout_marginStart="96dp"
         android:layout_marginLeft="96dp"
         android:layout_marginTop="80dp"
-        android:onClick="signupChangePage"
+
         android:text="@string/sign_up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordInputMainPage"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        />
 
     <Button
         android:id="@+id/confirmMainPage"
@@ -66,7 +72,6 @@
         android:layout_marginTop="80dp"
         android:layout_marginEnd="84dp"
         android:layout_marginRight="84dp"
-        android:onClick="confirmChangePage"
         android:text="@string/confirm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,4 +79,14 @@
         app:layout_constraintStart_toEndOf="@+id/confirmCreateAccount"
         app:layout_constraintTop_toBottomOf="@+id/passwordInputMainPage"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="150dp"
+        android:layout_height="123dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirmCreateAccount" />
 </androidx.constraintlayout.widget.ConstraintLayout>

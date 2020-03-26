@@ -9,18 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
-
-
-       <activity android:name=".CreateAccountActivity" android:exported="true"/>
-       <activity android:name=".MyTeamActivity" android:exported="true" />
-
-
-
-
-
-
+        <activity
+            android:name=".MyTeamsPage"
+            android:label="@string/title_activity_my_teams_page"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".createUser"
+            android:label="@string/title_activity_create_user" />
+        <activity
+            android:name=".CreateAccountActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MyTeamActivity"
+            android:exported="true" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +29,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

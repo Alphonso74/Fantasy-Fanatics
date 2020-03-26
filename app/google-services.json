@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "928858898092",
+    "firebase_url": "https://fantasy-fanatics-25012.firebaseio.com",
+    "project_id": "fantasy-fanatics-25012",
+    "storage_bucket": "fantasy-fanatics-25012.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:928858898092:android:8d87b7a3bb78d718cf6909",
+        "android_client_info": {
+          "package_name": "psu.ajm6684.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "928858898092-bbbrirm3cltg8ff7d3ebedllmh0et7j4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "psu.ajm6684.myapplication",
+            "certificate_hash": "86bfef38f42c190376f6362d99a02540fc5c17fb"
+          }
+        },
+        {
+          "client_id": "928858898092-btvl80fqpuqlrk2jv1ulc5s8teajdald.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMh0pNrTYnOlTsj9J26SEx3NCNXB5f7NQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "928858898092-btvl80fqpuqlrk2jv1ulc5s8teajdald.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

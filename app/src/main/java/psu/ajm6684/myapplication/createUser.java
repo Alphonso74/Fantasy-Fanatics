@@ -62,8 +62,7 @@ public class createUser extends AppCompatActivity {
         if(firebaseAuth.getCurrentUser() != null){
 
            // Toast.makeText(getApplicationContext(), "Account already created", Toast.LENGTH_LONG).show();
-            Snackbar.make(getCurrentFocus(), "Account already created", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+
 
 
         }
@@ -72,9 +71,7 @@ public class createUser extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //Toast.makeText(getApplicationContext(), "Click!", Toast.LENGTH_SHORT).show();
-                Snackbar.make(getCurrentFocus(), "Click!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+         
 
 
                 progressBar.setVisibility(View.VISIBLE);
@@ -93,9 +90,8 @@ public class createUser extends AppCompatActivity {
                         || password.getText().toString().isEmpty()) {
 
 
-                   // Toast.makeText(getApplicationContext(), "Empty Credentials", Toast.LENGTH_LONG).show();
-                    Snackbar.make(getCurrentFocus(), "Empty Credentials", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                    Toast.makeText(getApplicationContext(), "Empty Credentials", Toast.LENGTH_LONG).show();
+
                     progressBar.setVisibility(View.INVISIBLE);
                     return;
                 }
@@ -116,9 +112,8 @@ public class createUser extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
 
-                               // Toast.makeText(getApplicationContext(), "User Created", Toast.LENGTH_LONG).show();
-                                Snackbar.make(getCurrentFocus(), "User Created", Snackbar.LENGTH_LONG)
-                                        .setAction("Action", null).show();
+                                Toast.makeText(getApplicationContext(), "User Created", Toast.LENGTH_LONG).show();
+
                                 Uid = firebaseAuth.getCurrentUser().getUid();
                                 DocumentReference documentReference = firestore.collection("Users").document(Uid);
 
@@ -130,9 +125,8 @@ public class createUser extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(Void aVoid) {
 
-                                       // Toast.makeText(getApplicationContext(), "Account Created" , Toast.LENGTH_LONG).show();
-                                        Snackbar.make(getCurrentFocus(), "Account Created", Snackbar.LENGTH_LONG)
-                                                .setAction("Action", null).show();
+                                       Toast.makeText(getApplicationContext(), "Account Created" , Toast.LENGTH_LONG).show();
+
                                         progressBar.setVisibility(View.VISIBLE);
 
                                         System.out.println("Success" + Uid);
@@ -144,9 +138,8 @@ public class createUser extends AppCompatActivity {
 
                             }
                             else{
-                               // Toast.makeText(getApplicationContext(), "Error!" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                                Snackbar.make(getCurrentFocus(), "Error!", Snackbar.LENGTH_LONG)
-                                        .setAction("Action", null).show();
+                                Toast.makeText(getApplicationContext(), "Error!" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+
                                 progressBar.setVisibility(View.INVISIBLE);
 
                             }

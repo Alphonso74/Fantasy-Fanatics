@@ -10,6 +10,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -43,7 +44,7 @@ public class createUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
-
+        //this one
 
         confirmButton = (Button) findViewById(R.id.buttonSignUp);
         final EditText user = (EditText) findViewById(R.id.usernameInputCreateAccount);
@@ -61,7 +62,7 @@ public class createUser extends AppCompatActivity {
 
         if(firebaseAuth.getCurrentUser() != null){
 
-           // Toast.makeText(getApplicationContext(), "Account already created", Toast.LENGTH_LONG).show();
+         //   Toast.makeText(getApplicationContext(), "Account already created", Toast.LENGTH_LONG).show();
 
 
 
@@ -71,7 +72,7 @@ public class createUser extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-         
+
 
 
                 progressBar.setVisibility(View.VISIBLE);
@@ -121,6 +122,10 @@ public class createUser extends AppCompatActivity {
                                 userMap.put("userName",user1);
                                 userMap.put("email",email1);
 
+
+
+
+
                                 documentReference.set(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
@@ -130,8 +135,15 @@ public class createUser extends AppCompatActivity {
                                         progressBar.setVisibility(View.VISIBLE);
 
                                         System.out.println("Success" + Uid);
+
+
+
                                     }
                                 });
+
+
+
+
 
                                 Intent intent = new Intent(createUser.this, MainActivity.class);
                                 startActivity(intent);

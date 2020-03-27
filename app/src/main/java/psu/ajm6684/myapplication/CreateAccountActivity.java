@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -57,10 +58,8 @@ public class CreateAccountActivity  extends AppCompatActivity {
 
         if(firebaseAuth.getCurrentUser() != null){
 
-           // Toast.makeText(getApplicationContext(), "Account already created", Toast.LENGTH_LONG).show();
+        //    Toast.makeText(getApplicationContext(), "Account already created", Toast.LENGTH_LONG).show();
 
-            Snackbar.make(getCurrentFocus(), "Account already created", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
 
         }
 
@@ -85,9 +84,8 @@ public class CreateAccountActivity  extends AppCompatActivity {
                         || password.getText().toString().isEmpty()) {
 
 
-                    //Toast.makeText(getApplicationContext(), "Empty Credentials", Toast.LENGTH_LONG).show();
-                    Snackbar.make(getCurrentFocus(), "Empty Credentials", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                    Toast.makeText(getApplicationContext(), "Empty Credentials", Toast.LENGTH_LONG).show();
+
                     progressBar.setVisibility(View.INVISIBLE);
                     return;
                 }
@@ -120,16 +118,24 @@ public class CreateAccountActivity  extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(Void aVoid) {
 
+
+
                                         System.out.println("Success" + Uid);
                                     }
                                 });
+
+
+                                CollectionReference ref = firestore.collection("Users").document(Uid).collection("teams");
+                                ref.add("test");
+
+
 
                                 Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
                                 startActivity(intent);
 
                             }
                             else{
-                               // Toast.makeText(getApplicationContext(), "Error!" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                               Toast.makeText(getApplicationContext(), "Error!" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                 Snackbar.make(getCurrentFocus(), "Error!", Snackbar.LENGTH_LONG)
                                         .setAction("Action", null).show();
                                 progressBar.setVisibility(View.INVISIBLE);

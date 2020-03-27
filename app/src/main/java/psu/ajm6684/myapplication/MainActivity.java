@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -94,7 +95,9 @@ public class MainActivity extends AppCompatActivity {
 
                 if(email.getText().toString().isEmpty() || password.getText().toString().isEmpty()){
 
-                    Toast.makeText(getApplicationContext(), "Missing Fields Need to Entered", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "Missing Fields", Toast.LENGTH_LONG).show();
+                    Snackbar.make(getCurrentFocus(), "Missing Fields", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
 
                     loadingProgressBar.setVisibility(View.INVISIBLE);
                 }
@@ -109,7 +112,8 @@ public class MainActivity extends AppCompatActivity {
 
                             FirebaseUser user = firebaseAuth.getCurrentUser();
                             //updateUiWithUser(user);
-                            Toast.makeText(getApplicationContext(), "Logged in user: " + mail, Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(), "Logged in user: " + mail, Toast.LENGTH_LONG).show();
+                           // Snackbar.make(getCurrentFocus(), "Logged in user: " + mail, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                            openMyTeamsActivity();
 
                            loadingProgressBar.setVisibility(View.INVISIBLE);
@@ -117,7 +121,9 @@ public class MainActivity extends AppCompatActivity {
                         }
                         else{
 
-                            Toast.makeText(getApplicationContext(), "Incorrect Credentials! " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                           // Toast.makeText(getApplicationContext(), "Incorrect Credentials! " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            Snackbar.make(getCurrentFocus(), "Incorrect Credentials", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
                             //updateUiWithUser(null);
 
                             loadingProgressBar.setVisibility(View.INVISIBLE);

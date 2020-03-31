@@ -12,6 +12,7 @@
         <activity
             android:name=".MyTeamsPage"
             android:label="@string/title_activity_my_teams_page"
+
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".createUser"
@@ -22,6 +23,11 @@
         <activity
             android:name=".MyTeamActivity"
             android:exported="true" />
+        <activity android:name=".PreferenceActivity"
+            android:exported="true" />
+
+
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

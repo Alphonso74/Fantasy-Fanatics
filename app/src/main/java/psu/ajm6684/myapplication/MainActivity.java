@@ -66,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent confirmPage = new Intent(MainActivity.this, MyTeamActivity.class);
-                startActivity(confirmPage);
+                //Intent confirmPage = new Intent(MainActivity.this, MyTeamActivity.class);
+                //startActivity(confirmPage);
             }
         });
 

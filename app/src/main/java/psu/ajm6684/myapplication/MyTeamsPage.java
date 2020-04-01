@@ -39,14 +39,14 @@ public class MyTeamsPage extends AppCompatActivity {
 
     private teamAdapter TeamAdapter;
 
-// =======
 
 
-// public class MyTeamsPage extends AppCompatActivity {
+
+
 
 
     Button preference;
-// >>>>>>> 75590586d83d80e83700e5e335d65ca5af82fdd7
+
 
     Button logout;
 
@@ -95,7 +95,7 @@ public class MyTeamsPage extends AppCompatActivity {
 
     }
 
-// <<<<<<< HEAD
+
     public void collectionGroupQuery() {
         // [START fs_collection_group_query]
         db.collectionGroup("Teams").get()
@@ -168,7 +168,7 @@ public class MyTeamsPage extends AppCompatActivity {
 //        recyclerView.setAdapter(TeamAdapter);
     }
 
-// =======
+
     public void moveToPreference()
     {
         Intent confirmPage = new Intent(getApplicationContext(), PreferenceActivity.class);
@@ -176,5 +176,5 @@ public class MyTeamsPage extends AppCompatActivity {
     }
 
 
-// >>>>>>> 75590586d83d80e83700e5e335d65ca5af82fdd7
+
 }

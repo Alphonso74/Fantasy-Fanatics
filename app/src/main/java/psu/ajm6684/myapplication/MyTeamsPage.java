@@ -1,5 +1,6 @@
 package psu.ajm6684.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -22,12 +23,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.View;
+// <<<<<<< HEAD
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import android.widget.Button;
 public class MyTeamsPage extends AppCompatActivity {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -37,6 +39,14 @@ public class MyTeamsPage extends AppCompatActivity {
 
     private teamAdapter TeamAdapter;
 
+// =======
+
+
+// public class MyTeamsPage extends AppCompatActivity {
+
+
+    Button preference;
+// >>>>>>> 75590586d83d80e83700e5e335d65ca5af82fdd7
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +56,15 @@ public class MyTeamsPage extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
+// <<<<<<< HEAD
 //        Query afs = Users.document().collectionGroup("Teams");
 
         collectionGroupQuery();
 
         setUpView();
 
+// =======
+// >>>>>>> 75590586d83d80e83700e5e335d65ca5af82fdd7
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,8 +73,18 @@ public class MyTeamsPage extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        preference = findViewById(R.id.preferenceButton);
+        preference.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                moveToPreference();
+            }
+        });
+
     }
 
+// <<<<<<< HEAD
     public void collectionGroupQuery() {
         // [START fs_collection_group_query]
         db.collectionGroup("Teams").get()
@@ -134,4 +157,13 @@ public class MyTeamsPage extends AppCompatActivity {
 //        recyclerView.setAdapter(TeamAdapter);
     }
 
+// =======
+    public void moveToPreference()
+    {
+        Intent confirmPage = new Intent(getApplicationContext(), PreferenceActivity.class);
+        startActivity(confirmPage);
+    }
+
+
+// >>>>>>> 75590586d83d80e83700e5e335d65ca5af82fdd7
 }

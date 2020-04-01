@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/fantasyFanaticsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/audiowide"
+        android:text="@string/pref"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:gravity="center"
+        android:layout_width="172dp"
+        android:layout_height="71dp"
+        android:layout_below="@+id/fantasyFanaticsText"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="123dp"
+        android:layout_marginTop="116dp"
+        android:text="@string/prefswitch" />
+</RelativeLayout>

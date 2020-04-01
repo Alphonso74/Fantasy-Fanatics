@@ -48,23 +48,26 @@ public class MyTeamsPage extends AppCompatActivity {
     Button preference;
 // >>>>>>> 75590586d83d80e83700e5e335d65ca5af82fdd7
 
+    Button logout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_teams_page);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
 
-// <<<<<<< HEAD
+
+
 //        Query afs = Users.document().collectionGroup("Teams");
 
         collectionGroupQuery();
 
         setUpView();
 
-// =======
-// >>>>>>> 75590586d83d80e83700e5e335d65ca5af82fdd7
+        logout = (Button) findViewById(R.id.logoutButton) ;
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +82,14 @@ public class MyTeamsPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 moveToPreference();
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                finish();
             }
         });
 

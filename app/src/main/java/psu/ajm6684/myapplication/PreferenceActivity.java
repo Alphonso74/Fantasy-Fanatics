@@ -1,6 +1,8 @@
 package psu.ajm6684.myapplication;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -13,12 +15,15 @@ public class PreferenceActivity  extends AppCompatActivity {
 
     Switch aSwitch;
 
+    Button backButton;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.preference_page);
 
+        backButton = (Button) findViewById(R.id.backbutton);
         aSwitch = findViewById(R.id.switch1);
 
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -37,6 +42,16 @@ public class PreferenceActivity  extends AppCompatActivity {
 
             }
         });
+
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
 
     }
 }

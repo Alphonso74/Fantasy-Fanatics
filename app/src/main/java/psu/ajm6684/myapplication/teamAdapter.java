@@ -73,6 +73,8 @@ public class teamAdapter extends FirestoreRecyclerAdapter<Teams, teamAdapter.tea
 
 
 
+
+
     class teamHolder extends RecyclerView.ViewHolder{
         TextView teamNameView;
         TextView guardView;

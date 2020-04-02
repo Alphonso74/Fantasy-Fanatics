@@ -1,6 +1,7 @@
 package psu.ajm6684.myapplication;
 
 import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -39,9 +40,10 @@ public class MyTeamsPage extends AppCompatActivity {
 
     private teamAdapter TeamAdapter;
 
+    private ArrayList<Teams> teamsList;
 
 
-
+    RecyclerView recyclerView ;
 
 
 
@@ -58,13 +60,14 @@ public class MyTeamsPage extends AppCompatActivity {
         //setSupportActionBar(toolbar);
 
 
-
+recyclerView = findViewById(R.id.recycler_view);
+        teamsList = new ArrayList<Teams>();
 
 //        Query afs = Users.document().collectionGroup("Teams");
 
         collectionGroupQuery();
 
-        setUpView();
+       //setUpView();
 
         logout = (Button) findViewById(R.id.logoutButton) ;
 
@@ -98,75 +101,98 @@ public class MyTeamsPage extends AppCompatActivity {
 
     public void collectionGroupQuery() {
         // [START fs_collection_group_query]
-        db.collectionGroup("Teams").get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        // [START_EXCLUDE]
-                        for (QueryDocumentSnapshot snap : queryDocumentSnapshots) {
-                            Log.d("Data", snap.getId() + " => " + snap.getData());
-
-
-                        }
-                        // [END_EXCLUDE]
-                    }
-                });
-        // [END fs_collection_group_query]
-    }
-
-
-    private void setUpView(){
-
-
+//        db.collectionGroup("Teams").get()
+//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//        @Override
+//        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//            // [START_EXCLUDE]
+//            for (QueryDocumentSnapshot snap : queryDocumentSnapshots) {
+//                Log.d("Data", snap.getId() + " => " + snap.getData());
+//
+//
+//            }
+//            // [END_EXCLUDE]
+//        }
+//    });
+    // [END fs_collection_group_query]
 
         db.collectionGroup("Teams").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                List<Teams> teamsList = new ArrayList<>();
+
+                FirestoreRecyclerOptions<Teams> options = new FirestoreRecyclerOptions.Builder<Teams>().setQuery(team,Teams.class).build();
+
+//                List<Teams> mMissionsList = new ArrayList<>();
                 if(task.isSuccessful()){
                     for(QueryDocumentSnapshot document : task.getResult()) {
                         Teams team = document.toObject(Teams.class);
                         teamsList.add(team);
+                        Log.d("MissionActivity", document.getId() + " => " + document.getData());
                     }
-                    RecyclerView recyclerView = findViewById(R.id.recycler_view);
+//                    ListView mMissionsListView = (ListView) findViewById(R.id.missionList);
+                    TeamAdapter = new teamAdapter(options);
 //                    MissionsAdapter mMissionAdapter = new MissionsAdapter(this, mMissionsList);
-                    //teamAdapter TeamAdapter = new teamAdapter()
-                   // mMissionsListView.setAdapter(mMissionAdapter);
+                    recyclerView.setAdapter(TeamAdapter);
                 } else {
                     Log.d("MissionActivity", "Error getting documents: ", task.getException());
                 }
             }
         });
+}
 
-//        Query query = team ;
-//
-////        QueryDocumentSnapshot = team;
-//
-//        System.out.println("HEllllo " + team.get().toString());
-//
-////        Log.d("Query", team.toString());
+
+//    private void setUpView(){
 //
 //
 //
+//        db.collectionGroup("Teams").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                List<Teams> teamsList = new ArrayList<>();
+//                if(task.isSuccessful()){
+//                    for(QueryDocumentSnapshot document : task.getResult()) {
+//                        Teams team = document.toObject(Teams.class);
+//                        teamsList.add(team);
+//                    }
+//                    RecyclerView recyclerView = findViewById(R.id.recycler_view);
+////                    MissionsAdapter mMissionAdapter = new MissionsAdapter(this, mMissionsList);
+//                    //teamAdapter TeamAdapter = new teamAdapter()
+//                   // mMissionsListView.setAdapter(mMissionAdapter);
+//                } else {
+//                    Log.d("MissionActivity", "Error getting documents: ", task.getException());
+//                }
+//            }
+//        });
 //
-//        // Query nurses = patients.document().;
-//
-//
-//
-//
-//
-//
-//        FirestoreRecyclerOptions<Teams> options = new FirestoreRecyclerOptions.Builder<Teams>().setQuery(query,Teams.class).build();
-//
-//        TeamAdapter = new teamAdapter(options);
-//
-//
-//
-//        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView.setAdapter(TeamAdapter);
-    }
+////        Query query = team ;
+////
+//////        QueryDocumentSnapshot = team;
+////
+////        System.out.println("HEllllo " + team.get().toString());
+////
+//////        Log.d("Query", team.toString());
+////
+////
+////
+////
+////        // Query nurses = patients.document().;
+////
+////
+////
+////
+////
+////
+////        FirestoreRecyclerOptions<Teams> options = new FirestoreRecyclerOptions.Builder<Teams>().setQuery(query,Teams.class).build();
+////
+////        TeamAdapter = new teamAdapter(options);
+////
+////
+////
+////        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+////        recyclerView.setHasFixedSize(true);
+////        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+////        recyclerView.setAdapter(TeamAdapter);
+//    }
 
 
     public void moveToPreference()

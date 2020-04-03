@@ -50,7 +50,7 @@ public class MyTeamsPage extends AppCompatActivity {
     DocumentReference ajm = Users.document("gGUiNmpauHhsnbDe6pYhr47ddB52");
 
     CollectionReference myTeam = ajm.collection("Teams");
-
+int backButtonCount = 0;
 
 
     private Query team = db.collectionGroup("Teams");
@@ -80,7 +80,7 @@ public class MyTeamsPage extends AppCompatActivity {
     //do not delete
     FirebaseFirestore firestore;
     FirebaseAuth firebaseAuth;
-    FirebaseUser current;
+
     DocumentReference mode;
     //do not delete
 

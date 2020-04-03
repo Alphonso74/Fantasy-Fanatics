@@ -10,7 +10,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -18,6 +22,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,6 +35,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import android.widget.Button;
 public class MyTeamsPage extends AppCompatActivity {
 
@@ -52,12 +59,70 @@ public class MyTeamsPage extends AppCompatActivity {
 
     Button logout;
 
+    //do not delete
+    FirebaseFirestore firestore;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser current;
+    DocumentReference mode;
+    //do not delete
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_teams_page);
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
+
+        //do not delete
+        firebaseAuth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
+        current = firebaseAuth.getCurrentUser();
+        //do not delete
+
+        mode = firestore.collection("Users").document(current.getUid());
+
+        mode.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        List<String> list = new ArrayList<>();
+
+                        Map<String, Object> map = document.getData();
+                        if (map != null) {
+                            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                                list.add(entry.getValue().toString());
+                            }
+                        }
+
+                        //So what you need to do with your list
+                        for (String s : list) {
+
+                            if(s.equals("light"))
+                            {
+
+                                getDelegate().setLocalNightMode((AppCompatDelegate.MODE_NIGHT_NO));
+                                break;
+                            }
+
+                            if (s.equals("dark"))
+                            {
+                                getDelegate().setLocalNightMode((AppCompatDelegate.MODE_NIGHT_YES));
+                                break;
+                            }
+
+                        }
+                    }
+                }
+            }
+        });
+
+
+
+
 
 
 recyclerView = findViewById(R.id.recycler_view);

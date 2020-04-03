@@ -32,9 +32,9 @@ public class createUser extends AppCompatActivity {
     String Uid;
 
     FirebaseFirestore firestore;
+    //
 //
-//
-    Button confirmButton ;
+    Button confirmButton;
 
     FirebaseAuth firebaseAuth;
     ProgressBar progressBar;
@@ -59,11 +59,9 @@ public class createUser extends AppCompatActivity {
         System.out.println("test");
 
 
+        if (firebaseAuth.getCurrentUser() != null) {
 
-        if(firebaseAuth.getCurrentUser() != null){
-
-         //   Toast.makeText(getApplicationContext(), "Account already created", Toast.LENGTH_LONG).show();
-
+            //   Toast.makeText(getApplicationContext(), "Account already created", Toast.LENGTH_LONG).show();
 
 
         }
@@ -73,12 +71,10 @@ public class createUser extends AppCompatActivity {
             public void onClick(View v) {
 
 
-
-
                 progressBar.setVisibility(View.VISIBLE);
 
 
-                if(password.length() < 6){
+                if (password.length() < 6) {
 
                     password.setError("Password must be longer than 6 characters!");
                     progressBar.setVisibility(View.INVISIBLE);
@@ -86,7 +82,7 @@ public class createUser extends AppCompatActivity {
                 }
 
 
-                if(user.getText().toString().isEmpty()
+                if (user.getText().toString().isEmpty()
                         || email.getText().toString().isEmpty()
                         || password.getText().toString().isEmpty()) {
 
@@ -95,10 +91,7 @@ public class createUser extends AppCompatActivity {
 
                     progressBar.setVisibility(View.INVISIBLE);
                     return;
-                }
-
-                else
-                {
+                } else {
 
                     final String email1 = email.getText().toString().trim();
                     final String password1 = password.getText().toString().trim();
@@ -106,51 +99,43 @@ public class createUser extends AppCompatActivity {
                     final String user1 = user.getText().toString().trim();
 
 
-                    firebaseAuth.createUserWithEmailAndPassword(email1,password1).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    firebaseAuth.createUserWithEmailAndPassword(email1, password1).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
 
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
 
                                 Toast.makeText(getApplicationContext(), "User Created", Toast.LENGTH_LONG).show();
 
                                 Uid = firebaseAuth.getCurrentUser().getUid();
                                 DocumentReference documentReference = firestore.collection("Users").document(Uid);
 
-                                Map<String,Object> userMap = new HashMap<>();
-                                userMap.put("userName",user1);
-                                userMap.put("email",email1);
-                                userMap.put("mode",lightnDark);
-
-
-
+                                Map<String, Object> userMap = new HashMap<>();
+                                userMap.put("userName", user1);
+                                userMap.put("email", email1);
+                                userMap.put("mode", lightnDark);
 
 
                                 documentReference.set(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
 
-                                       Toast.makeText(getApplicationContext(), "Account Created" , Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getApplicationContext(), "Account Created", Toast.LENGTH_LONG).show();
 
                                         progressBar.setVisibility(View.VISIBLE);
 
                                         System.out.println("Success" + Uid);
 
 
-
                                     }
                                 });
-
-
-
 
 
                                 Intent intent = new Intent(createUser.this, MainActivity.class);
                                 startActivity(intent);
 
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(getApplicationContext(), "Error!" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
 
                                 progressBar.setVisibility(View.INVISIBLE);
@@ -158,9 +143,6 @@ public class createUser extends AppCompatActivity {
                             }
                         }
                     });
-
-
-
 
 
                 }

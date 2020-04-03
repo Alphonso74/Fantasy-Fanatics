@@ -46,8 +46,6 @@ public class PreferenceActivity  extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.preference_page);
-
-        backButton = (Button) findViewById(R.id.backbutton);
         aSwitch = findViewById(R.id.switch1);
 
         firebaseAuth = FirebaseAuth.getInstance();

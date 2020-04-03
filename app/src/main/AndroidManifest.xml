@@ -23,7 +23,8 @@
             android:exported="true" />
         <activity android:name=".PreferenceActivity"
             android:exported="true" />
-
+        <activity android:name=".AddTeamActivity"
+            android:exported="true" />
 
 
         <activity android:name=".MainActivity">

@@ -32,7 +32,7 @@ public class PreferenceActivity  extends AppCompatActivity {
 
     Button backButton;
 
-    String Uid;
+
     FirebaseFirestore firestore;
     FirebaseAuth firebaseAuth;
     FirebaseUser current;
@@ -55,7 +55,7 @@ public class PreferenceActivity  extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         current = firebaseAuth.getCurrentUser();
 
-        View currentFocus = getWindow().getCurrentFocus();
+        //View currentFocus = getWindow().getCurrentFocus();
 
 
 

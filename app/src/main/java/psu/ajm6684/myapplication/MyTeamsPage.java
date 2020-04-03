@@ -142,8 +142,9 @@ recyclerView = findViewById(R.id.recycler_view);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Will be to Add Team", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent confirmPage = new Intent(getApplicationContext(), AddTeamActivity.class);
+                startActivity(confirmPage);
+
             }
         });
 

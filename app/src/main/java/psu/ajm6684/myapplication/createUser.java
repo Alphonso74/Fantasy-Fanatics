@@ -56,7 +56,7 @@ public class createUser extends AppCompatActivity {
 
 
         progressBar.setVisibility(View.INVISIBLE);
-
+        System.out.println("test");
 
 
 

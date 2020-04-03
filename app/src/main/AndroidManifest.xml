@@ -17,9 +17,7 @@
         <activity
             android:name=".createUser"
             android:label="@string/title_activity_create_user" />
-        <activity
-            android:name=".CreateAccountActivity"
-            android:exported="true" />
+
         <activity
             android:name=".MyTeamActivity"
             android:exported="true" />

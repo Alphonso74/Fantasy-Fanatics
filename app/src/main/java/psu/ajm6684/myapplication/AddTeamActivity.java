@@ -1,12 +1,14 @@
 package psu.ajm6684.myapplication;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,43 +26,33 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-public class PreferenceActivity  extends AppCompatActivity {
-
-
-    Switch aSwitch;
-
-    Button backButton;
+public class AddTeamActivity extends  AppCompatActivity{
 
 
+    Button submit;
+    TextView teamName;
     FirebaseFirestore firestore;
     FirebaseAuth firebaseAuth;
     FirebaseUser current;
     DocumentReference mode;
-
-
+    int backButtonCount = 0;
 
 
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.preference_page);
-        aSwitch = findViewById(R.id.switch1);
+        setContentView(R.layout.add_players);
+
+        submit = findViewById(R.id.confirmbtn);
+        teamName = findViewById(R.id.teamNameSubmit);
+
+
+
 
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
         current = firebaseAuth.getCurrentUser();
-
-        //View currentFocus = getWindow().getCurrentFocus();
-
-
-
-
-
-
-
-
         mode = firestore.collection("Users").document(current.getUid());
 
         mode.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -83,14 +75,13 @@ public class PreferenceActivity  extends AppCompatActivity {
 
                             if(s.equals("light"))
                             {
-                                aSwitch.setChecked(false);
+
                                 getDelegate().setLocalNightMode((AppCompatDelegate.MODE_NIGHT_NO));
                                 break;
                             }
 
                             if (s.equals("dark"))
                             {
-                                aSwitch.setChecked(true);
                                 getDelegate().setLocalNightMode((AppCompatDelegate.MODE_NIGHT_YES));
                                 break;
                             }
@@ -104,50 +95,25 @@ public class PreferenceActivity  extends AppCompatActivity {
 
 
 
-
-        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b)
-                {
-                    getDelegate().setLocalNightMode((AppCompatDelegate.MODE_NIGHT_YES));
-
-                    firestore.collection("Users").document(current.getUid()).update("mode", "dark");
-
-
-                }
-                else
-                {
-                    getDelegate().setLocalNightMode((AppCompatDelegate.MODE_NIGHT_NO));
-                    firestore.collection("Users").document(current.getUid()).update("mode", "light");
-                }
-
-
-
-            }
-        });
-
-
-
-
-
-
-
-
-
-
-
     }
+
 
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getBaseContext(), MyTeamsPage.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        PreferenceActivity.this.finish();
-        //moveTaskToBack(true);
+
+        if(backButtonCount >= 1)
+        {
+           finish();
+        }
+        else
+        {
+            Toast.makeText(this, "Pressing the back button again will lose unsaved progress.", Toast.LENGTH_SHORT).show();
+            backButtonCount++;
+        }
     }
+
+
 
 
 }

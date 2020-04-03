@@ -4,59 +4,43 @@
 
     >
 
-
-
     <TextView
-        android:id="@+id/addPlayer"
-        android:layout_width="match_parent"
+        android:id="@+id/teamNameSubmit"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="false"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="0dp"
-        android:fontFamily="sans-serif-thin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="130dp"
+        android:fontFamily="@font/audiowide"
         android:gravity="center"
-        android:text="@string/add_player"
+        android:text="@string/create_team"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
 
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-
-
-        android:textSize="46sp" tools:targetApi="jelly_bean" />
-
-    <ScrollView
-
-        android:id="@+id/listContact"
-        android:layout_width="match_parent"
-        android:layout_height="504dp"
-        android:layout_below="@+id/button33"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="50dp">
-
-        <LinearLayout
-            android:id="@+id/contactscroller"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-
-        </LinearLayout>
-    </ScrollView>
-
-    <Button
-        android:id="@+id/button33"
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/usernameInputCreateAccount"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/addPlayer"
+        android:layout_below="@+id/teamNameSubmit"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="0dp"
-        android:gravity="center"
-        android:text="@string/add" />
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="100dp"
+        android:autofillHints="Username"
+        android:ems="10"
+        android:hint="@string/team_name"
+        android:inputType="text"
+        tools:targetApi="o" />
 
-
+    <Button
+        android:id="@+id/confirmbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="160dp"
+        android:layout_marginBottom="85dp"
+        android:text="@string/confirmed" />
 </RelativeLayout>

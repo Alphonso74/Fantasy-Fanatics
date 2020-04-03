@@ -14,6 +14,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+
+import com.google.firebase.firestore.DocumentSnapshot;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -21,6 +24,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,7 +37,11 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import android.widget.Button;
+import android.widget.Toast;
+
 public class MyTeamsPage extends AppCompatActivity {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -69,6 +77,15 @@ public class MyTeamsPage extends AppCompatActivity {
     Button logout;
 //    Query specific ;
 
+    //do not delete
+    FirebaseFirestore firestore;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser current;
+    DocumentReference mode;
+    //do not delete
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +106,55 @@ public class MyTeamsPage extends AppCompatActivity {
 //        specific = Users.document("gGUiNmpauHhsnbDe6pYhr47ddB52").collection("Teams");
 
 
+        //do not delete
+        firebaseAuth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
+        current = firebaseAuth.getCurrentUser();
+        //do not delete
+
+        mode = firestore.collection("Users").document(current.getUid());
+
+        mode.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        List<String> list = new ArrayList<>();
+
+                        Map<String, Object> map = document.getData();
+                        if (map != null) {
+                            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                                list.add(entry.getValue().toString());
+                            }
+                        }
+
+                        //So what you need to do with your list
+                        for (String s : list) {
+
+                            if(s.equals("light"))
+                            {
+
+                                getDelegate().setLocalNightMode((AppCompatDelegate.MODE_NIGHT_NO));
+                                break;
+                            }
+
+                            if (s.equals("dark"))
+                            {
+                                getDelegate().setLocalNightMode((AppCompatDelegate.MODE_NIGHT_YES));
+                                break;
+                            }
+
+                        }
+                    }
+                }
+            }
+        });
+
+
+
+
+
 
 recyclerView = findViewById(R.id.recycler_view);
         teamsList = new ArrayList<Teams>();
@@ -105,8 +171,9 @@ recyclerView = findViewById(R.id.recycler_view);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Will be to Add Team", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent confirmPage = new Intent(getApplicationContext(), AddTeamActivity.class);
+                startActivity(confirmPage);
+
             }
         });
 
@@ -238,5 +305,22 @@ recyclerView = findViewById(R.id.recycler_view);
         super.onStop();
         TeamAdapter.stopListening();
     }
+    public void onBackPressed() {
+
+        if(backButtonCount >= 1)
+        {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        else
+        {
+            Toast.makeText(this, "Press the back button once again to close the application.", Toast.LENGTH_SHORT).show();
+            backButtonCount++;
+        }
+    }
+
+
 
 }

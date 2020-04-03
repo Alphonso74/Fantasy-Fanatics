@@ -102,7 +102,7 @@ public class createUser extends AppCompatActivity {
 
                     final String email1 = email.getText().toString().trim();
                     final String password1 = password.getText().toString().trim();
-
+                    final String lightnDark = "light";
                     final String user1 = user.getText().toString().trim();
 
 
@@ -121,6 +121,7 @@ public class createUser extends AppCompatActivity {
                                 Map<String,Object> userMap = new HashMap<>();
                                 userMap.put("userName",user1);
                                 userMap.put("email",email1);
+                                userMap.put("mode",lightnDark);
 
 
 

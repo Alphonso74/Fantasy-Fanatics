@@ -8,8 +8,10 @@
 
     <TextView
         android:id="@+id/fantasyFanaticsText"
+        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_marginTop="48dp"
         android:fontFamily="@font/audiowide"
         android:text="@string/fantasy_fanatics"
@@ -21,6 +23,7 @@
     <EditText
         android:id="@+id/emailMainPage"
         android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
         android:autofillHints="email"
@@ -40,6 +43,7 @@
         android:layout_marginTop="96dp"
         android:autofillHints="@string/password"
         android:ems="10"
+        android:gravity="center"
         android:hint="@string/password"
         android:inputType="textPassword"
         android:textAlignment="center"
@@ -82,6 +86,7 @@
 
     <ProgressBar
         android:id="@+id/progressBar2"
+        android:gravity="center"
         style="?android:attr/progressBarStyle"
         android:layout_width="150dp"
         android:layout_height="123dp"

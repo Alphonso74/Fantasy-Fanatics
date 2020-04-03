@@ -2,6 +2,7 @@ package psu.ajm6684.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +42,9 @@ public class AddTeamActivity extends  AppCompatActivity{
 
 
 
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private ArrayList<Teams> teamsList;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +52,7 @@ public class AddTeamActivity extends  AppCompatActivity{
 
         submit = findViewById(R.id.confirmbtn);
         teamName = findViewById(R.id.teamNameSubmit);
-
+        teamsList = new ArrayList<Teams>();
 
 
 
@@ -91,13 +97,57 @@ public class AddTeamActivity extends  AppCompatActivity{
                 }
             }
         });
-
+    collectionGroupQuery();
 
 
 
     }
 
 
+    public void collectionGroupQuery() {
+//       ///  [START fs_collection_group_query]
+//        db.collection(myTeam).get()
+//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//        @Override
+//        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//            // [START_EXCLUDE]
+//            for (QueryDocumentSnapshot snap : queryDocumentSnapshots) {
+//                Log.d("Data", snap.getId() + " => " + snap.getData());
+//
+
+//
+//            }
+//            // [END_EXCLUDE]
+//        }
+//    });
+        // [END fs_collection_group_query]
+
+        db.collectionGroup("Players").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+//                FirestoreRecyclerOptions<Teams> options = new FirestoreRecyclerOptions.Builder<Teams>().setQuery(team,Teams.class).build();
+
+//                List<Teams> mMissionsList = new ArrayList<>();
+                if(task.isSuccessful()){
+                    for(QueryDocumentSnapshot document : task.getResult()) {
+                        Teams team = document.toObject(Teams.class);
+
+                            teamsList.add(team);
+
+
+                        Log.d("MissionActivity", document.getId() + " => " + document.getData());
+                    }
+//                    ListView mMissionsListView = (ListView) findViewById(R.id.missionList);
+//                    TeamAdapter = new teamAdapter(options);
+////                    MissionsAdapter mMissionAdapter = new MissionsAdapter(this, mMissionsList);
+//                    recyclerView.setAdapter(TeamAdapter);
+                } else {
+                    Log.d("MissionActivity", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+    }
 
     @Override
     public void onBackPressed() {

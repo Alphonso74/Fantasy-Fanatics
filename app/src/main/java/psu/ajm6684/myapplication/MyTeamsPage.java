@@ -163,7 +163,7 @@ recyclerView = findViewById(R.id.recycler_view);
 
 //        Query afs = Users.document().collectionGroup("Teams");
 
-        collectionGroupQuery();
+    //    collectionGroupQuery();
 
        setUpView(uid);
 

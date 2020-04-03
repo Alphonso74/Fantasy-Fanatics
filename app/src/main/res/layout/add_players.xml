@@ -67,15 +67,14 @@
 
     <Button
         android:id="@+id/confirmbtn"
-        android:layout_width="140dp"
-        android:layout_height="50dp"
+        android:layout_width="145dp"
+        android:layout_height="41dp"
         android:layout_below="@+id/listPickedPlayers"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="122dp"
-        android:layout_marginBottom="7dp"
+        android:gravity="center"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="117dp"
         android:text="@string/confirmed" />
 
     <TextView

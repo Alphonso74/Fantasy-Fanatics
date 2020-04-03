@@ -45,7 +45,6 @@ public class PreferenceActivity  extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
         setContentView(R.layout.preference_page);
 
         backButton = (Button) findViewById(R.id.backbutton);
@@ -134,16 +133,8 @@ public class PreferenceActivity  extends AppCompatActivity {
 
 
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), MyTeamsPage.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                PreferenceActivity.this.finish();
 
-            }
-        });
+
 
 
 

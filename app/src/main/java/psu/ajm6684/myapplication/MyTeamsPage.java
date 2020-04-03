@@ -62,6 +62,7 @@ public class MyTeamsPage extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseUser currentUser ;
 
+    int backButtonCount = 0;
 
 //    private Query specific = Users.document().collection("Teams");
 
@@ -80,7 +81,7 @@ public class MyTeamsPage extends AppCompatActivity {
     //do not delete
     FirebaseFirestore firestore;
     FirebaseAuth firebaseAuth;
-    FirebaseUser current;
+//    FirebaseUser current;
     DocumentReference mode;
     //do not delete
 
@@ -161,7 +162,7 @@ recyclerView = findViewById(R.id.recycler_view);
 
 //        Query afs = Users.document().collectionGroup("Teams");
 
-//        collectionGroupQuery();
+        collectionGroupQuery();
 
        setUpView(uid);
 
@@ -206,6 +207,7 @@ recyclerView = findViewById(R.id.recycler_view);
 //            for (QueryDocumentSnapshot snap : queryDocumentSnapshots) {
 //                Log.d("Data", snap.getId() + " => " + snap.getData());
 //
+
 //
 //            }
 //            // [END_EXCLUDE]
@@ -213,28 +215,28 @@ recyclerView = findViewById(R.id.recycler_view);
 //    });
     // [END fs_collection_group_query]
 
-//        db.collectionGroup("Teams").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//
+        db.collectionGroup("Players").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
 //                FirestoreRecyclerOptions<Teams> options = new FirestoreRecyclerOptions.Builder<Teams>().setQuery(team,Teams.class).build();
-//
-////                List<Teams> mMissionsList = new ArrayList<>();
-//                if(task.isSuccessful()){
-//                    for(QueryDocumentSnapshot document : task.getResult()) {
-//                        Teams team = document.toObject(Teams.class);
-//                        teamsList.add(team);
-//                        Log.d("MissionActivity", document.getId() + " => " + document.getData());
-//                    }
-////                    ListView mMissionsListView = (ListView) findViewById(R.id.missionList);
+
+//                List<Teams> mMissionsList = new ArrayList<>();
+                if(task.isSuccessful()){
+                    for(QueryDocumentSnapshot document : task.getResult()) {
+                        Teams team = document.toObject(Teams.class);
+                        teamsList.add(team);
+                        Log.d("MissionActivity", document.getId() + " => " + document.getData());
+                    }
+//                    ListView mMissionsListView = (ListView) findViewById(R.id.missionList);
 //                    TeamAdapter = new teamAdapter(options);
 ////                    MissionsAdapter mMissionAdapter = new MissionsAdapter(this, mMissionsList);
 //                    recyclerView.setAdapter(TeamAdapter);
-//                } else {
-//                    Log.d("MissionActivity", "Error getting documents: ", task.getException());
-//                }
-//            }
-//        });
+                } else {
+                    Log.d("MissionActivity", "Error getting documents: ", task.getException());
+                }
+            }
+        });
 }
 
 

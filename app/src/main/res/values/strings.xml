@@ -27,8 +27,9 @@
     <string name="prefswitch">Light/Dark Mode</string>
     <string name="logout">Logout</string>
 
+    <string name="availiabep">Available Players</string>
     <string name="ff">Fantasy Fanatics</string>
-
+    <string name="myp">My Players</string>
     <string name="create_team">Create Team</string>
     <string name="team_name">Team Name</string>
     <string name="confirmed">Confirm</string>

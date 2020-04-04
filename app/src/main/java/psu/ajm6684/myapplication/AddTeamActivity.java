@@ -1,6 +1,9 @@
 package psu.ajm6684.myapplication;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PersistableBundle;
@@ -45,6 +48,7 @@ public class AddTeamActivity extends  AppCompatActivity{
     DocumentReference mode;
     int backButtonCount = 0;
     Handler handler = new Handler();
+
 
 
 
@@ -200,9 +204,111 @@ public class AddTeamActivity extends  AppCompatActivity{
         btnTag.setText(title);
         //btnTag.setTextColor(Color.WHITE);
 
-        //buttonAction(btnTag);
+        buttonAction(btnTag);
 
         layout.addView(btnTag);
+
+
+    }
+
+    public void generateButton2(String title) {
+        ImageView imageView = new ImageView(AddTeamActivity.this);
+
+        ViewGroup layout = (ViewGroup) findViewById(R.id.pickedplayersscroller);
+        imageView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        final Button btnTag = new Button(AddTeamActivity.this );
+
+        btnTag.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        //btnTag.setBackgroundColor(Color.parseColor("#1D1D1D"));
+        btnTag.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
+        btnTag.setText(title);
+        //btnTag.setTextColor(Color.WHITE);
+
+        buttonAction2(btnTag);
+
+        layout.addView(btnTag);
+
+
+    }
+
+
+    public void buttonAction(final Button button) {
+
+
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddTeamActivity.this);
+                builder.setCancelable(false);
+                builder.setMessage("Do you want to add this player?");
+
+                builder.setTitle((button.getText().toString()))
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                button.setVisibility(View.GONE);
+                                availablePlayers.add(button.getText().toString());
+                                generateButton2(button.getText().toString());
+
+
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                            }
+                        });
+
+                builder.create();
+                builder.show();
+
+            }
+        });
+
+
+
+    }
+
+
+    public void buttonAction2(final Button button) {
+
+
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddTeamActivity.this);
+                builder.setCancelable(false);
+                builder.setMessage("Do you want to remove this player?");
+
+                builder.setTitle((button.getText().toString()))
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                button.setVisibility(View.GONE);
+                                if (availablePlayers.contains(button.getText().toString()))
+                                {
+                                    generateButton(button.getText().toString());
+                                    availablePlayers.remove(button.getText().toString());
+                                }
+
+
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                            }
+                        });
+
+                builder.create();
+                builder.show();
+
+            }
+        });
+
 
 
     }

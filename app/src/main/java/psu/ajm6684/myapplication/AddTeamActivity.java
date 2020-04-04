@@ -83,9 +83,17 @@ public class AddTeamActivity extends  AppCompatActivity{
             @Override
             public void onClick(View view) {
 
-                if(availablePlayers.size() != 5 || teamName.getText().toString().isEmpty())
+                if(availablePlayers.size() != 5 && teamName.getText().toString().isEmpty())
+                {
+                 superMax();
+                }
+                else if(availablePlayers.size() != 5)
                 {
                    notMax();
+                }
+                else if(teamName.getText().toString().isEmpty())
+                {
+                 nameMax();
                 }
                 else
                 {
@@ -301,12 +309,22 @@ public class AddTeamActivity extends  AppCompatActivity{
 
     public  void max()
     {
-        Toast.makeText(this, "Reached max limit", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Reached max player limit", Toast.LENGTH_SHORT).show();
     }
 
     public  void notMax()
     {
-        Toast.makeText(this, "Team needs five players", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Your team needs five players", Toast.LENGTH_SHORT).show();
+    }
+
+    public  void nameMax()
+    {
+        Toast.makeText(this, "Your team needs a name", Toast.LENGTH_SHORT).show();
+    }
+
+    public void superMax()
+    {
+        Toast.makeText(this, "Your team needs a name and your team needs five players", Toast.LENGTH_LONG).show();
     }
 
     public void buttonAction2(final Button button) {

@@ -36,6 +36,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 public class AddTeamActivity extends  AppCompatActivity{
@@ -164,6 +165,54 @@ public class AddTeamActivity extends  AppCompatActivity{
 
     public void addTeam()
     {
+            String userTN = "eadfa";
+
+            Map<String, Object> userFT = new HashMap<>();
+
+
+
+
+/*
+    firebaseAuth.createUserWithEmailAndPassword(email1, password1).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+
+                                Toast.makeText(getApplicationContext(), "User Created", Toast.LENGTH_LONG).show();
+
+                                Uid = firebaseAuth.getCurrentUser().getUid();
+                                DocumentReference documentReference = firestore.collection("Users").document(Uid);
+
+                                Map<String, Object> userMap = new HashMap<>();
+                                userMap.put("userName", user1);
+                                userMap.put("email", email1);
+                                userMap.put("mode", lightnDark);
+
+
+                                documentReference.set(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+
+                                        Toast.makeText(getApplicationContext(), "Account Created", Toast.LENGTH_LONG).show();
+
+                                        progressBar.setVisibility(View.VISIBLE);
+
+                                        System.out.println("Success" + Uid);
+
+
+                                    }
+                                });
+
+
+ */
+
+
+
+
+
+
 
     }
 

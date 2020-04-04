@@ -45,22 +45,26 @@ import android.widget.Toast;
 public class MyTeamsPage extends AppCompatActivity {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference Users = db.collection("Users");
+//    private CollectionReference Users = db.collection("Users");
+//
+//    DocumentReference ajm = Users.document("gGUiNmpauHhsnbDe6pYhr47ddB52");
+//    CollectionReference myTeam = ajm.collection("Teams");
 
-    DocumentReference ajm = Users.document("gGUiNmpauHhsnbDe6pYhr47ddB52");
+     CollectionReference Users;
 
-    CollectionReference myTeam = ajm.collection("Teams");
-int backButtonCount = 0;
+    DocumentReference ajm;
+    CollectionReference myTeam;
+
+
+
+    int backButtonCount = 0;
 
 
     private Query team = db.collectionGroup("Teams");
-
     private teamAdapter TeamAdapter;
-
     private ArrayList<Teams> teamsList;
-
     FirebaseAuth auth;
-    FirebaseUser currentUser ;
+    FirebaseUser currentUser;
 
     
 
@@ -78,11 +82,10 @@ int backButtonCount = 0;
     Button logout;
 //    Query specific ;
 
+
     //do not delete
     FirebaseFirestore firestore;
     FirebaseAuth firebaseAuth;
-
-
     DocumentReference mode;
     //do not delete
 
@@ -92,11 +95,20 @@ int backButtonCount = 0;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_teams_page);
+        firebaseAuth = FirebaseAuth.getInstance();
+       Users = db.collection("Users");
+        current = firebaseAuth.getCurrentUser();
 
-       auth = FirebaseAuth.getInstance();
-        current = auth.getCurrentUser();
+
+
+
+        auth = FirebaseAuth.getInstance();
+
         uid = current.getUid();
 
+
+        ajm = Users.document(current.getUid());
+        myTeam = ajm.collection("Teams");
 
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);

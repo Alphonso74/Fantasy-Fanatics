@@ -97,7 +97,7 @@ public class AddTeamActivity extends  AppCompatActivity{
                 }
                 else
                 {
-                    //TODO call function to grab all names in availiable list and add them into db
+                    addTeam();
                 }
 
 
@@ -159,6 +159,32 @@ public class AddTeamActivity extends  AppCompatActivity{
 
 
     }
+
+
+
+    public void addTeam()
+    {
+
+    }
+
+
+
+    /*
+    If you are using CollectionReference's add() method, it means that it:
+
+Adds a new document to this collection with the specified POJO as contents, assigning it a document ID automatically.
+
+If you want to get the document id that is generated and use it in your reference, then use DocumentReference's set() method:
+
+Overwrites the document referred to by this DocumentRefere
+
+Like in following lines of code:
+
+String id = db.collection("collection_name").document().getId();
+db.collection("collection_name").document(id).set(object);
+
+
+     */
 
 
     public void collectionGroupQuery() {
@@ -326,6 +352,11 @@ public class AddTeamActivity extends  AppCompatActivity{
     {
         Toast.makeText(this, "Your team needs a name and your team needs five players", Toast.LENGTH_LONG).show();
     }
+
+
+
+
+
 
     public void buttonAction2(final Button button) {
 

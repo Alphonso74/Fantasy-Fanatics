@@ -26,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -165,48 +166,71 @@ public class AddTeamActivity extends  AppCompatActivity{
 
     public void addTeam()
     {
-            String userTN = "eadfa";
+
+
+//        firebaseAuth = FirebaseAuth.getInstance();
+//        firestore = FirebaseFirestore.getInstance();
+//        current = firebaseAuth.getCurrentUser();
+//        mode = firestore.collection("Users").document(current.getUid());
+            String userTN = teamName.getText().toString();
 
             Map<String, Object> userFT = new HashMap<>();
 
 
+            userFT.put("TeamName",userTN);
+
+//            for(String player: availablePlayers)
+//            {
+//                String p1 = player;
+//                p1 = p1.substring(0,p1.indexOf(":"));
+//
+//                String n1 = player;
+//                n1= n1.substring(n1.indexOf(":") + 2);
+//
+//                System.out.println(p1 + "\t" + n1);
+//                System.out.println("AVAILABLE SIZE: " + availablePlayers.size());
+//
+//                userFT.put(p1,n1);
+//            }
 
 
-/*
-    firebaseAuth.createUserWithEmailAndPassword(email1, password1).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+            for(int x = 0; x < availablePlayers.size(); x++)
+            {
+                String p1 = availablePlayers.get(x);
+                p1 = p1.substring(0,p1.indexOf(":"));
+
+                String n1 = availablePlayers.get(x);
+                n1= n1.substring(n1.indexOf(":") + 2);
+
+                System.out.println(p1 + "\t" + n1);
+                System.out.println("AVAILABLE SIZE: " + availablePlayers.size());
+
+                userFT.put("Player"+x,n1);
+            }
 
 
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-
-                                Toast.makeText(getApplicationContext(), "User Created", Toast.LENGTH_LONG).show();
-
-                                Uid = firebaseAuth.getCurrentUser().getUid();
-                                DocumentReference documentReference = firestore.collection("Users").document(Uid);
-
-                                Map<String, Object> userMap = new HashMap<>();
-                                userMap.put("userName", user1);
-                                userMap.put("email", email1);
-                                userMap.put("mode", lightnDark);
 
 
-                                documentReference.set(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-
-                                        Toast.makeText(getApplicationContext(), "Account Created", Toast.LENGTH_LONG).show();
-
-                                        progressBar.setVisibility(View.VISIBLE);
-
-                                        System.out.println("Success" + Uid);
 
 
-                                    }
-                                });
+
+        mode = firestore.collection("Users").document(current.getUid()).collection("Teams").document();
+
+        mode.set(userFT).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Intent intent = new Intent(getBaseContext(), MyTeamsPage.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                AddTeamActivity.this.finish();
+            }
+        });
 
 
- */
+
+
+        System.out.println("works");
 
 
 
@@ -218,22 +242,6 @@ public class AddTeamActivity extends  AppCompatActivity{
 
 
 
-    /*
-    If you are using CollectionReference's add() method, it means that it:
-
-Adds a new document to this collection with the specified POJO as contents, assigning it a document ID automatically.
-
-If you want to get the document id that is generated and use it in your reference, then use DocumentReference's set() method:
-
-Overwrites the document referred to by this DocumentRefere
-
-Like in following lines of code:
-
-String id = db.collection("collection_name").document().getId();
-db.collection("collection_name").document(id).set(object);
-
-
-     */
 
 
     public void collectionGroupQuery() {
@@ -321,10 +329,10 @@ db.collection("collection_name").document(id).set(object);
         final Button btnTag = new Button(AddTeamActivity.this );
 
         btnTag.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        //btnTag.setBackgroundColor(Color.parseColor("#1D1D1D"));
+
         btnTag.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
         btnTag.setText(title);
-        //btnTag.setTextColor(Color.WHITE);
+
 
         buttonAction2(btnTag);
 

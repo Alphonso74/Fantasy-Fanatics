@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
@@ -41,7 +42,7 @@ public class AddTeamActivity extends  AppCompatActivity{
 
 
     Button submit;
-    TextView teamName;
+
     FirebaseFirestore firestore;
     FirebaseAuth firebaseAuth;
     FirebaseUser current;
@@ -49,7 +50,7 @@ public class AddTeamActivity extends  AppCompatActivity{
     int backButtonCount = 0;
     Handler handler = new Handler();
 
-
+    EditText teamName;
 
 
   FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -74,9 +75,26 @@ public class AddTeamActivity extends  AppCompatActivity{
         setContentView(R.layout.add_players);
 
         submit = findViewById(R.id.confirmbtn);
-        teamName = findViewById(R.id.teamNameSubmit);
+        teamName = findViewById(R.id.teamNameInputAddPlayer);
         teamsList = new ArrayList<Teams>();
         availablePlayers = new ArrayList<String>();
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(availablePlayers.size() != 5 || teamName.getText().toString().isEmpty())
+                {
+                   notMax();
+                }
+                else
+                {
+                    //TODO call function to grab all names in availiable list and add them into db
+                }
+
+
+            }
+        });
 
 
 
@@ -159,7 +177,7 @@ public class AddTeamActivity extends  AppCompatActivity{
 
                         String theWhole = pos + ": " + name;
 
-                          System.out.print(counter + ":\t" + theWhole + "\n");
+                      //////////////////////////////////////    System.out.print(counter + ":\t" + theWhole + "\n");
                     generateButton(theWhole);
 
 
@@ -248,9 +266,19 @@ public class AddTeamActivity extends  AppCompatActivity{
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
 
-                                button.setVisibility(View.GONE);
-                                availablePlayers.add(button.getText().toString());
-                                generateButton2(button.getText().toString());
+                                if(availablePlayers.size() == 5)
+                                {
+                                    max();
+                                }
+                                else
+                                {
+                                    button.setVisibility(View.GONE);
+                                    availablePlayers.add(button.getText().toString());
+                                    generateButton2(button.getText().toString());
+
+                                }
+
+
 
 
                             }
@@ -271,6 +299,15 @@ public class AddTeamActivity extends  AppCompatActivity{
 
     }
 
+    public  void max()
+    {
+        Toast.makeText(this, "Reached max limit", Toast.LENGTH_SHORT).show();
+    }
+
+    public  void notMax()
+    {
+        Toast.makeText(this, "Team needs five players", Toast.LENGTH_SHORT).show();
+    }
 
     public void buttonAction2(final Button button) {
 

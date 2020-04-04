@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent"
 
     >
-
+<!--
     <TextView
         android:id="@+id/teamNameSubmit"
         android:layout_width="wrap_content"
@@ -17,28 +17,29 @@
         android:gravity="center"
         android:text="@string/create_team"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
+-->
+
 
     <EditText
-        android:id="@+id/usernameInputCreateAccount"
-        android:layout_width="wrap_content"
+        android:id="@+id/teamNameInputAddPlayer"
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/teamNameSubmit"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="83dp"
         android:autofillHints="Username"
         android:ems="10"
         android:hint="@string/team_name"
         android:inputType="text"
         tools:targetApi="o" />
 
-
     <ScrollView
 
         android:id="@+id/listPlayers"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="240dp"
         android:layout_below="@+id/AvailablePText"
         android:layout_alignParentStart="true"
         android:layout_marginTop="5dp">
@@ -54,7 +55,7 @@
 
         android:id="@+id/listPickedPlayers"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="240dp"
         android:layout_below="@+id/textView"
         android:layout_marginTop="5dp">
 
@@ -72,9 +73,9 @@
         android:layout_below="@+id/listPickedPlayers"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="117dp"
+        android:gravity="center"
         android:text="@string/confirmed" />
 
     <TextView
@@ -84,7 +85,7 @@
         android:layout_below="@+id/listPlayers"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="162dp"
         android:fontFamily="@font/audiowide"
         android:gravity="center"
@@ -94,9 +95,9 @@
         android:id="@+id/AvailablePText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/usernameInputCreateAccount"
+        android:layout_below="@+id/teamNameInputAddPlayer"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/audiowide"
         android:gravity="center"
         android:text="@string/availiabep" />

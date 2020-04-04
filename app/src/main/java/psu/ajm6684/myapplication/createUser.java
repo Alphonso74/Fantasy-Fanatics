@@ -6,17 +6,13 @@ import android.os.Bundle;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 import android.widget.Button;
@@ -47,7 +43,7 @@ public class createUser extends AppCompatActivity {
         //this one
 
         confirmButton = (Button) findViewById(R.id.buttonSignUp);
-        final EditText user = (EditText) findViewById(R.id.usernameInputCreateAccount);
+        final EditText user = (EditText) findViewById(R.id.teamNameInputAddPlayer);
         final EditText email = (EditText) findViewById(R.id.emailInputCreateAccount);
         final EditText password = (EditText) findViewById(R.id.passwordInputCreateAccount);
         firebaseAuth = FirebaseAuth.getInstance();

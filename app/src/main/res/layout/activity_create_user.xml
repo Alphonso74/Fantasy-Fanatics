@@ -33,7 +33,7 @@
         tools:targetApi="o" />
 
     <EditText
-        android:id="@+id/usernameInputCreateAccount"
+        android:id="@+id/teamNameInputAddPlayer"
         android:layout_width="match_parent"
         android:gravity="center"
         android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
         android:id="@+id/passwordInputCreateAccount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/usernameInputCreateAccount"
+        android:layout_below="@+id/teamNameInputAddPlayer"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:layout_marginTop="58dp"

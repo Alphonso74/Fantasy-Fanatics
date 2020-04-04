@@ -1,12 +1,17 @@
 package psu.ajm6684.myapplication;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,11 +44,25 @@ public class AddTeamActivity extends  AppCompatActivity{
     FirebaseUser current;
     DocumentReference mode;
     int backButtonCount = 0;
+    Handler handler = new Handler();
 
 
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private ArrayList<Teams> teamsList;
+  FirebaseFirestore db = FirebaseFirestore.getInstance();
+  ArrayList<Teams> teamsList;
+    ArrayList<String> availablePlayers;
+
+    public AddTeamActivity()
+    {
+
+    }
+
+    public static AddTeamActivity newInstance() {
+        AddTeamActivity fragment = new AddTeamActivity();
+
+        return fragment;
+    }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +72,7 @@ public class AddTeamActivity extends  AppCompatActivity{
         submit = findViewById(R.id.confirmbtn);
         teamName = findViewById(R.id.teamNameSubmit);
         teamsList = new ArrayList<Teams>();
+        availablePlayers = new ArrayList<String>();
 
 
 
@@ -99,51 +119,53 @@ public class AddTeamActivity extends  AppCompatActivity{
         });
     collectionGroupQuery();
 
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//            }
+//        },5000);
+
 
 
     }
 
 
     public void collectionGroupQuery() {
-//       ///  [START fs_collection_group_query]
-//        db.collection(myTeam).get()
-//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//        @Override
-//        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//            // [START_EXCLUDE]
-//            for (QueryDocumentSnapshot snap : queryDocumentSnapshots) {
-//                Log.d("Data", snap.getId() + " => " + snap.getData());
-//
-
-//
-//            }
-//            // [END_EXCLUDE]
-//        }
-//    });
-        // [END fs_collection_group_query]
 
         db.collectionGroup("Players").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+        int counter = 1;
 
-//                FirestoreRecyclerOptions<Teams> options = new FirestoreRecyclerOptions.Builder<Teams>().setQuery(team,Teams.class).build();
-
-//                List<Teams> mMissionsList = new ArrayList<>();
                 if(task.isSuccessful()){
                     for(QueryDocumentSnapshot document : task.getResult()) {
                         Teams team = document.toObject(Teams.class);
 
                             teamsList.add(team);
 
+                          String pos = document.getData() + "";
+                          pos = pos.replaceAll("Position=","");
+                          pos = pos.substring(1,pos.indexOf(","));
 
-                        Log.d("MissionActivity", document.getId() + " => " + document.getData());
+                          String name = document.getData() + "";
+                          name = name.substring(name.indexOf("Name=")+5);
+                          name = name.substring(0,name.length() - 1);
+
+
+                        String theWhole = pos + ": " + name;
+
+                          System.out.print(counter + ":\t" + theWhole + "\n");
+                    generateButton(theWhole);
+
+
+                        counter++;
+
+                     //   Log.d("MissionActivity", document.getId() + " => " + document.getData());
                     }
-//                    ListView mMissionsListView = (ListView) findViewById(R.id.missionList);
-//                    TeamAdapter = new teamAdapter(options);
-////                    MissionsAdapter mMissionAdapter = new MissionsAdapter(this, mMissionsList);
-//                    recyclerView.setAdapter(TeamAdapter);
+
                 } else {
-                    Log.d("MissionActivity", "Error getting documents: ", task.getException());
+                   // Log.d("MissionActivity", "Error getting documents: ", task.getException());
                 }
             }
         });
@@ -164,6 +186,26 @@ public class AddTeamActivity extends  AppCompatActivity{
     }
 
 
+    public void generateButton(String title) {
+        ImageView imageView = new ImageView(AddTeamActivity.this);
+
+        ViewGroup layout = (ViewGroup) findViewById(R.id.availiableplayersscroller);
+        imageView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        final Button btnTag = new Button(AddTeamActivity.this );
+
+        btnTag.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        //btnTag.setBackgroundColor(Color.parseColor("#1D1D1D"));
+        btnTag.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
+        btnTag.setText(title);
+        //btnTag.setTextColor(Color.WHITE);
+
+        //buttonAction(btnTag);
+
+        layout.addView(btnTag);
+
+
+    }
 
 
 }

@@ -33,6 +33,8 @@
     <string name="create_team">Create Team</string>
     <string name="team_name">Team Name</string>
     <string name="confirmed">Confirm</string>
+    <string name="Splash">SPLASH</string>
+    <string name="splash">SPLASH</string>
 
 
 </resources>

@@ -381,6 +381,10 @@ public class AddTeamActivity extends AppCompatActivity {
                         String theWhole = pos + ": " + name;
                         if (theWhole.contains("Guard") && !theWhole.contains("-")) {
                             //   guard.add(theWhole);
+
+
+
+
                             generateButton(theWhole);
                         }
                         

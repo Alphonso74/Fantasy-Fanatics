@@ -22,18 +22,18 @@
 
     <EditText
         android:id="@+id/teamNameInputAddPlayer"
-        android:layout_width="250dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-2dp"
-        android:layout_marginEnd="87dp"
+        android:layout_marginTop="-1dp"
+        android:layout_marginEnd="27dp"
         android:autofillHints="Username"
         android:ems="10"
         android:hint="@string/team_name"
         android:inputType="text"
-        android:maxLength="20"
+        android:maxLength="15"
         tools:targetApi="o" />
 
     <ScrollView

@@ -40,7 +40,7 @@ public class teamAdapter extends FirestoreRecyclerAdapter<Teams, teamAdapter.tea
         teamHolder.guardView.setText(team.getGuard());
         teamHolder.guardForwardView.setText((team.getGuardForward()));
         teamHolder.forwardGuardView.setText(team.getForwardGuard());
-        teamHolder.centerForwardView.setText(team.getCenterForward());
+        teamHolder.centerForwardView.setText(team.getForwardCenter());
         teamHolder.centerView.setText(team.getCenter());
 
 

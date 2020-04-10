@@ -921,7 +921,7 @@ public class AddTeamActivity extends AppCompatActivity {
     }
 
     public void balanceMax() {
-        Toast.makeText(this, "Your team needs to be balance", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Your team needs a player in each position", Toast.LENGTH_LONG).show();
     }
 
 

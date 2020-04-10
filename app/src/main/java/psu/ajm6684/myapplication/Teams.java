@@ -6,8 +6,17 @@ public class Teams {
     private String Guard;
     private String ForwardGuard;
     private String GuardForward;
-    private String CenterForward;
+    private String ForwardCenter;
     private String Center;
+
+    public Teams(String teamName, String guard, String forwardGuard, String guardForward, String forwardCenter, String center) {
+        TeamName = teamName;
+        Guard = guard;
+        ForwardGuard = forwardGuard;
+        GuardForward = guardForward;
+        ForwardCenter = forwardCenter;
+        Center = center;
+    }
 
     public String getTeamName() {
         return TeamName;
@@ -41,12 +50,12 @@ public class Teams {
         GuardForward = guardForward;
     }
 
-    public String getCenterForward() {
-        return CenterForward;
+    public String getForwardCenter() {
+        return ForwardCenter;
     }
 
-    public void setCenterForward(String centerForward) {
-        CenterForward = centerForward;
+    public void setForwardCenter(String forwardCenter) {
+        ForwardCenter = forwardCenter;
     }
 
     public String getCenter() {
@@ -54,15 +63,6 @@ public class Teams {
     }
 
     public void setCenter(String center) {
-        Center = center;
-    }
-
-    public Teams(String teamName, String guard, String forwardGuard, String guardForward, String centerForward, String center) {
-        TeamName = teamName;
-        Guard = guard;
-        ForwardGuard = forwardGuard;
-        GuardForward = guardForward;
-        CenterForward = centerForward;
         Center = center;
     }
 

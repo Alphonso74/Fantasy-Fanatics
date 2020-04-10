@@ -72,6 +72,14 @@ public class AddTeamActivity extends AppCompatActivity {
     ArrayList<String> guard_forward;
     ArrayList<String> center;
 
+    boolean one = false;
+    boolean two = false;
+    boolean three = false;
+    boolean four = false;
+    boolean five = false;
+
+    boolean finale = false;
+
     public AddTeamActivity() {
 
     }
@@ -116,13 +124,86 @@ public class AddTeamActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
+
+                for (int x = 0; x < availablePlayers.size(); x++)
+                {
+
+                    if (availablePlayers.get(x).contains("Guard") && !availablePlayers.get(x).contains("-")) {
+                     one = true;
+
+                    }
+
+                    else if (availablePlayers.get(x).contains("Forward-Guard")) {
+                     two = true;
+
+                    }
+
+                    else  if (availablePlayers.get(x).contains("Forward-Center")) {
+                      three = true;
+
+                    }
+
+                    else  if (availablePlayers.get(x).contains("Guard-Forward")) {
+                      four = true;
+
+                    }
+
+                    else  if (availablePlayers.get(x).contains("Center") && !availablePlayers.get(x).contains("-")) {
+                     five = true;
+
+                    }
+                }
+
+                System.out.println("1:" + one);
+                System.out.println("2:" + two);
+                System.out.println("3:" + three);
+                System.out.println("4:" + four);
+                System.out.println("5:" + five);
+
+
                 if (availablePlayers.size() != 5 && teamName.getText().toString().isEmpty()) {
                     superMax();
                 } else if (availablePlayers.size() != 5) {
                     notMax();
                 } else if (teamName.getText().toString().isEmpty()) {
                     nameMax();
-                } else {
+                }
+                /*
+                    if (button.getText().toString().contains("Guard") && !button.getText().toString().contains("-")) {
+                                        System.out.println("test1");
+                                        one = true;
+                                    }
+
+                                   else if (button.getText().toString().contains("Forward-Guard")) {
+                                        System.out.println("test2");
+                                        two = true;
+                                    }
+
+                                   else  if (button.getText().toString().contains("Forward-Center")) {
+                                        System.out.println("test3");
+                                      three = true;
+                                    }
+
+                                   else  if (button.getText().toString().contains("Guard-Forward")) {
+                                        System.out.println("test4");
+                                        four = true;
+                                    }
+
+                                   else  if (button.getText().toString().contains("Center") && !button.getText().toString().contains("-")) {
+                                        System.out.println("test5");
+                                       five = true;
+                                    }
+
+                 */
+
+                else if((!one || !two || !three || !four || !five) && availablePlayers.size() == 5)
+                {
+                    balanceMax();
+                }
+
+
+                else {
 
                     addTeam();
                 }
@@ -241,13 +322,18 @@ public class AddTeamActivity extends AppCompatActivity {
             String p1 = availablePlayers.get(x);
             p1 = p1.substring(0, p1.indexOf(":"));
 
+            if(p1.contains("-"))
+            {
+               p1 = p1.replaceAll("-","");
+            }
+
             String n1 = availablePlayers.get(x);
             n1 = n1.substring(n1.indexOf(":") + 2);
 
             System.out.println(p1 + "\t" + n1);
             System.out.println("AVAILABLE SIZE: " + availablePlayers.size());
 
-            userFT.put("Player" + x, n1);
+            userFT.put(p1, n1);
         }
 
 
@@ -485,12 +571,10 @@ public class AddTeamActivity extends AppCompatActivity {
         imageView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         final Button btnTag = new Button(AddTeamActivity.this);
-
         btnTag.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        //btnTag.setBackgroundColor(Color.parseColor("#1D1D1D"));
         btnTag.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
         btnTag.setText(title);
-        //btnTag.setTextColor(Color.WHITE);
+
 
         buttonAction(btnTag);
 
@@ -545,7 +629,36 @@ public class AddTeamActivity extends AppCompatActivity {
 
                                 if (availablePlayers.size() == 5) {
                                     max();
-                                } else {
+                                }
+                                else {
+                                    System.out.println(button.getText().toString());
+
+                                    if (button.getText().toString().contains("Guard") && !button.getText().toString().contains("-")) {
+                                        System.out.println("test1");
+                                  //      one = true;
+                                    }
+
+                                   else if (button.getText().toString().contains("Forward-Guard")) {
+                                        System.out.println("test2");
+                                 //       two = true;
+                                    }
+
+                                   else  if (button.getText().toString().contains("Forward-Center")) {
+                                        System.out.println("test3");
+                                 //     three = true;
+                                    }
+
+                                   else  if (button.getText().toString().contains("Guard-Forward")) {
+                                        System.out.println("test4");
+                                   //     four = true;
+                                    }
+
+                                   else  if (button.getText().toString().contains("Center") && !button.getText().toString().contains("-")) {
+                                        System.out.println("test5");
+                                 //      five = true;
+                                    }
+
+
                                     button.setVisibility(View.GONE);
                                     availablePlayers.add(button.getText().toString());
                                     generateButton2(button.getText().toString());
@@ -586,6 +699,10 @@ public class AddTeamActivity extends AppCompatActivity {
         Toast.makeText(this, "Your team needs a name and your team needs five players", Toast.LENGTH_LONG).show();
     }
 
+    public void balanceMax() {
+        Toast.makeText(this, "Your team needs to be balance", Toast.LENGTH_LONG).show();
+    }
+
 
     public void buttonAction2(final Button button) {
 
@@ -601,7 +718,31 @@ public class AddTeamActivity extends AppCompatActivity {
                 builder.setTitle((button.getText().toString()))
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                System.out.println(button.getText().toString());
+                                if (button.getText().toString().contains("Guard") && !button.getText().toString().contains("-")) {
+                                    System.out.println("test6");
+                                    one = false;
+                                }
 
+                                else if (button.getText().toString().contains("Forward-Guard")) {
+                                    System.out.println("test7");
+                                    two = false;
+                                }
+
+                                else if (button.getText().toString().contains("Forward-Center")) {
+                                    System.out.println("test8");
+                                    three = false;
+                                }
+
+                                else  if (button.getText().toString().contains("Guard-Forward")) {
+                                    System.out.println("test9");
+                                    four = false;
+                                }
+
+                                else if (button.getText().toString().contains("Center") && !button.getText().toString().contains("-")) {
+                                    System.out.println("test10");
+                                    five = false;
+                                }
                                 button.setVisibility(View.GONE);
                                 if (availablePlayers.contains(button.getText().toString())) {
                                     generateButton(button.getText().toString());

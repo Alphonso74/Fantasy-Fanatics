@@ -27,12 +27,13 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="83dp"
+        android:layout_marginTop="-2dp"
+        android:layout_marginEnd="87dp"
         android:autofillHints="Username"
         android:ems="10"
         android:hint="@string/team_name"
         android:inputType="text"
+        android:maxLength="20"
         tools:targetApi="o" />
 
     <ScrollView
@@ -95,10 +96,19 @@
         android:id="@+id/AvailablePText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/teamNameInputAddPlayer"
+        android:layout_below="@+id/spinner"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/audiowide"
         android:gravity="center"
         android:text="@string/availiabep" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/teamNameInputAddPlayer"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="50dp"
+        android:entries="@array/spinner" />
 </RelativeLayout>

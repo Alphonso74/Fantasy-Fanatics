@@ -16,6 +16,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +52,7 @@ public class AddTeamActivity extends  AppCompatActivity{
     DocumentReference mode;
     int backButtonCount = 0;
     Handler handler = new Handler();
+    Spinner spinner;
 
     EditText teamName;
 
@@ -78,8 +80,10 @@ public class AddTeamActivity extends  AppCompatActivity{
 
         submit = findViewById(R.id.confirmbtn);
         teamName = findViewById(R.id.teamNameInputAddPlayer);
+        spinner = findViewById(R.id.spinner);
         teamsList = new ArrayList<Teams>();
         availablePlayers = new ArrayList<String>();
+        String[] spinnerArray = new String[]{"Guard", "Forward-Guard", "Forward-Center", "Guard-Forward", "Center"};
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

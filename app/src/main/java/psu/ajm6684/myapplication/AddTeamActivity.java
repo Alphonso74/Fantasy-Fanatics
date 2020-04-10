@@ -1,4 +1,5 @@
 package psu.ajm6684.myapplication;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +12,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -41,7 +44,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-public class AddTeamActivity extends  AppCompatActivity{
+
+public class AddTeamActivity extends AppCompatActivity {
 
 
     Button submit;
@@ -57,12 +61,18 @@ public class AddTeamActivity extends  AppCompatActivity{
     EditText teamName;
 
 
-  FirebaseFirestore db = FirebaseFirestore.getInstance();
-  ArrayList<Teams> teamsList;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    ArrayList<Teams> teamsList;
     ArrayList<String> availablePlayers;
 
-    public AddTeamActivity()
-    {
+
+    ArrayList<String> guard;
+    ArrayList<String> forward_guard;
+    ArrayList<String> forward_center;
+    ArrayList<String> guard_forward;
+    ArrayList<String> center;
+
+    public AddTeamActivity() {
 
     }
 
@@ -82,34 +92,44 @@ public class AddTeamActivity extends  AppCompatActivity{
         teamName = findViewById(R.id.teamNameInputAddPlayer);
         spinner = findViewById(R.id.spinner);
         teamsList = new ArrayList<Teams>();
-        availablePlayers = new ArrayList<String>();
+        availablePlayers = new ArrayList<>();
+
+
+        guard = new ArrayList<>();
+
+        forward_guard = new ArrayList<>();
+        forward_center = new ArrayList<>();
+        guard_forward = new ArrayList<>();
+        center = new ArrayList<>();
+
         String[] spinnerArray = new String[]{"Guard", "Forward-Guard", "Forward-Center", "Guard-Forward", "Center"};
+
+
+        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerArray);
+
+        stringArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(stringArrayAdapter);
+
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(availablePlayers.size() != 5 && teamName.getText().toString().isEmpty())
-                {
-                 superMax();
-                }
-                else if(availablePlayers.size() != 5)
-                {
-                   notMax();
-                }
-                else if(teamName.getText().toString().isEmpty())
-                {
-                 nameMax();
-                }
-                else
-                {
+                if (availablePlayers.size() != 5 && teamName.getText().toString().isEmpty()) {
+                    superMax();
+                } else if (availablePlayers.size() != 5) {
+                    notMax();
+                } else if (teamName.getText().toString().isEmpty()) {
+                    nameMax();
+                } else {
+
                     addTeam();
                 }
 
 
             }
         });
-
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -135,15 +155,13 @@ public class AddTeamActivity extends  AppCompatActivity{
                         //So what you need to do with your list
                         for (String s : list) {
 
-                            if(s.equals("light"))
-                            {
+                            if (s.equals("light")) {
 
                                 getDelegate().setLocalNightMode((AppCompatDelegate.MODE_NIGHT_NO));
                                 break;
                             }
 
-                            if (s.equals("dark"))
-                            {
+                            if (s.equals("dark")) {
                                 getDelegate().setLocalNightMode((AppCompatDelegate.MODE_NIGHT_YES));
                                 break;
                             }
@@ -153,35 +171,56 @@ public class AddTeamActivity extends  AppCompatActivity{
                 }
             }
         });
-    collectionGroupQuery();
 
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//            }
-//        },5000);
 
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String role = adapterView.getItemAtPosition(i).toString();
+
+                //  String[] spinnerArray = new String[]{"Guard", "Forward-Guard", "Forward-Center", "Guard-Forward", "Center"};
+                if (role.equals("Guard")) {
+                    clearLayoutTop();
+                    collectionGroupQuery();
+                } else if (role.equals("Forward-Guard")) {
+                    clearLayoutTop();
+                    collectionGroupQuery2();
+                } else if (role.equals("Forward-Center")) {
+                    clearLayoutTop();
+                    collectionGroupQuery3();
+                } else if (role.equals("Guard-Forward")) {
+                    clearLayoutTop();
+                    collectionGroupQuery4();
+                } else if (role.equals("Center")) {
+                    clearLayoutTop();
+                    collectionGroupQuery5();
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
     }
 
 
-
-    public void addTeam()
-    {
+    public void addTeam() {
 
 
 //        firebaseAuth = FirebaseAuth.getInstance();
 //        firestore = FirebaseFirestore.getInstance();
 //        current = firebaseAuth.getCurrentUser();
 //        mode = firestore.collection("Users").document(current.getUid());
-            String userTN = teamName.getText().toString();
+        String userTN = teamName.getText().toString();
 
-            Map<String, Object> userFT = new HashMap<>();
+        Map<String, Object> userFT = new HashMap<>();
 
 
-            userFT.put("TeamName",userTN);
+        userFT.put("TeamName", userTN);
 
 //            for(String player: availablePlayers)
 //            {
@@ -198,25 +237,18 @@ public class AddTeamActivity extends  AppCompatActivity{
 //            }
 
 
+        for (int x = 0; x < availablePlayers.size(); x++) {
+            String p1 = availablePlayers.get(x);
+            p1 = p1.substring(0, p1.indexOf(":"));
 
-            for(int x = 0; x < availablePlayers.size(); x++)
-            {
-                String p1 = availablePlayers.get(x);
-                p1 = p1.substring(0,p1.indexOf(":"));
+            String n1 = availablePlayers.get(x);
+            n1 = n1.substring(n1.indexOf(":") + 2);
 
-                String n1 = availablePlayers.get(x);
-                n1= n1.substring(n1.indexOf(":") + 2);
+            System.out.println(p1 + "\t" + n1);
+            System.out.println("AVAILABLE SIZE: " + availablePlayers.size());
 
-                System.out.println(p1 + "\t" + n1);
-                System.out.println("AVAILABLE SIZE: " + availablePlayers.size());
-
-                userFT.put("Player"+x,n1);
-            }
-
-
-
-
-
+            userFT.put("Player" + x, n1);
+        }
 
 
         mode = firestore.collection("Users").document(current.getUid()).collection("Teams").document();
@@ -232,20 +264,10 @@ public class AddTeamActivity extends  AppCompatActivity{
         });
 
 
-
-
         System.out.println("works");
 
 
-
-
-
-
-
     }
-
-
-
 
 
     public void collectionGroupQuery() {
@@ -253,50 +275,203 @@ public class AddTeamActivity extends  AppCompatActivity{
         db.collectionGroup("Players").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-        int counter = 1;
+                int counter = 1;
 
-                if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot document : task.getResult()) {
-                        Teams team = document.toObject(Teams.class);
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        //  Teams team = document.toObject(Teams.class);
 
-                            teamsList.add(team);
+                        // teamsList.add(team);
 
-                          String pos = document.getData() + "";
-                          pos = pos.replaceAll("Position=","");
-                          pos = pos.substring(1,pos.indexOf(","));
+                        String pos = document.getData() + "";
+                        pos = pos.replaceAll("Position=", "");
+                        pos = pos.substring(1, pos.indexOf(","));
 
-                          String name = document.getData() + "";
-                          name = name.substring(name.indexOf("Name=")+5);
-                          name = name.substring(0,name.length() - 1);
+                        String name = document.getData() + "";
+                        name = name.substring(name.indexOf("Name=") + 5);
+                        name = name.substring(0, name.length() - 1);
 
 
                         String theWhole = pos + ": " + name;
+                        if (theWhole.contains("Guard") && !theWhole.contains("-")) {
+                            //   guard.add(theWhole);
+                            generateButton(theWhole);
+                        }
+                        
 
-                      //////////////////////////////////////    System.out.print(counter + ":\t" + theWhole + "\n");
-                    generateButton(theWhole);
+
+                        /*
+                        //  String[] spinnerArray = new String[]{"Guard", "Forward-Guard", "Forward-Center", "Guard-Forward", "Center"};
+                        ArrayList<String> guard;
+                        ArrayList<String> forward_guard;
+                        ArrayList<String> forward_center;
+                        ArrayList<String> guard_forward;
+                        ArrayList<String> center;
+
+                         */
+
+
+                        //////////////////////////////////////    System.out.print(counter + ":\t" + theWhole + "\n");
 
 
                         counter++;
 
-                     //   Log.d("MissionActivity", document.getId() + " => " + document.getData());
+                        //   Log.d("MissionActivity", document.getId() + " => " + document.getData());
                     }
 
                 } else {
-                   // Log.d("MissionActivity", "Error getting documents: ", task.getException());
+                    // Log.d("MissionActivity", "Error getting documents: ", task.getException());
                 }
             }
         });
     }
 
+
+    public void collectionGroupQuery2() {
+
+        db.collectionGroup("Players").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+
+
+                        String pos = document.getData() + "";
+                        pos = pos.replaceAll("Position=", "");
+                        pos = pos.substring(1, pos.indexOf(","));
+
+                        String name = document.getData() + "";
+                        name = name.substring(name.indexOf("Name=") + 5);
+                        name = name.substring(0, name.length() - 1);
+
+
+                        String theWhole = pos + ": " + name;
+
+                        if (theWhole.contains("Forward-Guard")) {
+                            generateButton(theWhole);
+                        }
+                    }
+
+                } else {
+
+                }
+            }
+        });
+    }
+
+    public void collectionGroupQuery3() {
+
+        db.collectionGroup("Players").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+
+
+                        String pos = document.getData() + "";
+                        pos = pos.replaceAll("Position=", "");
+                        pos = pos.substring(1, pos.indexOf(","));
+
+                        String name = document.getData() + "";
+                        name = name.substring(name.indexOf("Name=") + 5);
+                        name = name.substring(0, name.length() - 1);
+
+
+                        String theWhole = pos + ": " + name;
+
+                        if (theWhole.contains("Forward-Center")) {
+                           generateButton(theWhole);
+                        }
+                    }
+
+                } else {
+
+                }
+            }
+        });
+    }
+
+
+    public void collectionGroupQuery4() {
+
+        db.collectionGroup("Players").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+
+
+                        String pos = document.getData() + "";
+                        pos = pos.replaceAll("Position=", "");
+                        pos = pos.substring(1, pos.indexOf(","));
+
+                        String name = document.getData() + "";
+                        name = name.substring(name.indexOf("Name=") + 5);
+                        name = name.substring(0, name.length() - 1);
+
+
+                        String theWhole = pos + ": " + name;
+                        if (theWhole.contains("Guard-Forward")) {
+                            generateButton(theWhole);
+                        }
+
+                    }
+
+                } else {
+
+                }
+            }
+        });
+    }
+
+
+    public void collectionGroupQuery5() {
+
+        db.collectionGroup("Players").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+
+
+                        String pos = document.getData() + "";
+                        pos = pos.replaceAll("Position=", "");
+                        pos = pos.substring(1, pos.indexOf(","));
+
+                        String name = document.getData() + "";
+                        name = name.substring(name.indexOf("Name=") + 5);
+                        name = name.substring(0, name.length() - 1);
+
+
+                        String theWhole = pos + ": " + name;
+                        if (theWhole.contains("Center")  && !theWhole.contains("-")) {
+                            generateButton(theWhole);
+                        }
+
+                    }
+
+                } else {
+
+                }
+            }
+        });
+    }
+
+
     @Override
     public void onBackPressed() {
 
-        if(backButtonCount >= 1)
-        {
-           finish();
-        }
-        else
-        {
+        if (backButtonCount >= 1) {
+            finish();
+        } else {
             Toast.makeText(this, "Pressing the back button again will lose unsaved progress.", Toast.LENGTH_SHORT).show();
             backButtonCount++;
         }
@@ -309,7 +484,7 @@ public class AddTeamActivity extends  AppCompatActivity{
         ViewGroup layout = (ViewGroup) findViewById(R.id.availiableplayersscroller);
         imageView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        final Button btnTag = new Button(AddTeamActivity.this );
+        final Button btnTag = new Button(AddTeamActivity.this);
 
         btnTag.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         //btnTag.setBackgroundColor(Color.parseColor("#1D1D1D"));
@@ -324,13 +499,20 @@ public class AddTeamActivity extends  AppCompatActivity{
 
     }
 
+
+    public void clearLayoutTop() {
+        ViewGroup layout = (ViewGroup) findViewById(R.id.availiableplayersscroller);
+        layout.removeAllViews();
+    }
+
+
     public void generateButton2(String title) {
         ImageView imageView = new ImageView(AddTeamActivity.this);
 
         ViewGroup layout = (ViewGroup) findViewById(R.id.pickedplayersscroller);
         imageView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        final Button btnTag = new Button(AddTeamActivity.this );
+        final Button btnTag = new Button(AddTeamActivity.this);
 
         btnTag.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
@@ -361,19 +543,14 @@ public class AddTeamActivity extends  AppCompatActivity{
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
 
-                                if(availablePlayers.size() == 5)
-                                {
+                                if (availablePlayers.size() == 5) {
                                     max();
-                                }
-                                else
-                                {
+                                } else {
                                     button.setVisibility(View.GONE);
                                     availablePlayers.add(button.getText().toString());
                                     generateButton2(button.getText().toString());
 
                                 }
-
-
 
 
                             }
@@ -391,32 +568,23 @@ public class AddTeamActivity extends  AppCompatActivity{
         });
 
 
-
     }
 
-    public  void max()
-    {
+    public void max() {
         Toast.makeText(this, "Reached max player limit", Toast.LENGTH_SHORT).show();
     }
 
-    public  void notMax()
-    {
+    public void notMax() {
         Toast.makeText(this, "Your team needs five players", Toast.LENGTH_SHORT).show();
     }
 
-    public  void nameMax()
-    {
+    public void nameMax() {
         Toast.makeText(this, "Your team needs a name", Toast.LENGTH_SHORT).show();
     }
 
-    public void superMax()
-    {
+    public void superMax() {
         Toast.makeText(this, "Your team needs a name and your team needs five players", Toast.LENGTH_LONG).show();
     }
-
-
-
-
 
 
     public void buttonAction2(final Button button) {
@@ -435,8 +603,7 @@ public class AddTeamActivity extends  AppCompatActivity{
                             public void onClick(DialogInterface dialog, int id) {
 
                                 button.setVisibility(View.GONE);
-                                if (availablePlayers.contains(button.getText().toString()))
-                                {
+                                if (availablePlayers.contains(button.getText().toString())) {
                                     generateButton(button.getText().toString());
                                     availablePlayers.remove(button.getText().toString());
                                 }
@@ -455,7 +622,6 @@ public class AddTeamActivity extends  AppCompatActivity{
 
             }
         });
-
 
 
     }

@@ -1,6 +1,7 @@
 package psu.ajm6684.myapplication;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 
@@ -79,7 +80,7 @@ public class MyTeamsPage extends AppCompatActivity {
 
     String uid ;
 
-    Button logout;
+    Button hide;
 //    Query specific ;
 
 
@@ -99,7 +100,7 @@ public class MyTeamsPage extends AppCompatActivity {
        Users = db.collection("Users");
         current = firebaseAuth.getCurrentUser();
 
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 
         auth = FirebaseAuth.getInstance();
@@ -179,7 +180,7 @@ recyclerView = findViewById(R.id.recycler_view);
 
        setUpView(uid);
 
-        logout = (Button) findViewById(R.id.logoutButton) ;
+        hide = (Button) findViewById(R.id.invisibleBtn) ;
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -199,13 +200,13 @@ recyclerView = findViewById(R.id.recycler_view);
             }
         });
 
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                finish();
-            }
-        });
+//        logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                finish();
+//            }
+//        });
 
     }
 
@@ -321,19 +322,19 @@ recyclerView = findViewById(R.id.recycler_view);
         TeamAdapter.stopListening();
     }
     public void onBackPressed() {
-
-        if(backButtonCount >= 1)
-        {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
-        else
-        {
-            Toast.makeText(this, "Press the back button once again to close the application.", Toast.LENGTH_SHORT).show();
-            backButtonCount++;
-        }
+//
+//        if(backButtonCount >= 1)
+//        {
+//            Intent intent = new Intent(Intent.ACTION_MAIN);
+//            intent.addCategory(Intent.CATEGORY_HOME);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(intent);
+//        }
+//        else
+//        {
+//            Toast.makeText(this, "Press the back button once again to close the application.", Toast.LENGTH_SHORT).show();
+//            backButtonCount++;
+//        }
     }
 
 

@@ -1,5 +1,8 @@
 package psu.ajm6684.myapplication;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -31,7 +34,7 @@ public class PreferenceActivity  extends AppCompatActivity {
     Switch aSwitch;
 
     Button backButton;
-
+    Button done;
 
     FirebaseFirestore firestore;
     FirebaseAuth firebaseAuth;
@@ -47,6 +50,41 @@ public class PreferenceActivity  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.preference_page);
         aSwitch = findViewById(R.id.switch1);
+        done = findViewById(R.id.logoutButtonPref);
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(PreferenceActivity.this);
+                builder.setCancelable(false);
+                builder.setMessage("Do you wish to exit?");
+                builder.setTitle("")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                Intent confirmPage = new Intent(PreferenceActivity.this, MainActivity.class);
+                                startActivity(confirmPage);
+                                System.exit(1);
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+
+
+
+
+
+                builder.create();
+                builder.show();
+
+            }
+        });
 
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();

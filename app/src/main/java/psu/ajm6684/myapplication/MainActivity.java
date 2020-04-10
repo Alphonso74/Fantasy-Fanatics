@@ -4,8 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,13 +42,19 @@ public class MainActivity extends Activity {
         updateUiWithUser(currentUser);
     }
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         confirm = findViewById(R.id.confirmMainPage);
         signup = findViewById(R.id.confirmCreateAccount);
+
+
+
 
         final EditText email = (EditText) findViewById(R.id.emailMainPage);
         final EditText password = (EditText) findViewById(R.id.passwordInputMainPage);
@@ -137,7 +149,10 @@ public class MainActivity extends Activity {
             }
         });
     }
+    @Override
+    public void onBackPressed() {
 
+    }
 
 
 

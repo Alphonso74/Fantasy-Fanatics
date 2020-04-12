@@ -40,6 +40,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,6 +57,7 @@ public class AddTeamActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseUser current;
     DocumentReference mode;
+    
     int backButtonCount = 0;
     Handler handler = new Handler();
     Spinner spinner;
@@ -62,6 +66,7 @@ public class AddTeamActivity extends AppCompatActivity {
 
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseFirestore nam = FirebaseFirestore.getInstance();
     ArrayList<Teams> teamsList;
     ArrayList<String> availablePlayers;
 
@@ -78,8 +83,9 @@ public class AddTeamActivity extends AppCompatActivity {
     boolean four = false;
     boolean five = false;
 
-    boolean finale = false;
 
+
+    boolean sameNam = false;
     public AddTeamActivity() {
 
     }
@@ -123,7 +129,7 @@ public class AddTeamActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                sameNam = false;
 
                 for (int x = 0; x < availablePlayers.size(); x++) {
 
@@ -152,47 +158,90 @@ public class AddTeamActivity extends AppCompatActivity {
                 System.out.println("5:" + five);
 
 
-                if (availablePlayers.size() != 5 && teamName.getText().toString().isEmpty()) {
-                    superMax();
-                } else if (availablePlayers.size() != 5) {
-                    notMax();
-                } else if (teamName.getText().toString().isEmpty()) {
-                    nameMax();
-                }
-                /*
-                    if (button.getText().toString().contains("Guard") && !button.getText().toString().contains("-")) {
-                                        System.out.println("test1");
-                                        one = true;
+
+                final String userTN = teamName.getText().toString();
+
+
+                nam.collection("Users").document(current.getUid()).collection("Teams").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+
+
+                                if(document.getData().toString().length() > 0)
+                                {
+                                    String separateTeamName = document.getData().toString();
+                                    String[] tokens = separateTeamName.split(" ");
+
+                                    String dbTeamName = "";
+                                    for(int x = 0; x < tokens.length; x++)
+                                    {
+                                        //System.out.println(tokens[x]);
+                                        if(tokens[x].contains("TeamName="))
+                                        {
+                                            dbTeamName = tokens[x];
+                                        }
+
                                     }
+                                    dbTeamName = dbTeamName.replace("TeamName=","");
+                                    dbTeamName = dbTeamName.replace(",","");
+                                    System.out.println(dbTeamName);
+                                    System.out.println(separateTeamName);
 
-                                   else if (button.getText().toString().contains("Forward-Guard")) {
-                                        System.out.println("test2");
-                                        two = true;
+                                    if(userTN.equals(dbTeamName))
+                                    {
+
+                                        System.out.println("yes");
+                                        System.out.println("Current Team name: " + userTN + "\t\t" + "DataBaseTeamName: " + dbTeamName);
+                                        sameName();
+                                        return;
+
                                     }
+                                    else
+                                    {
+                                        System.out.println("no");
+                                        System.out.println("Current Team name: " + userTN + "\t\t" + "DataBaseTeamName: " + dbTeamName);
 
-                                   else  if (button.getText().toString().contains("Forward-Center")) {
-                                        System.out.println("test3");
-                                      three = true;
                                     }
+                                }
 
-                                   else  if (button.getText().toString().contains("Guard-Forward")) {
-                                        System.out.println("test4");
-                                        four = true;
-                                    }
 
-                                   else  if (button.getText().toString().contains("Center") && !button.getText().toString().contains("-")) {
-                                        System.out.println("test5");
-                                       five = true;
-                                    }
+                            }
+                        }
 
-                 */
 
-                else if ((!one || !two || !three || !four || !five) && availablePlayers.size() == 5) {
-                    balanceMax();
-                } else {
+                        if (availablePlayers.size() != 5 && teamName.getText().toString().isEmpty()) {
+                            superMax();
+                        } else if (availablePlayers.size() != 5) {
+                            notMax();
+                        } else if (teamName.getText().toString().isEmpty()) {
+                            nameMax();
+                        }else if(sameNam)
+                        {
+                            sameName();
+                        }
 
-                    addTeam();
-                }
+                        else if ((!one || !two || !three || !four || !five) && availablePlayers.size() == 5) {
+                            balanceMax();
+                        } else {
+
+                              addTeam();
+                        }
+
+
+
+                    }
+
+
+                });
+
+
+                System.out.println("IS IT THE SAME???" + sameNam);
+
+
+
 
 
             }
@@ -437,7 +486,7 @@ public class AddTeamActivity extends AppCompatActivity {
                          */
 
 
-                    //////////////////////////////////////    System.out.print(counter + ":\t" + theWhole + "\n");
+                    //////////////////////////////////////    System.out.print(counter + ":\t" + theWhole + "\nam");
 
 
                     counter++;
@@ -449,6 +498,7 @@ public class AddTeamActivity extends AppCompatActivity {
             }
         });
     }
+
 
 
     public void collectionGroupQuery2() {
@@ -532,6 +582,7 @@ public class AddTeamActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public void collectionGroupQuery3() {
 
@@ -922,6 +973,11 @@ public class AddTeamActivity extends AppCompatActivity {
 
     public void balanceMax() {
         Toast.makeText(this, "Your team needs a player in each position", Toast.LENGTH_LONG).show();
+    }
+
+    public void sameName()
+    {
+        Toast.makeText(this, "Team name is already in used", Toast.LENGTH_SHORT).show();
     }
 
 

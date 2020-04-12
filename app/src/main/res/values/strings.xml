@@ -35,6 +35,8 @@
     <string name="confirmed">Confirm</string>
     <string name="Splash">SPLASH</string>
     <string name="splash">SPLASH</string>
+    <string name="choose_2_teams">Choose 2 Teams</string>
+    <string name="match_up">Match UP</string>
 
     <string-array name="spinner">
         <item>Guard</item>

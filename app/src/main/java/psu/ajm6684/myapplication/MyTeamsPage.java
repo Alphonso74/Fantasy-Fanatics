@@ -1,5 +1,6 @@
 package psu.ajm6684.myapplication;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.wifi.WifiManager;
@@ -77,7 +78,7 @@ public class MyTeamsPage extends AppCompatActivity {
 
     FirebaseUser current;
     Button preference;
-
+    Button playGame;
     String uid ;
 
     Button hide;
@@ -92,6 +93,7 @@ public class MyTeamsPage extends AppCompatActivity {
 
 
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +108,18 @@ public class MyTeamsPage extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         uid = current.getUid();
+
+
+        playGame = (Button) findViewById(R.id.gameSim);
+
+        playGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(), ChooseTeams.class);
+                startActivity(intent);
+            }
+        });
 
 
         ajm = Users.document(current.getUid());
@@ -180,7 +194,7 @@ recyclerView = findViewById(R.id.recycler_view);
 
        setUpView(uid);
 
-        hide = (Button) findViewById(R.id.invisibleBtn) ;
+       // hide = (Button) findViewById(R.id.invisibleBtn) ;
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

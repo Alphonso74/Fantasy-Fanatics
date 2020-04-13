@@ -22,7 +22,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="10dp">
 
 
 <!--        <TextView-->
@@ -48,7 +48,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:gravity="center_horizontal"
         android:text="@string/match_up"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -82,20 +82,29 @@
 
     <Button
         android:id="@+id/clear_text"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Clear Teams"
+        android:layout_marginTop="20dp"
+        android:text="Remove Team"
         android:onClick="clearFeed"
         android:textSize="24sp"/>
 
 
     <Button
         android:id="@+id/play_game"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Play Game"
+        android:onClick="playgame"
+        android:textSize="24sp"/>
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel Game"
+        android:onClick="back2Teams"
         android:textSize="24sp"/>
 
 

@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class SplashScreenActivity extends AppCompatActivity {
 
     private static int SPLASH_TIME_OUT = 4000;
-    Animation topAnim, bottomAnim;
+    Animation topAnim, bottomAnim, rotateAnim;
     ImageView image;
 
     @Override
@@ -30,10 +30,11 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation);
         bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
+        rotateAnim = AnimationUtils.loadAnimation(this, R.anim.rotate);
 
         image = findViewById(R.id.imageView2);
-
         image.setAnimation(topAnim);
+        image.setAnimation(rotateAnim);
 
         new Handler().postDelayed(new Runnable(){
 

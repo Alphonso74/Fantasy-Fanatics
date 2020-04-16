@@ -8,12 +8,12 @@
 
     <TextView
         android:id="@+id/fantasyFanaticsText"
-        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:fontFamily="@font/audiowide"
-        android:text="@string/fantasy_fanatics"
+        android:gravity="center"
+        android:text="@string/ff"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

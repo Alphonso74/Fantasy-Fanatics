@@ -11,11 +11,15 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,6 +35,7 @@ public class MainActivity extends Activity {
 
     Button confirm;
     Button signup;
+    private SharedPreference sharedPreferenceObj;
 
     FirebaseAuth firebaseAuth;
     FirebaseAuth.AuthStateListener authStateListener;
@@ -43,8 +48,6 @@ public class MainActivity extends Activity {
     }
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,12 +57,10 @@ public class MainActivity extends Activity {
         signup = findViewById(R.id.confirmCreateAccount);
 
 
-
-
         final EditText email = (EditText) findViewById(R.id.emailMainPage);
         final EditText password = (EditText) findViewById(R.id.passwordInputMainPage);
 
-        final ProgressBar  loadingProgressBar = (ProgressBar) findViewById(R.id.progressBar2);
+        final ProgressBar loadingProgressBar = (ProgressBar) findViewById(R.id.progressBar2);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -97,7 +98,7 @@ public class MainActivity extends Activity {
 //                loginViewModel.login(emailEditText.getText().toString(),
 //                        passwordEditText.getText().toString());
 
-                if(pass.length() < 6){
+                if (pass.length() < 6) {
 
                     password.setError("Password must be longer than 6 characters!");
 
@@ -106,7 +107,7 @@ public class MainActivity extends Activity {
                     return;
                 }
 
-                if(email.getText().toString().isEmpty() || password.getText().toString().isEmpty()){
+                if (email.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
 
                     //Toast.makeText(getApplicationContext(), "Missing Fields", Toast.LENGTH_LONG).show();
                     Snackbar.make(getCurrentFocus(), "Missing Fields", Snackbar.LENGTH_LONG)
@@ -116,25 +117,24 @@ public class MainActivity extends Activity {
                 }
 
 
-                firebaseAuth.signInWithEmailAndPassword(mail,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                firebaseAuth.signInWithEmailAndPassword(mail, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
 
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
 
                             FirebaseUser user = firebaseAuth.getCurrentUser();
                             //updateUiWithUser(user);
                             //Toast.makeText(getApplicationContext(), "Logged in user: " + mail, Toast.LENGTH_LONG).show();
-                           // Snackbar.make(getCurrentFocus(), "Logged in user: " + mail, Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                           openMyTeamsActivity();
+                            // Snackbar.make(getCurrentFocus(), "Logged in user: " + mail, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                            openMyTeamsActivity();
 
-                           loadingProgressBar.setVisibility(View.INVISIBLE);
+                            loadingProgressBar.setVisibility(View.INVISIBLE);
 
-                        }
-                        else{
+                        } else {
 
-                           // Toast.makeText(getApplicationContext(), "Incorrect Credentials! " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            // Toast.makeText(getApplicationContext(), "Incorrect Credentials! " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                             Snackbar.make(getCurrentFocus(), "Incorrect Credentials", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                             //updateUiWithUser(null);
@@ -148,16 +148,50 @@ public class MainActivity extends Activity {
 
             }
         });
+
+
+        sharedPreferenceObj = new SharedPreference(MainActivity.this);
+        if (sharedPreferenceObj.getApp_runFirst().equals("FIRST")) {
+
+            final AlertDialog d = new AlertDialog.Builder(MainActivity.this,R.style.MyDialogTheme)
+                    .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                           sharedPreferenceObj.setApp_runFirst("NO");
+
+
+                        }
+                    })
+                    .setNegativeButton("Decline", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finish();
+
+                        }
+                    })
+
+                    .setTitle("Fantasy Fanatics")
+
+                    .setMessage("Do you agree to our Terms and Services & Privacy Policies?")
+                    .create();
+
+            d.show();
+
+        } else {
+
+
+            // App is not First Time Launch
+        }
+
     }
+
     @Override
     public void onBackPressed() {
 
     }
 
 
-
-    public void openMyTeamsActivity()
-    {
+    public void openMyTeamsActivity() {
         Intent confirmPage = new Intent(MainActivity.this, MyTeamsPage.class);
         startActivity(confirmPage);
 
@@ -178,8 +212,6 @@ public class MainActivity extends Activity {
 //        // TODO : initiate successful logged in experience
 //        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
-
-
 
 
 }

@@ -1,5 +1,6 @@
 package psu.ajm6684.myapplication;
 
+import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.PersistableBundle;
 import android.util.Log;
+import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +59,7 @@ public class AddTeamActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseUser current;
     DocumentReference mode;
+    int dialogCounter = 0;
     
     int backButtonCount = 0;
     Handler handler = new Handler();
@@ -102,6 +105,16 @@ public class AddTeamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_players);
 
+
+
+
+
+
+
+
+
+
+
         submit = findViewById(R.id.confirmbtn);
         teamName = findViewById(R.id.teamNameInputAddPlayer);
         spinner = findViewById(R.id.spinner);
@@ -124,6 +137,8 @@ public class AddTeamActivity extends AppCompatActivity {
         stringArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(stringArrayAdapter);
+
+
 
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -280,6 +295,7 @@ public class AddTeamActivity extends AppCompatActivity {
                             if (s.equals("dark")) {
                                 getDelegate().setLocalNightMode((AppCompatDelegate.MODE_NIGHT_YES));
                                 break;
+
                             }
 
                         }
@@ -296,18 +312,55 @@ public class AddTeamActivity extends AppCompatActivity {
 
                 //  String[] spinnerArray = new String[]{"Guard", "Forward-Guard", "Forward-Center", "Guard-Forward", "Center"};
                 if (role.equals("Guard")) {
+                    dialogCounter++;
+                    System.out.println("COUNTER OF DIALOG:" + dialogCounter);
+
+                    if(dialogCounter > 1)
+                    {
+                        dialogged();
+                    }
+
                     clearLayoutTop();
                     collectionGroupQuery();
                 } else if (role.equals("Forward-Guard")) {
+                    dialogCounter++;
+                    System.out.println("COUNTER OF DIALOG:" + dialogCounter);
+
+                    if(dialogCounter > 1)
+                    {
+                        dialogged();
+                    }
                     clearLayoutTop();
                     collectionGroupQuery2();
                 } else if (role.equals("Forward-Center")) {
+                    dialogCounter++;
+                    System.out.println("COUNTER OF DIALOG:" + dialogCounter);
+
+
+                    if(dialogCounter > 1)
+                    {
+                        dialogged();
+                    }
                     clearLayoutTop();
                     collectionGroupQuery3();
                 } else if (role.equals("Guard-Forward")) {
+                    dialogCounter++;
+                    System.out.println("COUNTER OF DIALOG:" + dialogCounter);
+
+                    if(dialogCounter > 1)
+                    {
+                        dialogged();
+                    }
                     clearLayoutTop();
                     collectionGroupQuery4();
                 } else if (role.equals("Center")) {
+                    dialogCounter++;
+                    System.out.println("COUNTER OF DIALOG:" + dialogCounter);
+
+                    if(dialogCounter > 1)
+                    {
+                        dialogged();
+                    }
                     clearLayoutTop();
                     collectionGroupQuery5();
 
@@ -321,6 +374,25 @@ public class AddTeamActivity extends AppCompatActivity {
         });
 
 
+
+
+
+
+    }
+
+    public void dialogged()
+    {
+        final LoadingDialog loadingDialog = new LoadingDialog(AddTeamActivity.this);
+        loadingDialog.startDialog();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                loadingDialog.dismissDialog();
+
+            }
+        }, 1250);
     }
 
 

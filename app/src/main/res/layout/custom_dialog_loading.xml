@@ -12,33 +12,36 @@
 
     >
 
-    <ProgressBar
-        android:id="@+id/progressBarLogout"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="167dp"
-        android:layout_height="37dp"
-        android:indeterminateDrawable="@drawable/custom_dialog_1"
-        android:indeterminateDuration="@android:integer/config_longAnimTime"
+    <pl.droidsonroids.gif.GifImageView
+
+        android:id="@+id/gifspin"
+        android:layout_width="172dp"
+        android:layout_height="74dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="50dp"
+        android:foregroundGravity="center"
+        android:src="@drawable/spin2"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="25dp"/>
+        app:layout_constraintVertical_bias="0.421"
+        tools:ignore="MissingConstraints">
+
+    </pl.droidsonroids.gif.GifImageView>
 
     <TextView
         android:id="@+id/textViewLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Loading..."
-        android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBarLogout"
+        android:text="@string/loading_text"
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="#FFFFFF"
+        android:textSize="18sp"
         android:textStyle="bold"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gifspin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

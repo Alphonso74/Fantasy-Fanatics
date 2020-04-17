@@ -80,41 +80,7 @@ public class ChooseTeams extends AppCompatActivity {
 
         String Uid = currentUser.getUid().toString();
 
-//        db.collectionGroup("Teams").whereEqualTo("TeamName", "Big Ballers").get()
-//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//
-//                        for (QueryDocumentSnapshot snap : queryDocumentSnapshots) {
-//                            Log.d("fewfwewf", snap.getId() + " => " + snap.getData());
-//                            Toast.makeText(ChooseTeams.this, snap.getId(), Toast.LENGTH_SHORT).show();
-//
-//                        }
-//                    }
-//                });
 
-        db.collectionGroup("Teams").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        //  Teams team = document.toObject(Teams.class);
-
-                        String teamName = document.get("TeamName").toString();
-                       // Toast.makeText(ChooseTeams.this, teamName, Toast.LENGTH_SHORT).show();
-
-
-                    }
-
-
-
-
-
-
-                }
-            }
-        });
 
         db.collectionGroup("Teams").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

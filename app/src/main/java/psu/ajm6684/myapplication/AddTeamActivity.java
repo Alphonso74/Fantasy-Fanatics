@@ -227,22 +227,21 @@ public class AddTeamActivity extends AppCompatActivity {
                         }
 
 
-                        if (availablePlayers.size() != 5 && teamName.getText().toString().isEmpty()) {
+                        String nameCheckTrim = teamName.getText().toString().trim();
+                        int nameSize = nameCheckTrim.length();
+                        if (availablePlayers.size() != 5 && nameCheckTrim.isEmpty()) {
                             superMax();
                         } else if (availablePlayers.size() != 5) {
                             notMax();
-                        } else if (teamName.getText().toString().isEmpty()) {
+                        } else if (nameCheckTrim.isEmpty()) {
                             nameMax();
-                        }else if(sameNam)
-                        {
+                        } else if (sameNam) {
                             sameName();
-                        }
-
-                        else if ((!one || !two || !three || !four || !five) && availablePlayers.size() == 5) {
+                        } else if ((!one || !two || !three || !four || !five) && availablePlayers.size() == 5) {
                             balanceMax();
                         } else {
 
-                              addTeam();
+                            addTeam();
                         }
 
 

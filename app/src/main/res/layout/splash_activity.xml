@@ -9,8 +9,8 @@
    >
 
     <pl.droidsonroids.gif.GifImageView
-        android:layout_width="417dp"
-        android:layout_height="733dp"
+        android:layout_width="410dp"
+        android:layout_height="730dp"
         android:src="@drawable/bb"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

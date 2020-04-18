@@ -151,13 +151,13 @@ public class ChooseTeams extends AppCompatActivity {
                                     //  Teams team = document.toObject(Teams.class);
 
                                     String teamName = document.get("TeamName").toString();
-                                    Toast.makeText(ChooseTeams.this, teamName, Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(ChooseTeams.this, teamName, Toast.LENGTH_SHORT).show();
                                       Guard1 = document.get("Guard").toString();
                                       ForwardGuard1 = document.get("ForwardGuard").toString();
                                       GuardForward1 = document.get("GuardForward").toString();
                                       ForwardCenter1 = document.get("ForwardCenter").toString();
                                       Center1 = document.get("Center").toString();
-                                    Toast.makeText(ChooseTeams.this, Guard1, Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(ChooseTeams.this, Guard1, Toast.LENGTH_SHORT).show();
 
 
 
@@ -189,7 +189,7 @@ public class ChooseTeams extends AppCompatActivity {
                                     GuardForward2 = document.get("GuardForward").toString();
                                     ForwardCenter2 = document.get("ForwardCenter").toString();
                                     Center2 = document.get("Center").toString();
-                                    Toast.makeText(ChooseTeams.this, Guard2, Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(ChooseTeams.this, Guard2, Toast.LENGTH_SHORT).show();
 
 
                                 }

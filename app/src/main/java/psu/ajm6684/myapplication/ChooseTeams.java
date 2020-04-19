@@ -2,6 +2,7 @@ package psu.ajm6684.myapplication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -31,6 +32,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ChooseTeams extends AppCompatActivity {
 
@@ -63,10 +65,77 @@ public class ChooseTeams extends AppCompatActivity {
     String ForwardCenter2;
     String Center2;
 
+    //for dark mode
+    DocumentReference mode;
+    FirebaseUser current;
+    FirebaseFirestore firestore;
+    //
+
+    int backButtonCount = 0;
+    @Override
+    public void onBackPressed() {
+
+        if (backButtonCount >= 1) {
+            finish();
+        } else {
+            Toast.makeText(this, "Pressing the back button again will lose unsaved progress.", Toast.LENGTH_SHORT).show();
+            backButtonCount++;
+        }
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_teams);
+
+        //for dark mode
+        firebaseAuth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
+        current = firebaseAuth.getCurrentUser();
+        mode = firestore.collection("Users").document(current.getUid());
+
+        mode.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        List<String> list = new ArrayList<>();
+
+                        Map<String, Object> map = document.getData();
+                        if (map != null) {
+                            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                                list.add(entry.getValue().toString());
+                            }
+                        }
+
+
+                        for (String s : list) {
+
+                            if(s.equals("light"))
+                            {
+
+                                getDelegate().setLocalNightMode((AppCompatDelegate.MODE_NIGHT_NO));
+                                break;
+                            }
+
+                            if (s.equals("dark"))
+                            {
+                                getDelegate().setLocalNightMode((AppCompatDelegate.MODE_NIGHT_YES));
+                                break;
+                            }
+
+                        }
+                    }
+                }
+            }
+        });
+        //
+
+
+
+
         layout = (ViewGroup) findViewById(R.id.teams);
         playGame = (Button) findViewById(R.id.play_game);
         imageView = new ImageView(ChooseTeams.this);
@@ -291,8 +360,14 @@ public class ChooseTeams extends AppCompatActivity {
 
     public void back2Teams(View view) {
 
-        Intent confirmPage = new Intent(this, MyTeamsPage.class);
-        startActivity(confirmPage);
+        if (backButtonCount >= 1) {
+            Intent confirmPage = new Intent(this, MyTeamsPage.class);
+            startActivity(confirmPage);
+        } else {
+            Toast.makeText(this, "Pressing the cancel button again will lose unsaved progress.", Toast.LENGTH_SHORT).show();
+            backButtonCount++;
+        }
+
     }
 
     public void playgame(View view) {

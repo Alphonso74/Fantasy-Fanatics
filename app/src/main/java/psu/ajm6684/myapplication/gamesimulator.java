@@ -2,6 +2,7 @@ package psu.ajm6684.myapplication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,11 +13,19 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class gamesimulator extends AppCompatActivity {
 
@@ -36,10 +45,75 @@ public class gamesimulator extends AppCompatActivity {
     String GuardForward2 ;
     String ForwardCenter2;
     String Center2 ;
+
+
+    //for dark mode
+    DocumentReference mode;
+    FirebaseUser current;
+    FirebaseFirestore firestore;
+    FirebaseAuth firebaseAuth;
+    //
+
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamesimulator);
+
+
+        //for dark mode
+        firebaseAuth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
+        current = firebaseAuth.getCurrentUser();
+        mode = firestore.collection("Users").document(current.getUid());
+
+        mode.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        List<String> list = new ArrayList<>();
+
+                        Map<String, Object> map = document.getData();
+                        if (map != null) {
+                            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                                list.add(entry.getValue().toString());
+                            }
+                        }
+
+
+                        for (String s : list) {
+
+                            if(s.equals("light"))
+                            {
+
+                                getDelegate().setLocalNightMode((AppCompatDelegate.MODE_NIGHT_NO));
+                                break;
+                            }
+
+                            if (s.equals("dark"))
+                            {
+                                getDelegate().setLocalNightMode((AppCompatDelegate.MODE_NIGHT_YES));
+                                break;
+                            }
+
+                        }
+                    }
+                }
+            }
+        });
+        //
+
+
+
 
         team1Score = 0;
         team2score = 0;

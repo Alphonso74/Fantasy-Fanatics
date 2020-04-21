@@ -37,6 +37,8 @@ public class gamesimulator extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Query team = db.collectionGroup("Teams");
 
+    int possession = 0; //Even means team1 has the ball, Odd means team2 has the ball
+
     Button playGame;
     TextView gameFeed;
 
@@ -202,8 +204,12 @@ public class gamesimulator extends AppCompatActivity {
 
 
         playGame.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+
+                playGame.setAlpha(.5f);
+                playGame.setClickable(false);
 
 //                final Handler handler = new Handler();
 //                handler.postDelayed(new Runnable() {
@@ -228,8 +234,8 @@ public class gamesimulator extends AppCompatActivity {
                         firstQ();
                     }
                 }, 15000);
-//
-//
+
+
 //                final Handler handler3 = new Handler();
 //                handler3.postDelayed(new Runnable() {
 //                    @Override
@@ -322,16 +328,35 @@ public class gamesimulator extends AppCompatActivity {
 
 
         gameFeed.append("\nLets get ready for Tip off!\n\n" );
+        gameFeed.append("\n15 seconds.......\n\n" );
+
 
 
     }
 
     private void firstQ() {
 
+        gameFeed.append("\nGet Ready.......\n" );
 
 
 
-        Toast.makeText(gamesimulator.this, "Start of the First Quarter", Toast.LENGTH_SHORT).show();
+       int tip = (int)Math.round(Math.random());
+
+       if(tip == 0){
+
+           gameFeed.append("\n" + teamName1 + " Won the tip!\n" );
+
+           possession = possession + 2;
+
+       }
+       else{
+
+           gameFeed.append("\n" + teamName2 + " Won the tip!\n" );
+           possession++;
+
+       }
+
+//        Toast.makeText(gamesimulator.this, "Start of the First Quarter", Toast.LENGTH_SHORT).show();
 
 
 

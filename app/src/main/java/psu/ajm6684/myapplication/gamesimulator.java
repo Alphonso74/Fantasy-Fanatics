@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,12 +37,17 @@ public class gamesimulator extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Query team = db.collectionGroup("Teams");
 
+    Button playGame;
+    TextView gameFeed;
+
+    String teamName1;
     String Guard1 ;
     String ForwardGuard1 ;
     String GuardForward1 ;
     String ForwardCenter1 ;
     String Center1 ;
 
+    String teamName2;
     String Guard2 ;
     String ForwardGuard2 ;
     String GuardForward2 ;
@@ -66,6 +74,13 @@ public class gamesimulator extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamesimulator);
+
+        playGame = (Button) findViewById(R.id.rungame);
+        gameFeed = (TextView) findViewById(R.id.dataFeed);
+
+
+        team1Score = 0;
+        team2score = 0;
 
 
         //for dark mode
@@ -110,33 +125,15 @@ public class gamesimulator extends AppCompatActivity {
                 }
             }
         });
-        //
-
-
-
-
-        team1Score = 0;
-        team2score = 0;
-
-
 
         Intent intent = getIntent();
 
-        String teamName1 = intent.getStringExtra("Team1").trim();
-//        String Guard1 ;
-//        String ForwardGuard1 ;
-//        String GuardForward1 ;
-//        String ForwardCenter1 ;
-//        String Center1 ;
-//        Toast.makeText(gamesimulator.this, "Team 1 Guard " + Guard1, Toast.LENGTH_SHORT).show();
+        teamName1 = intent.getStringExtra("Team1").trim();
 
 
-        String teamName2 = intent.getStringExtra("Team2").trim();
-//        String Guard2 ;
-//        String ForwardGuard2 ;
-//        String GuardForward2 ;
-//        String ForwardCenter2;
-//        String Center2 ;
+
+        teamName2 = intent.getStringExtra("Team2").trim();
+
 
 
 
@@ -150,22 +147,14 @@ public class gamesimulator extends AppCompatActivity {
 
                         String teamName = document.get("TeamName").toString();
 //                        Toast.makeText(gamesimulator.this, teamName, Toast.LENGTH_SHORT).show();
-                        String Guard1 = document.get("Guard").toString();
-                        String ForwardGuard1 = document.get("ForwardGuard").toString();
-                        String GuardForward1 = document.get("GuardForward").toString();
-                        String ForwardCenter1 = document.get("ForwardCenter").toString();
-                        String Center1 = document.get("Center").toString();
-                        Toast.makeText(gamesimulator.this, "Guard " + Guard1, Toast.LENGTH_SHORT).show();
-
-
+                        Guard1 = document.get("Guard").toString();
+                        ForwardGuard1 = document.get("ForwardGuard").toString();
+                        GuardForward1 = document.get("GuardForward").toString();
+                        ForwardCenter1 = document.get("ForwardCenter").toString();
+                        Center1 = document.get("Center").toString();
+//                        Toast.makeText(gamesimulator.this, "Guard " + Guard1, Toast.LENGTH_SHORT).show();
 
                     }
-
-
-
-
-
-
 
                 }
 
@@ -189,19 +178,15 @@ public class gamesimulator extends AppCompatActivity {
                         //  Teams team = document.toObject(Teams.class);
 
 //                                    String teamName = document.get("TeamName").toString();
-                        String Guard2 = document.get("Guard").toString();
-                        String ForwardGuard2 = document.get("ForwardGuard").toString();
-                        String GuardForward2 = document.get("GuardForward").toString();
-                        String ForwardCenter2 = document.get("ForwardCenter").toString();
-                        String Center2 = document.get("Center").toString();
-                        Toast.makeText(gamesimulator.this, "Guard 2 " + Guard2, Toast.LENGTH_SHORT).show();
+                        Guard2 = document.get("Guard").toString();
+                        ForwardGuard2 = document.get("ForwardGuard").toString();
+                        GuardForward2 = document.get("GuardForward").toString();
+                        ForwardCenter2 = document.get("ForwardCenter").toString();
+                        Center2 = document.get("Center").toString();
+//                        Toast.makeText(gamesimulator.this, "Guard 2 " + Guard2, Toast.LENGTH_SHORT).show();
 
 
                     }
-
-
-
-
 
 
                 } else{
@@ -213,6 +198,174 @@ public class gamesimulator extends AppCompatActivity {
 
             }
         });
+
+
+
+        playGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                final Handler handler = new Handler();
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        //Do something after 100ms
+
+                        tipOff();
+//                    }
+//                }, 10000);
+
+
+
+                final Handler handler2 = new Handler();
+                handler2.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //Do something after 100ms
+
+                        Toast.makeText(gamesimulator.this, "The First Quarter Is Now Underway!", Toast.LENGTH_SHORT).show();
+
+                        firstQ();
+                    }
+                }, 15000);
+//
+//
+//                final Handler handler3 = new Handler();
+//                handler3.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        //Do something after 100ms
+//
+//                        secondQ();
+//                    }
+//                }, 50000);
+//
+//
+//                final Handler handler4 = new Handler();
+//                handler4.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        //Do something after 100ms
+//                        halftime();
+//                    }
+//                }, 70000);
+//
+//
+//                final Handler handler5 = new Handler();
+//                handler5.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        //Do something after 100ms
+//
+//                        thirdQ();
+//                    }
+//                }, 90000);
+//
+//
+//                final Handler handler6 = new Handler();
+//                handler6.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        //Do something after 100ms
+//
+//                        fourthQ();
+//                    }
+//                }, 110000);
+//
+//                final Handler handler7 = new Handler();
+//                handler7.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        //Do something after 100ms
+//
+//                        endGame();
+//                    }
+//                }, 130000);
+//
+
+
+
+            }
+        });
+
+
+
+
+
+
+    }
+
+    private void tipOff(){
+
+        gameFeed.append("Welcome to Today's game!\n" );
+        gameFeed.append("\nToday's match up is between....\n"
+                + teamName1 + " and " + teamName2 +"\n");
+
+        gameFeed.append("\n"+teamName1+"'s" + " Starting Five! \n");
+
+        gameFeed.append("\nStarting at the Guard Position\n" + Guard1+"!\n" );
+        gameFeed.append("\nStarting at the Shooting Guard Position\n" + GuardForward1+"!\n" );
+        gameFeed.append("\nStarting at the Small Forward Position\n" + ForwardGuard1+"!\n" );
+        gameFeed.append("\nStarting at the Power Forward Position\n" + ForwardCenter1+"!\n" );
+        gameFeed.append("\nStarting at the Center Position\n" + Center1+"!\n" );
+
+
+
+        gameFeed.append("\n"+teamName2+"'s" + " Starting Five! \n");
+
+        gameFeed.append("\nStarting at the Guard Position\n" + Guard2+"!\n" );
+        gameFeed.append("\nStarting at the Shooting Guard Position\n" + GuardForward2+"!\n" );
+        gameFeed.append("\nStarting at the Small Forward Position\n" + ForwardGuard2+"!\n" );
+        gameFeed.append("\nStarting at the Power Forward Position\n" + ForwardCenter2+"!\n" );
+        gameFeed.append("\nStarting at the Center Position\n" + Center2+"!\n" );
+
+
+
+        gameFeed.append("\nLets get ready for Tip off!\n\n" );
+
+
+    }
+
+    private void firstQ() {
+
+
+
+
+        Toast.makeText(gamesimulator.this, "Start of the First Quarter", Toast.LENGTH_SHORT).show();
+
+
+
+    }
+
+
+    private void secondQ() {
+
+        Toast.makeText(gamesimulator.this, "Start of the Second Quarter", Toast.LENGTH_SHORT).show();
+
+    }
+
+   private void halftime(){
+
+       Toast.makeText(gamesimulator.this, "Halftime", Toast.LENGTH_SHORT).show();
+
+   }
+
+
+   private void thirdQ(){
+
+       Toast.makeText(gamesimulator.this, "Start of the Third Quarter", Toast.LENGTH_SHORT).show();
+
+   }
+
+    private void fourthQ(){
+
+        Toast.makeText(gamesimulator.this, "Start of the Fourth Quarter", Toast.LENGTH_SHORT).show();
+
+    }
+
+    private void endGame(){
+
+        Toast.makeText(gamesimulator.this, "Final Score - " , Toast.LENGTH_SHORT).show();
 
     }
 

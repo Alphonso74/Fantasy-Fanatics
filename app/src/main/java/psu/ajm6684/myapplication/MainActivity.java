@@ -134,9 +134,9 @@ public class MainActivity extends Activity {
 
                         } else {
 
-                            // Toast.makeText(getApplicationContext(), "Incorrect Credentials! " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                            Snackbar.make(getCurrentFocus(), "Incorrect Credentials", Snackbar.LENGTH_LONG)
-                                    .setAction("Action", null).show();
+                             Toast.makeText(getApplicationContext(), "Incorrect Credentials! " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+//                            Snackbar.make(this, "Incorrect Credentials", Snackbar.LENGTH_LONG)
+//                                    .setAction("Action", null).show();
                             //updateUiWithUser(null);
 
                             loadingProgressBar.setVisibility(View.INVISIBLE);

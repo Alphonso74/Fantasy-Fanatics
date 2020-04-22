@@ -57,12 +57,14 @@ public class teamAdapter extends FirestoreRecyclerAdapter<Teams, teamAdapter.tea
         return new teamHolder(v);
     }
 
-//    public void deletePatient(int position){
-//        getSnapshots().getSnapshot(position).getReference().delete();
-//
-//
-//
-//    }
+
+
+    public void deleteTeam(int position){
+        getSnapshots().getSnapshot(position).getReference().delete();
+
+
+
+    }
 //
 //    public void updateNurse(int position,String newNurse){
 //
@@ -96,16 +98,16 @@ public class teamAdapter extends FirestoreRecyclerAdapter<Teams, teamAdapter.tea
             centerView = itemView.findViewById(R.id.text_view_center);
 
 
-//            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-//                @Override
-//                public boolean onLongClick(View v) {
-//
-//                    int position = getAdapterPosition();
-//
-//                    listener.onItemLongClick(getSnapshots().getSnapshot(position),position);
-//                    return true;
-//                }
-//            });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+
+                    int position = getAdapterPosition();
+
+                    listener.onItemLongClick(getSnapshots().getSnapshot(position),position);
+                    return true;
+                }
+            });
 ////
 //            itemView.setOnClickListener(new View.OnClickListener() {
 //                @Override

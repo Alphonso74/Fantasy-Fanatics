@@ -26,18 +26,27 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class gamesimulator extends AppCompatActivity {
 
     Integer team1Score;
-    Integer team2score;
+    Integer team2Score;
+
+    TextView team1ScoreView;
+    TextView team2ScoreView;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Query team = db.collectionGroup("Teams");
-
+    Random r;
+    Handler handler8;
     int possession = 0; //Even means team1 has the ball, Odd means team2 has the ball
+    int eventType;
+    String event;
 
     Button playGame;
     TextView gameFeed;
@@ -77,12 +86,15 @@ public class gamesimulator extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamesimulator);
 
+        team1ScoreView = (TextView) findViewById(R.id.team1Score);
+        team2ScoreView = (TextView) findViewById(R.id.team2Score);
+
         playGame = (Button) findViewById(R.id.rungame);
         gameFeed = (TextView) findViewById(R.id.dataFeed);
 
 
         team1Score = 0;
-        team2score = 0;
+        team2Score = 0;
 
 
         //for dark mode
@@ -356,7 +368,361 @@ public class gamesimulator extends AppCompatActivity {
 
        }
 
-//        Toast.makeText(gamesimulator.this, "Start of the First Quarter", Toast.LENGTH_SHORT).show();
+
+       //for(int x = 0; x < 15; x++) {
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //Do something after 100ms
+                        eventFucntion();
+
+
+                    }
+                }, 2000);
+
+        Handler handler2 = new Handler();
+        handler2.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 4000);
+
+        Handler handler3 = new Handler();
+        handler3.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 6000);
+
+        Handler handler4 = new Handler();
+        handler4.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 8000);
+
+
+
+        Handler handler5 = new Handler();
+        handler5.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 10000);
+
+        Handler handler6 = new Handler();
+        handler6.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 12000);
+
+        Handler handler7 = new Handler();
+        handler7.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 14000);
+
+
+        Handler handler8 = new Handler();
+        handler8.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 16000);
+
+        Handler handler9 = new Handler();
+        handler9.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 18000);
+
+        Handler handler10 = new Handler();
+        handler10.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 20000);
+
+        Handler handler11 = new Handler();
+        handler11.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 22000);
+
+        Handler handler12 = new Handler();
+        handler12.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 24000);
+
+        Handler handler13 = new Handler();
+        handler13.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 26000);
+
+        Handler handler14 = new Handler();
+        handler14.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 28000);
+
+
+        Handler handler15 = new Handler();
+        handler15.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 30000);
+
+        Handler handler16 = new Handler();
+        handler16.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+        Toast.makeText(gamesimulator.this, "End of the First Quarter", Toast.LENGTH_SHORT).show();
+
+        gameFeed.append("\n That Concludes the First Quarter\n" );
+
+            }
+        }, 30000);
+
+
+
+
+
+
+    }
+
+    private void eventFucntion() {
+
+
+
+
+            r = new Random();
+
+            eventType = r.nextInt(15);
+
+
+            switch (eventType) {
+
+                case 0:
+                    event = "Team with possession scores, change of possession";
+                    if(possession%2 == 0){
+
+                        team1Score = team1Score + 2;
+                        team1ScoreView.setText(team1Score.toString());
+                    }
+                    else{
+
+                        team2Score = team2Score + 2;
+                        team2ScoreView.setText(team2Score.toString());
+
+                    }
+
+                            possession ++;
+
+                    break;
+                case 1:
+                    event = "Gets ball stollen, change of possession";
+                    possession++;
+                    break;
+                case 2:
+                    event = "Team with possession scores, change of possession";
+                    if(possession%2 == 0){
+
+                        team1Score = team1Score + 2;
+                        team1ScoreView.setText(team1Score.toString());
+                    }
+                    else{
+
+                        team2Score = team2Score + 2;
+                        team2ScoreView.setText(team2Score.toString());
+
+                    }
+                    possession++;
+                    break;
+                case 3:
+                    event = "Missed shot, change of possession";
+                    possession++;
+
+                    break;
+                case 4:
+                    event = "Foul, no change of possession";
+                    break;
+                case 5:
+                    event = "Foul on shot attempt, no and1, take 2 free throws, randomized chance to hit 1 or 2 freethrows, change of possession";
+                    possession++;
+
+                    break;
+                case 6:
+                    event = "Foul on shot attempt, and1, ramdomized chance to make the 1 freethrow, change of possession ";
+                    possession++;
+
+                    break;
+                case 7:
+                    event = "Three pointer made, change of possession";
+                    if(possession%2 == 0){
+
+                        team1Score = team1Score + 3;
+                        team1ScoreView.setText(team1Score.toString());
+                    }
+                    else{
+
+                        team2Score = team2Score + 3;
+                        team2ScoreView.setText(team2Score.toString());
+
+                    }
+                    possession++;
+
+                    break;
+                case 8:
+                    event = "Team with possession misses shot, offensive rebound, no change of possession";
+                    break;
+                case 9:
+                    event = "Team with possession scores, change of possession";
+                    if(possession%2 == 0){
+
+                        team1Score = team1Score + 2;
+                        team1ScoreView.setText(team1Score.toString());
+                    }
+                    else{
+
+                        team2Score = team2Score + 2;
+                        team2ScoreView.setText(team2Score.toString());
+
+                    }
+                    possession++;
+
+                    break;
+                case 10:
+                    event = "Team with possession scores, change of possession";
+                    if(possession%2 == 0){
+
+                        team1Score = team1Score + 2;
+                        team1ScoreView.setText(team1Score.toString());
+                    }
+                    else{
+
+                        team2Score = team2Score + 2;
+                        team2ScoreView.setText(team2Score.toString());
+
+                    }
+                    possession++;
+
+                    break;
+                case 11:
+                    event = "Team with possession scores, change of possession";
+                    if(possession%2 == 0){
+
+                        team1Score = team1Score + 2;
+                        team1ScoreView.setText(team1Score.toString());
+                    }
+                    else{
+
+                        team2Score = team2Score + 2;
+                        team2ScoreView.setText(team2Score.toString());
+
+                    }
+                    possession++;
+
+                    break;
+                case 12:
+                    event = "Missed shot, change of possession";
+                    possession++;
+
+                    break;
+                case 13:
+                    event = "Missed shot, change of possession";
+                    possession++;
+
+                    break;
+                case 14:
+                    event = "Missed shot, change of possession";
+                    possession++;
+
+                    break;
+                case 15:
+                    event = "Missed shot, change of possession";
+                    possession++;
+
+                    break;
+
+                default:
+                    event = "Test Error";
+
+
+            }
+
+
+
+            gameFeed.append("\n" + event +"\n" );
+
 
 
 

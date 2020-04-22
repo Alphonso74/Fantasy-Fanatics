@@ -1,6 +1,8 @@
 package psu.ajm6684.myapplication;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.wifi.WifiManager;
@@ -32,6 +34,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 
 import android.widget.ImageView;
@@ -287,34 +290,75 @@ recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setAdapter(TeamAdapter);
 
 
-//        Query query = team ;
-//
-////        QueryDocumentSnapshot = team;
-//
-//        System.out.println("HEllllo " + team.get().toString());
-//
-////        Log.d("Query", team.toString());
-//
-//
-//
-//
-//        // Query nurses = patients.document().;
-//
-//
-//
-//
-//
-//
-//        FirestoreRecyclerOptions<Teams> options = new FirestoreRecyclerOptions.Builder<Teams>().setQuery(query,Teams.class).build();
-//
-//        TeamAdapter = new teamAdapter(options);
-//
-//
-//
-//        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView.setAdapter(TeamAdapter);
+
+        TeamAdapter.setOnItemClickListener(new teamAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+
+
+            }
+
+            @Override
+            public void onItemLongClick(DocumentSnapshot documentSnapshot, final int position) {
+                DocumentReference teamItem;
+
+                AlertDialog.Builder alertDlg = new AlertDialog.Builder(new ContextThemeWrapper(MyTeamsPage.this, android.R.style.Theme_Holo_Light));
+                alertDlg.setTitle("Team Options");
+                alertDlg.setMessage("Would you like to delete this team?");
+                alertDlg.setCancelable(true);
+//                teamItem = db.document(documentSnapshot.getId());
+
+                alertDlg.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+
+                        AlertDialog.Builder alertDlg2 = new AlertDialog.Builder(new ContextThemeWrapper(MyTeamsPage.this, android.R.style.Theme_Holo_Light));
+                        alertDlg2.setTitle("Delete this Team");
+                        alertDlg2.setMessage("Are you sure?");
+                        alertDlg2.setCancelable(true);
+
+                        alertDlg2.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+
+                                    TeamAdapter.deleteTeam(position);
+
+//                                patientAdapter.deletePatient(position);
+
+                            }
+
+
+                        });
+
+                        alertDlg2.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+
+                            }
+                        });
+
+                        alertDlg2.show();
+                    }
+
+
+                });
+
+                alertDlg.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                alertDlg.show();
+
+
+            }
+        });
     }
 
 

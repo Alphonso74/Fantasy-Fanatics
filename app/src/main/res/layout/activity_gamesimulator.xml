@@ -94,7 +94,7 @@
         android:layout_height="60dp"
         android:text="Finish Game"
         android:textSize="24sp"
-        android:onClick="back2Teams"/>
+        />
 
 
 

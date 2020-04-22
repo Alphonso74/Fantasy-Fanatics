@@ -64,6 +64,7 @@ public class gamesimulator extends AppCompatActivity {
     String GuardForward2 ;
     String ForwardCenter2;
     String Center2 ;
+    Button backButton;
 
 
     //for dark mode
@@ -85,6 +86,21 @@ public class gamesimulator extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamesimulator);
+
+        backButton = (Button) findViewById(R.id.backButton);
+
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent confirmPage = new Intent(gamesimulator.this, MyTeamsPage.class);
+                confirmPage.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(confirmPage);
+                finish();
+
+            }
+        });
 
         team1ScoreView = (TextView) findViewById(R.id.team1Score);
         team2ScoreView = (TextView) findViewById(R.id.team2Score);
@@ -349,6 +365,8 @@ public class gamesimulator extends AppCompatActivity {
     }
 
     private void firstQ() {
+
+        Toast.makeText(gamesimulator.this, "The First Quarter Is Now Underway!", Toast.LENGTH_SHORT).show();
 
         gameFeed.append("\nGet Ready.......\n" );
 
@@ -943,7 +961,11 @@ public class gamesimulator extends AppCompatActivity {
 
     public void back2Teams(View view) {
 
-        Intent confirmPage = new Intent(this, MyTeamsPage.class);
-        startActivity(confirmPage);
+
+//        Intent confirmPage = new Intent(this, MyTeamsPage.class);
+//        confirmPage.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(confirmPage);
+//        finish();
+
     }
 }

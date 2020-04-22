@@ -315,6 +315,7 @@ public class ChooseTeams extends AppCompatActivity {
 
                     if(count == 1){
 
+                        button.setClickable(false);
                         team1 = button.getText().toString();
 //                        button.setBackgroundColor(Color.GREEN);
                         //Toast.makeText(ChooseTeams.this, team1, Toast.LENGTH_SHORT).show();
@@ -323,6 +324,7 @@ public class ChooseTeams extends AppCompatActivity {
 
 
                     }else if(count == 2){
+                        button.setClickable(false);
 //                        button.setBackgroundColor(Color.GREEN);
                         team2 = button.getText().toString();
                         //Toast.makeText(ChooseTeams.this, team2, Toast.LENGTH_SHORT).show();
@@ -349,6 +351,7 @@ public class ChooseTeams extends AppCompatActivity {
         for(int i = 0; i < layout2.getChildCount(); i++){
 
             View temp = layout2.getChildAt(i);
+            layout2.getChildAt(i).setClickable(true);
             layout2.removeViewAt(i);
             layout.addView(temp);
 

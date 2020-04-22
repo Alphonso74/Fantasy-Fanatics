@@ -213,5 +213,11 @@ public class MainActivity extends Activity {
 //        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 
+    public void openScoresActivity() {
+        Intent ScoresPage = new Intent(MainActivity.this, Scores.class);
+        startActivity(ScoresPage);
+
+    }
+
 
 }

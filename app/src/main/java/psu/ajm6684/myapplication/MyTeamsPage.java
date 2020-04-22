@@ -61,7 +61,6 @@ public class MyTeamsPage extends AppCompatActivity {
     CollectionReference myTeam;
 
 
-
     int backButtonCount = 0;
 
 

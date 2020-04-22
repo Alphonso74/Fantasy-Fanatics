@@ -42,6 +42,7 @@
     <string name="play_a_game">Play a Game</string>
     <string name="scoreboard">ScoreBoard</string>
     <string name="ScoreBoard">Score Board</string>
+    <string name="scores">Scores</string>
 
     <string-array name="spinner">
         <item>Guard</item>

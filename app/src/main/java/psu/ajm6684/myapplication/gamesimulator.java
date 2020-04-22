@@ -235,8 +235,8 @@ public class gamesimulator extends AppCompatActivity {
 
 
 
-                final Handler handler2 = new Handler();
-                handler2.postDelayed(new Runnable() {
+                final Handler handler22 = new Handler();
+                handler22.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         //Do something after 100ms
@@ -248,57 +248,59 @@ public class gamesimulator extends AppCompatActivity {
                 }, 15000);
 
 
-//                final Handler handler3 = new Handler();
-//                handler3.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        //Do something after 100ms
-//
-//                        secondQ();
-//                    }
-//                }, 50000);
-//
-//
-//                final Handler handler4 = new Handler();
-//                handler4.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        //Do something after 100ms
-//                        halftime();
-//                    }
-//                }, 70000);
-//
-//
-//                final Handler handler5 = new Handler();
-//                handler5.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        //Do something after 100ms
-//
-//                        thirdQ();
-//                    }
-//                }, 90000);
-//
-//
-//                final Handler handler6 = new Handler();
-//                handler6.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        //Do something after 100ms
-//
-//                        fourthQ();
-//                    }
-//                }, 110000);
-//
-//                final Handler handler7 = new Handler();
-//                handler7.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        //Do something after 100ms
-//
-//                        endGame();
-//                    }
-//                }, 130000);
+                final Handler handler23 = new Handler();
+                handler23.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //Do something after 100ms
+
+                        secondQ();
+                    }
+                }, 50000);
+
+
+
+                final Handler handler24 = new Handler();
+                handler24.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //Do something after 100ms
+                        halftime();
+                    }
+                }, 85000);
+
+
+
+                final Handler handler25 = new Handler();
+                handler25.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //Do something after 100ms
+
+                        thirdQ();
+                    }
+                }, 120000);
+
+
+                final Handler handler26 = new Handler();
+                handler26.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //Do something after 100ms
+
+                        fourthQ();
+                    }
+                }, 155000);
+
+                final Handler handler27 = new Handler();
+                handler27.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //Do something after 100ms
+
+                        endGame();
+                    }
+                }, 190000);
 //
 
 
@@ -572,13 +574,15 @@ public class gamesimulator extends AppCompatActivity {
             switch (eventType) {
 
                 case 0:
-                    event = "Team with possession scores, change of possession";
                     if(possession%2 == 0){
+
+                        event = teamName1 + " Scored!";
 
                         team1Score = team1Score + 2;
                         team1ScoreView.setText(team1Score.toString());
                     }
                     else{
+                        event = teamName2 + " Scored!";
 
                         team2Score = team2Score + 2;
                         team2ScoreView.setText(team2Score.toString());
@@ -588,51 +592,161 @@ public class gamesimulator extends AppCompatActivity {
                             possession ++;
 
                     break;
+
                 case 1:
-                    event = "Gets ball stollen, change of possession";
+
+                    if(possession%2 == 0){
+
+                        event = teamName2 + " stole the ball from " + teamName1;
+
+                    }
+                    else{
+
+                        event = teamName1 + " stole the ball from " + teamName2;
+
+
+                    }
+
                     possession++;
                     break;
+
                 case 2:
-                    event = "Team with possession scores, change of possession";
                     if(possession%2 == 0){
+
+                        event = teamName1 + " Scored!";
 
                         team1Score = team1Score + 2;
                         team1ScoreView.setText(team1Score.toString());
                     }
                     else{
+                        event = teamName2 + " Scored!";
 
                         team2Score = team2Score + 2;
                         team2ScoreView.setText(team2Score.toString());
 
                     }
-                    possession++;
+
+                    possession ++;
+
                     break;
+
                 case 3:
-                    event = "Missed shot, change of possession";
-                    possession++;
+                    if(possession%2 == 0){
+
+                        event = teamName1 + " Missed!";
+
+
+                    }
+                    else{
+
+                        event = teamName2 + " Missed!";
+
+
+                    }
+
+                    possession ++;
 
                     break;
                 case 4:
-                    event = "Foul, no change of possession";
+                    if(possession%2 == 0){
+
+                        event = teamName2 + " committed a foul! On the Floor!";
+
+
+                    }
+                    else{
+                        event = teamName1 + " committed a foul! On the Floor!";
+
+
+
+                    }
+
+
                     break;
                 case 5:
-                    event = "Foul on shot attempt, no and1, take 2 free throws, randomized chance to hit 1 or 2 freethrows, change of possession";
-                    possession++;
 
-                    break;
-                case 6:
-                    event = "Foul on shot attempt, and1, ramdomized chance to make the 1 freethrow, change of possession ";
-                    possession++;
+                    Random s = new Random();
 
-                    break;
-                case 7:
-                    event = "Three pointer made, change of possession";
+                   int  freethrows = s.nextInt(2);
+
                     if(possession%2 == 0){
+
+                        if(freethrows == 0){
+
+                            event = teamName1 + " was fouled on the shot attempt!\n" + "Both Free throw Missed";
+
+
+                        }
+                        else if(freethrows == 1){
+
+                            event = teamName1 + " was fouled on the shot attempt!\n" + "1 Free throw Made";
+
+                            team1Score = team1Score + 1;
+                            team1ScoreView.setText(team1Score.toString());
+                        }
+                        else if(freethrows == 2){
+
+                            event = teamName1 + " was fouled on the shot attempt!\n" + "Both Free throws Made";
+
+                            team1Score = team1Score + 2;
+                            team1ScoreView.setText(team1Score.toString());
+                        }
+
+
+                    }
+                    else{
+                        if(freethrows == 0){
+
+                            event = teamName2 + " was fouled on the shot attempt!\n" + "Both Free throw Missed";
+
+
+                        }
+                        else if(freethrows == 1){
+
+                            event = teamName2 + " was fouled on the shot attempt!\n" + "1 Free throw Made";
+
+                            team2Score = team2Score + 1;
+                            team2ScoreView.setText(team2Score.toString());
+                        }
+                        else if(freethrows == 2){
+
+                            event = teamName2 + " was fouled on the shot attempt!\n" + "Both Free throws Made";
+
+                            team2Score = team2Score + 2;
+                            team2ScoreView.setText(team2Score.toString());
+                        }
+
+                    }
+                    possession++;
+
+                    break;
+
+                case 6:
+                    if(possession%2 == 0){
+                        event = teamName1 + " was fouled! AND1 !!!!!";
 
                         team1Score = team1Score + 3;
                         team1ScoreView.setText(team1Score.toString());
                     }
                     else{
+                        event = teamName2 + " was fouled! AND1 !!!!!";
+
+                        team2Score = team2Score + 3;
+                        team2ScoreView.setText(team2Score.toString());
+
+                    }
+                    possession++;
+
+                    break;
+                case 7:
+                    if(possession%2 == 0){
+                        event = teamName1 + " made a 3!";
+
+                        team1Score = team1Score + 3;
+                        team1ScoreView.setText(team1Score.toString());
+                    }
+                    else{
+                        event = teamName1 + " made a 3!";
 
                         team2Score = team2Score + 3;
                         team2ScoreView.setText(team2Score.toString());
@@ -642,74 +756,141 @@ public class gamesimulator extends AppCompatActivity {
 
                     break;
                 case 8:
-                    event = "Team with possession misses shot, offensive rebound, no change of possession";
+                    if(possession%2 == 0){
+                        event = teamName1 + " missed a shot! Offensive rebound!";
+
+
+                    }
+                    else{
+                        event = teamName2 + " missed a shot! Offensive rebound!";
+
+
+
+                    }
                     break;
                 case 9:
-                    event = "Team with possession scores, change of possession";
                     if(possession%2 == 0){
+
+                        event = teamName1 + " Scored!";
 
                         team1Score = team1Score + 2;
                         team1ScoreView.setText(team1Score.toString());
                     }
                     else{
+                        event = teamName2 + " Scored!";
 
                         team2Score = team2Score + 2;
                         team2ScoreView.setText(team2Score.toString());
 
                     }
-                    possession++;
+
+                    possession ++;
 
                     break;
                 case 10:
-                    event = "Team with possession scores, change of possession";
                     if(possession%2 == 0){
+
+                        event = teamName1 + " Scored!";
 
                         team1Score = team1Score + 2;
                         team1ScoreView.setText(team1Score.toString());
                     }
                     else{
+                        event = teamName2 + " Scored!";
 
                         team2Score = team2Score + 2;
                         team2ScoreView.setText(team2Score.toString());
 
                     }
-                    possession++;
+
+                    possession ++;
 
                     break;
                 case 11:
-                    event = "Team with possession scores, change of possession";
                     if(possession%2 == 0){
+
+                        event = teamName1 + " Scored!";
 
                         team1Score = team1Score + 2;
                         team1ScoreView.setText(team1Score.toString());
                     }
                     else{
+                        event = teamName2 + " Scored!";
 
                         team2Score = team2Score + 2;
                         team2ScoreView.setText(team2Score.toString());
 
                     }
-                    possession++;
+
+                    possession ++;
 
                     break;
                 case 12:
-                    event = "Missed shot, change of possession";
-                    possession++;
+                    if(possession%2 == 0){
+
+                        event = teamName1 + " Missed!";
+
+
+                    }
+                    else{
+
+                        event = teamName2 + " Missed!";
+
+
+                    }
+
+                    possession ++;
 
                     break;
                 case 13:
-                    event = "Missed shot, change of possession";
-                    possession++;
+                    if(possession%2 == 0){
+
+                        event = teamName1 + " Missed!";
+
+
+                    }
+                    else{
+
+                        event = teamName2 + " Missed!";
+
+
+                    }
+
+                    possession ++;
 
                     break;
                 case 14:
-                    event = "Missed shot, change of possession";
-                    possession++;
+                    if(possession%2 == 0){
+
+                        event = teamName1 + " Missed!";
+
+
+                    }
+                    else{
+
+                        event = teamName2 + " Missed!";
+
+
+                    }
+
+                    possession ++;
 
                     break;
                 case 15:
-                    event = "Missed shot, change of possession";
-                    possession++;
+                    if(possession%2 == 0){
+
+                        event = teamName1 + " Missed!";
+
+
+                    }
+                    else{
+
+                        event = teamName2 + " Missed!";
+
+
+                    }
+
+                    possession ++;
 
                     break;
 

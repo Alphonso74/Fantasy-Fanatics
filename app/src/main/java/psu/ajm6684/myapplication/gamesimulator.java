@@ -52,18 +52,18 @@ public class gamesimulator extends AppCompatActivity {
     TextView gameFeed;
 
     String teamName1;
-    String Guard1 ;
-    String ForwardGuard1 ;
-    String GuardForward1 ;
-    String ForwardCenter1 ;
-    String Center1 ;
+    String Guard1;
+    String ForwardGuard1;
+    String GuardForward1;
+    String ForwardCenter1;
+    String Center1;
 
     String teamName2;
-    String Guard2 ;
-    String ForwardGuard2 ;
-    String GuardForward2 ;
+    String Guard2;
+    String ForwardGuard2;
+    String GuardForward2;
     String ForwardCenter2;
-    String Center2 ;
+    String Center2;
     Button backButton;
 
 
@@ -79,7 +79,6 @@ public class gamesimulator extends AppCompatActivity {
     public void onBackPressed() {
 
     }
-
 
 
     @Override
@@ -137,15 +136,13 @@ public class gamesimulator extends AppCompatActivity {
 
                         for (String s : list) {
 
-                            if(s.equals("light"))
-                            {
+                            if (s.equals("light")) {
 
                                 getDelegate().setLocalNightMode((AppCompatDelegate.MODE_NIGHT_NO));
                                 break;
                             }
 
-                            if (s.equals("dark"))
-                            {
+                            if (s.equals("dark")) {
                                 getDelegate().setLocalNightMode((AppCompatDelegate.MODE_NIGHT_YES));
                                 break;
                             }
@@ -161,13 +158,10 @@ public class gamesimulator extends AppCompatActivity {
         teamName1 = intent.getStringExtra("Team1").trim();
 
 
-
         teamName2 = intent.getStringExtra("Team2").trim();
 
 
-
-
-        db.collectionGroup("Teams").whereEqualTo("TeamName",teamName1).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collectionGroup("Teams").whereEqualTo("TeamName", teamName1).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
@@ -186,9 +180,7 @@ public class gamesimulator extends AppCompatActivity {
 
                     }
 
-                }
-
-                else{
+                } else {
 
                     Log.d("Error", task.getException().toString());
 
@@ -199,7 +191,7 @@ public class gamesimulator extends AppCompatActivity {
         });
 
 
-        db.collectionGroup("Teams").whereEqualTo("TeamName",teamName2).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collectionGroup("Teams").whereEqualTo("TeamName", teamName2).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
@@ -219,7 +211,7 @@ public class gamesimulator extends AppCompatActivity {
                     }
 
 
-                } else{
+                } else {
 
                     Log.d("Error", task.getException().toString());
 
@@ -228,7 +220,6 @@ public class gamesimulator extends AppCompatActivity {
 
             }
         });
-
 
 
         playGame.setOnClickListener(new View.OnClickListener() {
@@ -245,10 +236,9 @@ public class gamesimulator extends AppCompatActivity {
 //                    public void run() {
 //                        //Do something after 100ms
 
-                        tipOff();
+                tipOff();
 //                    }
 //                }, 10000);
-
 
 
                 final Handler handler22 = new Handler();
@@ -257,9 +247,14 @@ public class gamesimulator extends AppCompatActivity {
                     public void run() {
                         //Do something after 100ms
 
-                        Toast.makeText(gamesimulator.this, "The First Quarter Is Now Underway!", Toast.LENGTH_SHORT).show();
+                        if(gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true)
+                        {
+                         //   Toast.makeText(gamesimulator.this, "The First Quarter Is Now Underway!", Toast.LENGTH_SHORT).show();
 
-                        firstQ();
+                            firstQ();
+                        }
+
+
                     }
                 }, 15000);
 
@@ -269,11 +264,11 @@ public class gamesimulator extends AppCompatActivity {
                     @Override
                     public void run() {
                         //Do something after 100ms
-
-                        secondQ();
+                        if(gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+                            secondQ();
+                        }
                     }
                 }, 50000);
-
 
 
                 final Handler handler24 = new Handler();
@@ -281,10 +276,11 @@ public class gamesimulator extends AppCompatActivity {
                     @Override
                     public void run() {
                         //Do something after 100ms
-                        halftime();
+                        if(gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+                            halftime();
+                        }
                     }
                 }, 85000);
-
 
 
                 final Handler handler25 = new Handler();
@@ -292,8 +288,10 @@ public class gamesimulator extends AppCompatActivity {
                     @Override
                     public void run() {
                         //Do something after 100ms
+                        if(gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+                            thirdQ();
 
-                        thirdQ();
+                        }
                     }
                 }, 120000);
 
@@ -303,8 +301,9 @@ public class gamesimulator extends AppCompatActivity {
                     @Override
                     public void run() {
                         //Do something after 100ms
-
-                        fourthQ();
+                        if(gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+                            fourthQ();
+                        }
                     }
                 }, 155000);
 
@@ -313,53 +312,46 @@ public class gamesimulator extends AppCompatActivity {
                     @Override
                     public void run() {
                         //Do something after 100ms
-
-                        endGame();
+                        if(gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+                            endGame();
+                        }
                     }
                 }, 190000);
 //
-
 
 
             }
         });
 
 
-
-
-
-
     }
 
-    private void tipOff(){
+    private void tipOff() {
 
-        gameFeed.append("Welcome to Today's game!\n" );
+        gameFeed.append("Welcome to Today's game!\n");
         gameFeed.append("\nToday's match up is between....\n"
-                + teamName1 + " and " + teamName2 +"\n");
+                + teamName1 + " and " + teamName2 + "\n");
 
-        gameFeed.append("\n"+teamName1+"'s" + " Starting Five! \n");
+        gameFeed.append("\n" + teamName1 + "'s" + " Starting Five! \n");
 
-        gameFeed.append("\nStarting at the Guard Position\n" + Guard1+"!\n" );
-        gameFeed.append("\nStarting at the Shooting Guard Position\n" + GuardForward1+"!\n" );
-        gameFeed.append("\nStarting at the Small Forward Position\n" + ForwardGuard1+"!\n" );
-        gameFeed.append("\nStarting at the Power Forward Position\n" + ForwardCenter1+"!\n" );
-        gameFeed.append("\nStarting at the Center Position\n" + Center1+"!\n" );
-
-
-
-        gameFeed.append("\n"+teamName2+"'s" + " Starting Five! \n");
-
-        gameFeed.append("\nStarting at the Guard Position\n" + Guard2+"!\n" );
-        gameFeed.append("\nStarting at the Shooting Guard Position\n" + GuardForward2+"!\n" );
-        gameFeed.append("\nStarting at the Small Forward Position\n" + ForwardGuard2+"!\n" );
-        gameFeed.append("\nStarting at the Power Forward Position\n" + ForwardCenter2+"!\n" );
-        gameFeed.append("\nStarting at the Center Position\n" + Center2+"!\n" );
+        gameFeed.append("\nStarting at the Guard Position\n" + Guard1 + "!\n");
+        gameFeed.append("\nStarting at the Shooting Guard Position\n" + GuardForward1 + "!\n");
+        gameFeed.append("\nStarting at the Small Forward Position\n" + ForwardGuard1 + "!\n");
+        gameFeed.append("\nStarting at the Power Forward Position\n" + ForwardCenter1 + "!\n");
+        gameFeed.append("\nStarting at the Center Position\n" + Center1 + "!\n");
 
 
+        gameFeed.append("\n" + teamName2 + "'s" + " Starting Five! \n");
 
-        gameFeed.append("\nLets get ready for Tip off!\n\n" );
-        gameFeed.append("\n15 seconds.......\n\n" );
+        gameFeed.append("\nStarting at the Guard Position\n" + Guard2 + "!\n");
+        gameFeed.append("\nStarting at the Shooting Guard Position\n" + GuardForward2 + "!\n");
+        gameFeed.append("\nStarting at the Small Forward Position\n" + ForwardGuard2 + "!\n");
+        gameFeed.append("\nStarting at the Power Forward Position\n" + ForwardCenter2 + "!\n");
+        gameFeed.append("\nStarting at the Center Position\n" + Center2 + "!\n");
 
+
+        gameFeed.append("\nLets get ready for Tip off!\n\n");
+        gameFeed.append("\n15 seconds.......\n\n");
 
 
     }
@@ -368,39 +360,37 @@ public class gamesimulator extends AppCompatActivity {
 
         Toast.makeText(gamesimulator.this, "The First Quarter Is Now Underway!", Toast.LENGTH_SHORT).show();
 
-        gameFeed.append("\nGet Ready.......\n" );
+        gameFeed.append("\nGet Ready.......\n");
 
 
+        int tip = (int) Math.round(Math.random());
 
-       int tip = (int)Math.round(Math.random());
+        if (tip == 0) {
 
-       if(tip == 0){
+            gameFeed.append("\n" + teamName1 + " Won the tip!\n");
 
-           gameFeed.append("\n" + teamName1 + " Won the tip!\n" );
+            possession = possession + 2;
 
-           possession = possession + 2;
+        } else {
 
-       }
-       else{
+            gameFeed.append("\n" + teamName2 + " Won the tip!\n");
+            possession++;
 
-           gameFeed.append("\n" + teamName2 + " Won the tip!\n" );
-           possession++;
-
-       }
+        }
 
 
-       //for(int x = 0; x < 15; x++) {
+        //for(int x = 0; x < 15; x++) {
 
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        //Do something after 100ms
-                        eventFucntion();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
 
 
-                    }
-                }, 2000);
+            }
+        }, 2000);
 
         Handler handler2 = new Handler();
         handler2.postDelayed(new Runnable() {
@@ -434,7 +424,6 @@ public class gamesimulator extends AppCompatActivity {
 
             }
         }, 8000);
-
 
 
         Handler handler5 = new Handler();
@@ -565,16 +554,14 @@ public class gamesimulator extends AppCompatActivity {
             @Override
             public void run() {
                 //Do something after 100ms
-        Toast.makeText(gamesimulator.this, "End of the First Quarter", Toast.LENGTH_SHORT).show();
+                if(gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
 
-        gameFeed.append("\n That Concludes the First Quarter\n" );
+                    Toast.makeText(gamesimulator.this, "End of the First Quarter", Toast.LENGTH_SHORT).show();
+                }
+                gameFeed.append("\n That Concludes the First Quarter\n");
 
             }
         }, 30000);
-
-
-
-
 
 
     }
@@ -582,347 +569,320 @@ public class gamesimulator extends AppCompatActivity {
     private void eventFucntion() {
 
 
+        r = new Random();
+
+        eventType = r.nextInt(15);
 
 
-            r = new Random();
+        switch (eventType) {
 
-            eventType = r.nextInt(15);
+            case 0:
+                if (possession % 2 == 0) {
+
+                    event = teamName1 + " Scored!";
+
+                    team1Score = team1Score + 2;
+                    team1ScoreView.setText(team1Score.toString());
+                } else {
+                    event = teamName2 + " Scored!";
+
+                    team2Score = team2Score + 2;
+                    team2ScoreView.setText(team2Score.toString());
+
+                }
+
+                possession++;
+
+                break;
+
+            case 1:
+
+                if (possession % 2 == 0) {
+
+                    event = teamName2 + " stole the ball from " + teamName1;
+
+                } else {
+
+                    event = teamName1 + " stole the ball from " + teamName2;
 
 
-            switch (eventType) {
+                }
 
-                case 0:
-                    if(possession%2 == 0){
+                possession++;
+                break;
 
-                        event = teamName1 + " Scored!";
+            case 2:
+                if (possession % 2 == 0) {
+
+                    event = teamName1 + " Scored!";
+
+                    team1Score = team1Score + 2;
+                    team1ScoreView.setText(team1Score.toString());
+                } else {
+                    event = teamName2 + " Scored!";
+
+                    team2Score = team2Score + 2;
+                    team2ScoreView.setText(team2Score.toString());
+
+                }
+
+                possession++;
+
+                break;
+
+            case 3:
+                if (possession % 2 == 0) {
+
+                    event = teamName1 + " Missed!";
+
+
+                } else {
+
+                    event = teamName2 + " Missed!";
+
+
+                }
+
+                possession++;
+
+                break;
+            case 4:
+                if (possession % 2 == 0) {
+
+                    event = teamName2 + " committed a foul! On the Floor!";
+
+
+                } else {
+                    event = teamName1 + " committed a foul! On the Floor!";
+
+
+                }
+
+
+                break;
+            case 5:
+
+                Random s = new Random();
+
+                int freethrows = s.nextInt(2);
+
+                if (possession % 2 == 0) {
+
+                    if (freethrows == 0) {
+
+                        event = teamName1 + " was fouled on the shot attempt!\n" + "Both Free throw Missed";
+
+
+                    } else if (freethrows == 1) {
+
+                        event = teamName1 + " was fouled on the shot attempt!\n" + "1 Free throw Made";
+
+                        team1Score = team1Score + 1;
+                        team1ScoreView.setText(team1Score.toString());
+                    } else if (freethrows == 2) {
+
+                        event = teamName1 + " was fouled on the shot attempt!\n" + "Both Free throws Made";
 
                         team1Score = team1Score + 2;
                         team1ScoreView.setText(team1Score.toString());
                     }
-                    else{
-                        event = teamName2 + " Scored!";
+
+
+                } else {
+                    if (freethrows == 0) {
+
+                        event = teamName2 + " was fouled on the shot attempt!\n" + "Both Free throw Missed";
+
+
+                    } else if (freethrows == 1) {
+
+                        event = teamName2 + " was fouled on the shot attempt!\n" + "1 Free throw Made";
+
+                        team2Score = team2Score + 1;
+                        team2ScoreView.setText(team2Score.toString());
+                    } else if (freethrows == 2) {
+
+                        event = teamName2 + " was fouled on the shot attempt!\n" + "Both Free throws Made";
 
                         team2Score = team2Score + 2;
                         team2ScoreView.setText(team2Score.toString());
-
                     }
 
-                            possession ++;
+                }
+                possession++;
 
-                    break;
+                break;
 
-                case 1:
+            case 6:
+                if (possession % 2 == 0) {
+                    event = teamName1 + " was fouled! AND1 !!!!!";
 
-                    if(possession%2 == 0){
+                    team1Score = team1Score + 3;
+                    team1ScoreView.setText(team1Score.toString());
+                } else {
+                    event = teamName2 + " was fouled! AND1 !!!!!";
 
-                        event = teamName2 + " stole the ball from " + teamName1;
+                    team2Score = team2Score + 3;
+                    team2ScoreView.setText(team2Score.toString());
 
-                    }
-                    else{
+                }
+                possession++;
 
-                        event = teamName1 + " stole the ball from " + teamName2;
+                break;
+            case 7:
+                if (possession % 2 == 0) {
+                    event = teamName1 + " made a 3!";
 
+                    team1Score = team1Score + 3;
+                    team1ScoreView.setText(team1Score.toString());
+                } else {
+                    event = teamName1 + " made a 3!";
 
-                    }
+                    team2Score = team2Score + 3;
+                    team2ScoreView.setText(team2Score.toString());
 
-                    possession++;
-                    break;
+                }
+                possession++;
 
-                case 2:
-                    if(possession%2 == 0){
+                break;
+            case 8:
+                if (possession % 2 == 0) {
+                    event = teamName1 + " missed a shot! Offensive rebound!";
 
-                        event = teamName1 + " Scored!";
 
-                        team1Score = team1Score + 2;
-                        team1ScoreView.setText(team1Score.toString());
-                    }
-                    else{
-                        event = teamName2 + " Scored!";
+                } else {
+                    event = teamName2 + " missed a shot! Offensive rebound!";
 
-                        team2Score = team2Score + 2;
-                        team2ScoreView.setText(team2Score.toString());
 
-                    }
+                }
+                break;
+            case 9:
+                if (possession % 2 == 0) {
 
-                    possession ++;
+                    event = teamName1 + " Scored!";
 
-                    break;
+                    team1Score = team1Score + 2;
+                    team1ScoreView.setText(team1Score.toString());
+                } else {
+                    event = teamName2 + " Scored!";
 
-                case 3:
-                    if(possession%2 == 0){
+                    team2Score = team2Score + 2;
+                    team2ScoreView.setText(team2Score.toString());
 
-                        event = teamName1 + " Missed!";
+                }
 
+                possession++;
 
-                    }
-                    else{
+                break;
+            case 10:
+                if (possession % 2 == 0) {
 
-                        event = teamName2 + " Missed!";
+                    event = teamName1 + " Scored!";
 
+                    team1Score = team1Score + 2;
+                    team1ScoreView.setText(team1Score.toString());
+                } else {
+                    event = teamName2 + " Scored!";
 
-                    }
+                    team2Score = team2Score + 2;
+                    team2ScoreView.setText(team2Score.toString());
 
-                    possession ++;
+                }
 
-                    break;
-                case 4:
-                    if(possession%2 == 0){
+                possession++;
 
-                        event = teamName2 + " committed a foul! On the Floor!";
+                break;
+            case 11:
+                if (possession % 2 == 0) {
 
+                    event = teamName1 + " Scored!";
 
-                    }
-                    else{
-                        event = teamName1 + " committed a foul! On the Floor!";
+                    team1Score = team1Score + 2;
+                    team1ScoreView.setText(team1Score.toString());
+                } else {
+                    event = teamName2 + " Scored!";
 
+                    team2Score = team2Score + 2;
+                    team2ScoreView.setText(team2Score.toString());
 
+                }
 
-                    }
+                possession++;
 
+                break;
+            case 12:
+                if (possession % 2 == 0) {
 
-                    break;
-                case 5:
+                    event = teamName1 + " Missed!";
 
-                    Random s = new Random();
 
-                   int  freethrows = s.nextInt(2);
+                } else {
 
-                    if(possession%2 == 0){
+                    event = teamName2 + " Missed!";
 
-                        if(freethrows == 0){
 
-                            event = teamName1 + " was fouled on the shot attempt!\n" + "Both Free throw Missed";
+                }
 
+                possession++;
 
-                        }
-                        else if(freethrows == 1){
+                break;
+            case 13:
+                if (possession % 2 == 0) {
 
-                            event = teamName1 + " was fouled on the shot attempt!\n" + "1 Free throw Made";
+                    event = teamName1 + " Missed!";
 
-                            team1Score = team1Score + 1;
-                            team1ScoreView.setText(team1Score.toString());
-                        }
-                        else if(freethrows == 2){
 
-                            event = teamName1 + " was fouled on the shot attempt!\n" + "Both Free throws Made";
+                } else {
 
-                            team1Score = team1Score + 2;
-                            team1ScoreView.setText(team1Score.toString());
-                        }
+                    event = teamName2 + " Missed!";
 
 
-                    }
-                    else{
-                        if(freethrows == 0){
+                }
 
-                            event = teamName2 + " was fouled on the shot attempt!\n" + "Both Free throw Missed";
+                possession++;
 
+                break;
+            case 14:
+                if (possession % 2 == 0) {
 
-                        }
-                        else if(freethrows == 1){
+                    event = teamName1 + " Missed!";
 
-                            event = teamName2 + " was fouled on the shot attempt!\n" + "1 Free throw Made";
 
-                            team2Score = team2Score + 1;
-                            team2ScoreView.setText(team2Score.toString());
-                        }
-                        else if(freethrows == 2){
+                } else {
 
-                            event = teamName2 + " was fouled on the shot attempt!\n" + "Both Free throws Made";
+                    event = teamName2 + " Missed!";
 
-                            team2Score = team2Score + 2;
-                            team2ScoreView.setText(team2Score.toString());
-                        }
 
-                    }
-                    possession++;
+                }
 
-                    break;
+                possession++;
 
-                case 6:
-                    if(possession%2 == 0){
-                        event = teamName1 + " was fouled! AND1 !!!!!";
+                break;
+            case 15:
+                if (possession % 2 == 0) {
 
-                        team1Score = team1Score + 3;
-                        team1ScoreView.setText(team1Score.toString());
-                    }
-                    else{
-                        event = teamName2 + " was fouled! AND1 !!!!!";
+                    event = teamName1 + " Missed!";
 
-                        team2Score = team2Score + 3;
-                        team2ScoreView.setText(team2Score.toString());
 
-                    }
-                    possession++;
+                } else {
 
-                    break;
-                case 7:
-                    if(possession%2 == 0){
-                        event = teamName1 + " made a 3!";
+                    event = teamName2 + " Missed!";
 
-                        team1Score = team1Score + 3;
-                        team1ScoreView.setText(team1Score.toString());
-                    }
-                    else{
-                        event = teamName1 + " made a 3!";
 
-                        team2Score = team2Score + 3;
-                        team2ScoreView.setText(team2Score.toString());
+                }
 
-                    }
-                    possession++;
+                possession++;
 
-                    break;
-                case 8:
-                    if(possession%2 == 0){
-                        event = teamName1 + " missed a shot! Offensive rebound!";
+                break;
 
+            default:
+                event = "Test Error";
 
-                    }
-                    else{
-                        event = teamName2 + " missed a shot! Offensive rebound!";
 
+        }
 
 
-                    }
-                    break;
-                case 9:
-                    if(possession%2 == 0){
-
-                        event = teamName1 + " Scored!";
-
-                        team1Score = team1Score + 2;
-                        team1ScoreView.setText(team1Score.toString());
-                    }
-                    else{
-                        event = teamName2 + " Scored!";
-
-                        team2Score = team2Score + 2;
-                        team2ScoreView.setText(team2Score.toString());
-
-                    }
-
-                    possession ++;
-
-                    break;
-                case 10:
-                    if(possession%2 == 0){
-
-                        event = teamName1 + " Scored!";
-
-                        team1Score = team1Score + 2;
-                        team1ScoreView.setText(team1Score.toString());
-                    }
-                    else{
-                        event = teamName2 + " Scored!";
-
-                        team2Score = team2Score + 2;
-                        team2ScoreView.setText(team2Score.toString());
-
-                    }
-
-                    possession ++;
-
-                    break;
-                case 11:
-                    if(possession%2 == 0){
-
-                        event = teamName1 + " Scored!";
-
-                        team1Score = team1Score + 2;
-                        team1ScoreView.setText(team1Score.toString());
-                    }
-                    else{
-                        event = teamName2 + " Scored!";
-
-                        team2Score = team2Score + 2;
-                        team2ScoreView.setText(team2Score.toString());
-
-                    }
-
-                    possession ++;
-
-                    break;
-                case 12:
-                    if(possession%2 == 0){
-
-                        event = teamName1 + " Missed!";
-
-
-                    }
-                    else{
-
-                        event = teamName2 + " Missed!";
-
-
-                    }
-
-                    possession ++;
-
-                    break;
-                case 13:
-                    if(possession%2 == 0){
-
-                        event = teamName1 + " Missed!";
-
-
-                    }
-                    else{
-
-                        event = teamName2 + " Missed!";
-
-
-                    }
-
-                    possession ++;
-
-                    break;
-                case 14:
-                    if(possession%2 == 0){
-
-                        event = teamName1 + " Missed!";
-
-
-                    }
-                    else{
-
-                        event = teamName2 + " Missed!";
-
-
-                    }
-
-                    possession ++;
-
-                    break;
-                case 15:
-                    if(possession%2 == 0){
-
-                        event = teamName1 + " Missed!";
-
-
-                    }
-                    else{
-
-                        event = teamName2 + " Missed!";
-
-
-                    }
-
-                    possession ++;
-
-                    break;
-
-                default:
-                    event = "Test Error";
-
-
-            }
-
-
-
-            gameFeed.append("\n" + event +"\n" );
-
-
+        gameFeed.append("\n" + event + "\n");
 
 
     }
@@ -934,32 +894,33 @@ public class gamesimulator extends AppCompatActivity {
 
     }
 
-   private void halftime(){
+    private void halftime() {
 
-       Toast.makeText(gamesimulator.this, "Halftime", Toast.LENGTH_SHORT).show();
+        Toast.makeText(gamesimulator.this, "Halftime", Toast.LENGTH_SHORT).show();
 
-   }
+    }
 
 
-   private void thirdQ(){
+    private void thirdQ() {
 
-       Toast.makeText(gamesimulator.this, "Start of the Third Quarter", Toast.LENGTH_SHORT).show();
+        Toast.makeText(gamesimulator.this, "Start of the Third Quarter", Toast.LENGTH_SHORT).show();
 
-   }
+    }
 
-    private void fourthQ(){
+    private void fourthQ() {
 
         Toast.makeText(gamesimulator.this, "Start of the Fourth Quarter", Toast.LENGTH_SHORT).show();
 
     }
 
-    private void endGame(){
+    private void endGame() {
 
-        Toast.makeText(gamesimulator.this, "Final Score - " , Toast.LENGTH_SHORT).show();
+        Toast.makeText(gamesimulator.this, "Final Score - ", Toast.LENGTH_SHORT).show();
 
     }
 
     public void back2Teams(View view) {
+        finish();
 
 
 //        Intent confirmPage = new Intent(this, MyTeamsPage.class);

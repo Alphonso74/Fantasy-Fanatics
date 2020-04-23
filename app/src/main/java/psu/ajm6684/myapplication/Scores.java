@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -21,6 +22,8 @@ public class Scores extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     TextView ScoresList;
     Button View;
+
+    RecyclerView recyclerView ;
 
 
     //int count = 0;

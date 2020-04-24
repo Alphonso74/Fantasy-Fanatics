@@ -42,11 +42,11 @@
                 android:text="@string/play_a_game" />
 
             <Button
-                android:id="@+id/scoreboard"
+                android:id="@+id/score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/ScoreBoard" />
+                android:text="@string/scores" />
 
 
         </LinearLayout>

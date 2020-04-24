@@ -30,6 +30,10 @@
             android:exported="true"
             android:label="@string/ff" />
         <activity
+            android:name=".Scores"
+            android:exported="true"
+            android:label="@string/ff" />
+        <activity
             android:name=".AddTeamActivity"
             android:exported="true"
             android:label="@string/ff" />

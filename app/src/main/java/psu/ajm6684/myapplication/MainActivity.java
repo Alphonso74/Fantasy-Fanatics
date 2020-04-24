@@ -199,6 +199,8 @@ public class MainActivity extends Activity {
     }
 
 
+
+
 //    public void signupChangePage(View view)
 //    {
 //        Intent signupPage = new Intent(MainActivity.this, CreateAccountActivity.class);
@@ -212,6 +214,7 @@ public class MainActivity extends Activity {
 //        // TODO : initiate successful logged in experience
 //        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
+
 
 
 }

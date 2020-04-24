@@ -45,6 +45,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MyTeamsPage extends AppCompatActivity {
@@ -59,7 +60,6 @@ public class MyTeamsPage extends AppCompatActivity {
 
     DocumentReference ajm;
     CollectionReference myTeam;
-
 
 
     int backButtonCount = 0;
@@ -82,6 +82,7 @@ public class MyTeamsPage extends AppCompatActivity {
     FirebaseUser current;
     Button preference;
     Button playGame;
+    Button score;
     String uid ;
 
     Button hide;
@@ -121,6 +122,14 @@ public class MyTeamsPage extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), ChooseTeams.class);
                 startActivity(intent);
+            }
+        });
+
+        score = (Button) findViewById(R.id.score);
+        score.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenScoresActivity();
             }
         });
 
@@ -224,6 +233,7 @@ recyclerView = findViewById(R.id.recycler_view);
 //                finish();
 //            }
 //        });
+
 
     }
 
@@ -366,6 +376,12 @@ recyclerView = findViewById(R.id.recycler_view);
     {
         Intent confirmPage = new Intent(getApplicationContext(), PreferenceActivity.class);
         startActivity(confirmPage);
+    }
+
+    public void OpenScoresActivity()
+    {
+        Intent intent = new Intent(this, Scores.class);
+        startActivity(intent);
     }
 
     @Override

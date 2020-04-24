@@ -38,10 +38,12 @@
     <string name="choose_2_teams">Choose 2 Teams</string>
     <string name="match_up">Match UP</string>
     <string name="loading_text">Loading...</string>
-    <string name="gamescore">GameScore</string>
+    <string name="Scores">GameScore</string>
     <string name="play_a_game">Play a Game</string>
     <string name="scoreboard">ScoreBoard</string>
     <string name="ScoreBoard">Score Board</string>
+    <string name="scores">Scores</string>
+    <string name="scorestext">Scores</string>
 
     <string-array name="spinner">
         <item>Guard</item>

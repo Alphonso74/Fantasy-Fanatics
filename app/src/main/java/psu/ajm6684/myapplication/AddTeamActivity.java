@@ -4,7 +4,9 @@ import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -105,8 +107,7 @@ public class AddTeamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_players);
 
-
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 
 
@@ -447,10 +448,24 @@ public class AddTeamActivity extends AppCompatActivity {
         mode.set(userFT).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Intent intent = new Intent(getBaseContext(), MyTeamsPage.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                AddTeamActivity.this.finish();
+                final MediaPlayer mp = MediaPlayer.create(AddTeamActivity.this, R.raw.singledribble);
+                mp.start();
+
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //Do something after 100ms
+                        Intent intent = new Intent(getBaseContext(), MyTeamsPage.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        AddTeamActivity.this.finish();
+
+                    }
+                }, 500);
+
+
+
             }
         });
 
@@ -908,7 +923,22 @@ public class AddTeamActivity extends AppCompatActivity {
     public void onBackPressed() {
 
         if (backButtonCount >= 1) {
-            finish();
+
+            final MediaPlayer mp = MediaPlayer.create(AddTeamActivity.this, R.raw.backboardshot);
+            mp.start();
+
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    finish();
+
+                }
+            }, 600);
+
+
+
+
         } else {
             Toast.makeText(this, "Pressing the back button again will lose unsaved progress.", Toast.LENGTH_SHORT).show();
             backButtonCount++;

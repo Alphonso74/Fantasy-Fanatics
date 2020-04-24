@@ -714,17 +714,44 @@ public class gamesimulator extends AppCompatActivity {
                 break;
 
             case 6:
+                Random r = new Random();
+
+                int freethrows1= r.nextInt(1);
+
                 if (possession % 2 == 0) {
-                    event = teamName1 + " was fouled! AND1 !!!!!";
+//                    event = teamName1 + " was fouled! AND1 !!!!!";
 
-                    team1Score = team1Score + 3;
-                    team1ScoreView.setText(team1Score.toString());
+                    if(freethrows1 == 0){
+
+                        event = teamName1 + " was fouled! AND1 !!!!!\n"
+                        + "Free Throw Missed";
+                        team1Score = team1Score + 2;
+                        team1ScoreView.setText(team1Score.toString());
+                    }
+                    else if(freethrows1 == 1){
+
+                        event = teamName1 + " was fouled! AND1 !!!!!\n"
+                                + "Free Throw Made";
+                        team1Score = team1Score + 3;
+                        team1ScoreView.setText(team1Score.toString());
+                    }
+
+
                 } else {
-                    event = teamName2 + " was fouled! AND1 !!!!!";
+                    if(freethrows1 == 0){
 
-                    team2Score = team2Score + 3;
-                    team2ScoreView.setText(team2Score.toString());
+                        event = teamName2 + " was fouled! AND1 !!!!!\n"
+                                + "Free Throw Missed";
+                        team2Score = team2Score + 2;
+                        team2ScoreView.setText(team2Score.toString());
+                    }
+                    else if(freethrows1 == 1){
 
+                        event = teamName2 + " was fouled! AND1 !!!!!\n"
+                                + "Free Throw Made";
+                        team2Score = team2Score + 3;
+                        team2ScoreView.setText(team2Score.toString());
+                    }
                 }
                 possession++;
 
@@ -892,6 +919,192 @@ public class gamesimulator extends AppCompatActivity {
 
         Toast.makeText(gamesimulator.this, "Start of the Second Quarter", Toast.LENGTH_SHORT).show();
 
+        gameFeed.append("\nGet Ready.......\n");
+
+
+        //for(int x = 0; x < 15; x++) {
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 2000);
+
+        Handler handler2 = new Handler();
+        handler2.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 4000);
+
+        Handler handler3 = new Handler();
+        handler3.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 6000);
+
+        Handler handler4 = new Handler();
+        handler4.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 8000);
+
+
+        Handler handler5 = new Handler();
+        handler5.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 10000);
+
+        Handler handler6 = new Handler();
+        handler6.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 12000);
+
+        Handler handler7 = new Handler();
+        handler7.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 14000);
+
+
+        Handler handler8 = new Handler();
+        handler8.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 16000);
+
+        Handler handler9 = new Handler();
+        handler9.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 18000);
+
+        Handler handler10 = new Handler();
+        handler10.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 20000);
+
+        Handler handler11 = new Handler();
+        handler11.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 22000);
+
+        Handler handler12 = new Handler();
+        handler12.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 24000);
+
+        Handler handler13 = new Handler();
+        handler13.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 26000);
+
+        Handler handler14 = new Handler();
+        handler14.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 28000);
+
+
+        Handler handler15 = new Handler();
+        handler15.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 30000);
+
+        Handler handler16 = new Handler();
+        handler16.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                if(gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+
+                    Toast.makeText(gamesimulator.this, "End of the Second Quarter", Toast.LENGTH_SHORT).show();
+                }
+                gameFeed.append("\n That Concludes the Second Quarter\n");
+
+            }
+        }, 30000);
     }
 
     private void halftime() {
@@ -905,18 +1118,417 @@ public class gamesimulator extends AppCompatActivity {
 
         Toast.makeText(gamesimulator.this, "Start of the Third Quarter", Toast.LENGTH_SHORT).show();
 
+        gameFeed.append("\nGet Ready.......\n");
+
+
+        int tip = (int) Math.round(Math.random());
+
+
+
+        //for(int x = 0; x < 15; x++) {
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 2000);
+
+        Handler handler2 = new Handler();
+        handler2.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 4000);
+
+        Handler handler3 = new Handler();
+        handler3.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 6000);
+
+        Handler handler4 = new Handler();
+        handler4.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 8000);
+
+
+        Handler handler5 = new Handler();
+        handler5.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 10000);
+
+        Handler handler6 = new Handler();
+        handler6.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 12000);
+
+        Handler handler7 = new Handler();
+        handler7.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 14000);
+
+
+        Handler handler8 = new Handler();
+        handler8.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 16000);
+
+        Handler handler9 = new Handler();
+        handler9.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 18000);
+
+        Handler handler10 = new Handler();
+        handler10.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 20000);
+
+        Handler handler11 = new Handler();
+        handler11.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 22000);
+
+        Handler handler12 = new Handler();
+        handler12.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 24000);
+
+        Handler handler13 = new Handler();
+        handler13.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 26000);
+
+        Handler handler14 = new Handler();
+        handler14.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 28000);
+
+
+        Handler handler15 = new Handler();
+        handler15.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 30000);
+
+        Handler handler16 = new Handler();
+        handler16.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                if(gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+
+                    Toast.makeText(gamesimulator.this, "End of the Third Quarter", Toast.LENGTH_SHORT).show();
+                }
+                gameFeed.append("\n That Concludes the Third Quarter\n");
+
+            }
+        }, 30000);
+
     }
 
     private void fourthQ() {
 
         Toast.makeText(gamesimulator.this, "Start of the Fourth Quarter", Toast.LENGTH_SHORT).show();
 
+        gameFeed.append("\nGet Ready.......\n");
+
+
+        //for(int x = 0; x < 15; x++) {
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 2000);
+
+        Handler handler2 = new Handler();
+        handler2.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 4000);
+
+        Handler handler3 = new Handler();
+        handler3.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 6000);
+
+        Handler handler4 = new Handler();
+        handler4.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 8000);
+
+
+        Handler handler5 = new Handler();
+        handler5.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 10000);
+
+        Handler handler6 = new Handler();
+        handler6.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 12000);
+
+        Handler handler7 = new Handler();
+        handler7.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 14000);
+
+
+        Handler handler8 = new Handler();
+        handler8.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 16000);
+
+        Handler handler9 = new Handler();
+        handler9.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 18000);
+
+        Handler handler10 = new Handler();
+        handler10.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 20000);
+
+        Handler handler11 = new Handler();
+        handler11.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 22000);
+
+        Handler handler12 = new Handler();
+        handler12.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 24000);
+
+        Handler handler13 = new Handler();
+        handler13.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 26000);
+
+        Handler handler14 = new Handler();
+        handler14.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 28000);
+
+
+        Handler handler15 = new Handler();
+        handler15.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                eventFucntion();
+
+
+            }
+        }, 30000);
+
+        Handler handler16 = new Handler();
+        handler16.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                if(gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+
+                    Toast.makeText(gamesimulator.this, "End of the Fourth Quarter", Toast.LENGTH_SHORT).show();
+                }
+                gameFeed.append("\n That Concludes the Fourth Quarter\n");
+
+            }
+        }, 30000);
     }
 
     private void endGame() {
 
-        Toast.makeText(gamesimulator.this, "Final Score - ", Toast.LENGTH_SHORT).show();
+        Toast.makeText(gamesimulator.this, "BUZZZER SOUNDS!!! THATS IT!!!", Toast.LENGTH_SHORT).show();
 
+
+        if(team1Score > team2Score){
+
+
+            gameFeed.append("\nFinal Score\n");
+
+
+            gameFeed.append("\n"+ team1Score + " - " + team2Score  +"\n");
+            gameFeed.append("\n"+ teamName1 + " Wins!!!!!!!"+"\n");
+
+
+        }
+
+        else{
+
+
+            gameFeed.append("\nFinal Score\n");
+
+
+            gameFeed.append("\n"+ team1Score + " - " + team2Score  +"\n");
+            gameFeed.append("\n"+ teamName2 + " Wins!!!!!!!"+"\n");
+        }
     }
 
     public void back2Teams(View view) {

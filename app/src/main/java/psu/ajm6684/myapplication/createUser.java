@@ -2,6 +2,7 @@ package psu.ajm6684.myapplication;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -15,6 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +34,7 @@ public class createUser extends AppCompatActivity {
     //
 //
     Button confirmButton;
+    int backButtonCount = 0;
 
     FirebaseAuth firebaseAuth;
     ProgressBar progressBar;
@@ -43,7 +46,7 @@ public class createUser extends AppCompatActivity {
         setContentView(R.layout.activity_create_user);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //this one
-
+        int backButtonCount = 0;
         confirmButton = (Button) findViewById(R.id.buttonSignUp);
         final EditText user = (EditText) findViewById(R.id.teamNameInputAddPlayer);
         final EditText email = (EditText) findViewById(R.id.emailInputCreateAccount);
@@ -104,7 +107,6 @@ public class createUser extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
 
-                                Toast.makeText(getApplicationContext(), "User Created", Toast.LENGTH_LONG).show();
 
                                 Uid = firebaseAuth.getCurrentUser().getUid();
                                 DocumentReference documentReference = firestore.collection("Users").document(Uid);
@@ -130,8 +132,27 @@ public class createUser extends AppCompatActivity {
                                 });
 
 
-                                Intent intent = new Intent(createUser.this, MainActivity.class);
-                                startActivity(intent);
+
+                                final MediaPlayer mp = MediaPlayer.create(createUser.this, R.raw.singledribble);
+                                mp.start();
+
+
+                                final Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        //Do something after 100ms
+                                        Intent intent = new Intent(createUser.this, MainActivity.class);
+                                        startActivity(intent);
+
+
+                                    }
+                                }, 500);
+
+
+
+
+
 
                             } else {
                                 Toast.makeText(getApplicationContext(), "Error!" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
@@ -150,11 +171,31 @@ public class createUser extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        if (backButtonCount >= 1) {
 
-    public void back(View view) {
+            final MediaPlayer mp = MediaPlayer.create(createUser.this, R.raw.backboardshot);
+            mp.start();
 
-        startActivity(new Intent(createUser.this, MainActivity.class));
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    startActivity(new Intent(createUser.this, MainActivity.class));
 
-    }
+                }
+            }, 600);
+
+
+
+
+        } else {
+            Toast.makeText(this, "Pressing the back button again will lose unsaved progress.", Toast.LENGTH_SHORT).show();
+            backButtonCount++;
+        }
+            }
+
+
 
 }

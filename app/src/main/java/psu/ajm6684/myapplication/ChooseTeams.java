@@ -7,8 +7,11 @@ import androidx.appcompat.app.AppCompatDelegate;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.View;
@@ -76,7 +79,19 @@ public class ChooseTeams extends AppCompatActivity {
     public void onBackPressed() {
 
         if (backButtonCount >= 1) {
-            finish();
+            final MediaPlayer mp = MediaPlayer.create(ChooseTeams.this, R.raw.backboardshot);
+            mp.start();
+
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    finish();
+
+                }
+            }, 600);
+
+
         } else {
             Toast.makeText(this, "Pressing the back button again will lose unsaved progress.", Toast.LENGTH_SHORT).show();
             backButtonCount++;
@@ -88,7 +103,7 @@ public class ChooseTeams extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_teams);
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //for dark mode
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
@@ -276,22 +291,41 @@ public class ChooseTeams extends AppCompatActivity {
 
 
 
-                    Intent intent = new Intent(ChooseTeams.this, gamesimulator.class);
-                    intent.putExtra("Team1",team1);
-                    intent.putExtra("Guard1",Guard1);
-                    intent.putExtra("ForwardGuard1",ForwardGuard1);
-                    intent.putExtra("GuardForward1",GuardForward1);
-                    intent.putExtra("ForwardCenter1",ForwardCenter1);
-                    intent.putExtra("Center1",Center1);
 
-                    intent.putExtra("Team2",team2);
-                    intent.putExtra("Guard2",Guard2);
-                    intent.putExtra("ForwardGuard2",ForwardGuard2);
-                    intent.putExtra("GuardForward2",GuardForward2);
-                    intent.putExtra("ForwardCenter2",ForwardCenter2);
-                    intent.putExtra("Center2",Center2);
 
-                    startActivity(intent);
+
+
+                    final MediaPlayer mp = MediaPlayer.create(ChooseTeams.this, R.raw.singledribble);
+                    mp.start();
+
+
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Intent intent = new Intent(ChooseTeams.this, gamesimulator.class);
+                            intent.putExtra("Team1",team1);
+                            intent.putExtra("Guard1",Guard1);
+                            intent.putExtra("ForwardGuard1",ForwardGuard1);
+                            intent.putExtra("GuardForward1",GuardForward1);
+                            intent.putExtra("ForwardCenter1",ForwardCenter1);
+                            intent.putExtra("Center1",Center1);
+
+                            intent.putExtra("Team2",team2);
+                            intent.putExtra("Guard2",Guard2);
+                            intent.putExtra("ForwardGuard2",ForwardGuard2);
+                            intent.putExtra("GuardForward2",GuardForward2);
+                            intent.putExtra("ForwardCenter2",ForwardCenter2);
+                            intent.putExtra("Center2",Center2);
+                            startActivity(intent);
+
+                        }
+                    }, 500);
+
+
+
+
 
                 }
 
@@ -364,14 +398,29 @@ public class ChooseTeams extends AppCompatActivity {
     public void back2Teams(View view) {
 
         if (backButtonCount >= 1) {
-            Intent confirmPage = new Intent(this, MyTeamsPage.class);
-            startActivity(confirmPage);
+
+
+            final MediaPlayer mp = MediaPlayer.create(ChooseTeams.this, R.raw.backboardshot);
+            mp.start();
+
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent confirmPage = new Intent(ChooseTeams.this, MyTeamsPage.class);
+                    startActivity(confirmPage);
+
+                }
+            }, 600);
+
         } else {
             Toast.makeText(this, "Pressing the cancel button again will lose unsaved progress.", Toast.LENGTH_SHORT).show();
             backButtonCount++;
         }
 
     }
+
+
 
     public void playgame(View view) {
 

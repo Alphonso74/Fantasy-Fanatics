@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -85,7 +87,7 @@ public class gamesimulator extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamesimulator);
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         backButton = (Button) findViewById(R.id.backButton);
 
 
@@ -93,10 +95,23 @@ public class gamesimulator extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent confirmPage = new Intent(gamesimulator.this, MyTeamsPage.class);
-                confirmPage.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(confirmPage);
-                finish();
+                final MediaPlayer mp = MediaPlayer.create(gamesimulator.this, R.raw.backboardshot);
+                mp.start();
+
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent confirmPage = new Intent(gamesimulator.this, MyTeamsPage.class);
+                        confirmPage.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(confirmPage);
+                        finish();
+
+                    }
+                }, 600);
+
+
 
             }
         });
@@ -1532,13 +1547,24 @@ public class gamesimulator extends AppCompatActivity {
     }
 
     public void back2Teams(View view) {
-        finish();
 
 
-//        Intent confirmPage = new Intent(this, MyTeamsPage.class);
-//        confirmPage.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(confirmPage);
-//        finish();
+        final MediaPlayer mp = MediaPlayer.create(gamesimulator.this, R.raw.singledribble);
+        mp.start();
+
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+            }
+        }, 500);
+
 
     }
+
+
+
+
 }

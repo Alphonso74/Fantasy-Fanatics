@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.SpannableString;
@@ -124,6 +125,8 @@ public class MainActivity extends Activity {
 
                         if (task.isSuccessful()) {
 
+                            final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.singledribble);
+                            mp.start();
                             FirebaseUser user = firebaseAuth.getCurrentUser();
                             //updateUiWithUser(user);
                             //Toast.makeText(getApplicationContext(), "Logged in user: " + mail, Toast.LENGTH_LONG).show();

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -34,7 +35,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class gamesimulator extends AppCompatActivity {
-
+    MediaPlayer player;
     Integer team1Score;
     Integer team2Score;
 
@@ -85,7 +86,7 @@ public class gamesimulator extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamesimulator);
-
+        player = MediaPlayer.create(gamesimulator.this,R.raw.intro);
         backButton = (Button) findViewById(R.id.backButton);
 
 
@@ -235,6 +236,7 @@ public class gamesimulator extends AppCompatActivity {
 //                    @Override
 //                    public void run() {
 //                        //Do something after 100ms
+                play(gamesimulator.this);
 
                 tipOff();
 //                    }
@@ -251,6 +253,7 @@ public class gamesimulator extends AppCompatActivity {
                         {
                          //   Toast.makeText(gamesimulator.this, "The First Quarter Is Now Underway!", Toast.LENGTH_SHORT).show();
 
+                            player = MediaPlayer.create(gamesimulator.this,R.raw.buzzer);
                             firstQ();
                         }
 
@@ -560,6 +563,7 @@ public class gamesimulator extends AppCompatActivity {
                 }
                 gameFeed.append("\n That Concludes the First Quarter\n");
 
+                play(gamesimulator.this);
             }
         }, 30000);
 
@@ -1102,6 +1106,7 @@ public class gamesimulator extends AppCompatActivity {
                     Toast.makeText(gamesimulator.this, "End of the Second Quarter", Toast.LENGTH_SHORT).show();
                 }
                 gameFeed.append("\n That Concludes the Second Quarter\n");
+                play(gamesimulator.this);
 
             }
         }, 30000);
@@ -1305,6 +1310,7 @@ public class gamesimulator extends AppCompatActivity {
                     Toast.makeText(gamesimulator.this, "End of the Third Quarter", Toast.LENGTH_SHORT).show();
                 }
                 gameFeed.append("\n That Concludes the Third Quarter\n");
+                play(gamesimulator.this);
 
             }
         }, 30000);
@@ -1498,6 +1504,7 @@ public class gamesimulator extends AppCompatActivity {
                     Toast.makeText(gamesimulator.this, "End of the Fourth Quarter", Toast.LENGTH_SHORT).show();
                 }
                 gameFeed.append("\n That Concludes the Fourth Quarter\n");
+                play(gamesimulator.this);
 
             }
         }, 30000);
@@ -1520,7 +1527,7 @@ public class gamesimulator extends AppCompatActivity {
 
         }
 
-        else{
+        else if(team1Score < team2Score){
 
 
             gameFeed.append("\nFinal Score\n");
@@ -1529,7 +1536,16 @@ public class gamesimulator extends AppCompatActivity {
             gameFeed.append("\n"+ team1Score + " - " + team2Score  +"\n");
             gameFeed.append("\n"+ teamName2 + " Wins!!!!!!!"+"\n");
         }
-    }
+        else{
+
+            gameFeed.append("\nFinal Score\n");
+
+
+            gameFeed.append("\n"+ team1Score + " - " + team2Score  +"\n");
+            gameFeed.append("\n"+ "Its a TIE!!!!!!!"+"\n");
+
+
+        }    }
 
     public void back2Teams(View view) {
         finish();
@@ -1541,4 +1557,43 @@ public class gamesimulator extends AppCompatActivity {
 //        finish();
 
     }
+
+    public void play(gamesimulator v) {
+        if (player == null) {
+//            player = MediaPlayer.create(this, R.raw.song);
+            player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    stopPlayer();
+                }
+            });
+        }
+
+        player.start();
+    }
+
+    public void pause(View v) {
+        if (player != null) {
+            player.pause();
+        }
+    }
+
+    public void stop(View v) {
+        stopPlayer();
+    }
+
+    private void stopPlayer() {
+        if (player != null) {
+            player.release();
+            player = null;
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopPlayer();
+    }
+
+
 }

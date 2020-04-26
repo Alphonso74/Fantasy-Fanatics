@@ -157,7 +157,7 @@ public class MainActivity extends Activity {
         if (sharedPreferenceObj.getApp_runFirst().equals("FIRST")) {
 
             final AlertDialog d = new AlertDialog.Builder(MainActivity.this,R.style.MyDialogTheme)
-                    .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    .setPositiveButton("Agree", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                            sharedPreferenceObj.setApp_runFirst("NO");
@@ -165,17 +165,10 @@ public class MainActivity extends Activity {
 
                         }
                     })
-                    .setNegativeButton("Decline", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            finish();
 
-                        }
-                    })
-
+                    .setCancelable(false)
                     .setTitle("Fantasy Fanatics")
-
-                    .setMessage("Do you agree to our Terms and Services & Privacy Policies?")
+                    .setMessage("Rate Freestyle 5 stars?")
                     .create();
 
             d.show();

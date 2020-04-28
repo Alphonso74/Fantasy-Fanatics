@@ -6,9 +6,14 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -30,7 +35,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -87,7 +95,7 @@ public class gamesimulator extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamesimulator);
-        player = MediaPlayer.create(gamesimulator.this,R.raw.intro);
+        player = MediaPlayer.create(gamesimulator.this, R.raw.intro);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         backButton = (Button) findViewById(R.id.backButton);
 
@@ -113,7 +121,6 @@ public class gamesimulator extends AppCompatActivity {
                 }, 600);
 
 
-
             }
         });
 
@@ -122,6 +129,7 @@ public class gamesimulator extends AppCompatActivity {
 
         playGame = (Button) findViewById(R.id.rungame);
         gameFeed = (TextView) findViewById(R.id.dataFeed);
+        gameFeed.setMovementMethod(new ScrollingMovementMethod());
 
 
         team1Score = 0;
@@ -264,11 +272,10 @@ public class gamesimulator extends AppCompatActivity {
                     public void run() {
                         //Do something after 100ms
 
-                        if(gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true)
-                        {
-                         //   Toast.makeText(gamesimulator.this, "The First Quarter Is Now Underway!", Toast.LENGTH_SHORT).show();
+                        if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+                            //   Toast.makeText(gamesimulator.this, "The First Quarter Is Now Underway!", Toast.LENGTH_SHORT).show();
 
-                            player = MediaPlayer.create(gamesimulator.this,R.raw.buzzer);
+                            player = MediaPlayer.create(gamesimulator.this, R.raw.buzzer);
                             firstQ();
                         }
 
@@ -282,7 +289,7 @@ public class gamesimulator extends AppCompatActivity {
                     @Override
                     public void run() {
                         //Do something after 100ms
-                        if(gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+                        if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
                             secondQ();
                         }
                     }
@@ -294,7 +301,7 @@ public class gamesimulator extends AppCompatActivity {
                     @Override
                     public void run() {
                         //Do something after 100ms
-                        if(gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+                        if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
                             halftime();
                         }
                     }
@@ -306,7 +313,7 @@ public class gamesimulator extends AppCompatActivity {
                     @Override
                     public void run() {
                         //Do something after 100ms
-                        if(gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+                        if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
                             thirdQ();
 
                         }
@@ -319,7 +326,7 @@ public class gamesimulator extends AppCompatActivity {
                     @Override
                     public void run() {
                         //Do something after 100ms
-                        if(gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+                        if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
                             fourthQ();
                         }
                     }
@@ -330,7 +337,7 @@ public class gamesimulator extends AppCompatActivity {
                     @Override
                     public void run() {
                         //Do something after 100ms
-                        if(gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+                        if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
                             endGame();
                         }
                     }
@@ -375,8 +382,10 @@ public class gamesimulator extends AppCompatActivity {
     }
 
     private void firstQ() {
+        if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+            Toast.makeText(gamesimulator.this, "The First Quarter Is Now Underway!", Toast.LENGTH_SHORT).show();
 
-        Toast.makeText(gamesimulator.this, "The First Quarter Is Now Underway!", Toast.LENGTH_SHORT).show();
+        }
 
         gameFeed.append("\nGet Ready.......\n");
 
@@ -572,7 +581,7 @@ public class gamesimulator extends AppCompatActivity {
             @Override
             public void run() {
                 //Do something after 100ms
-                if(gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+                if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
 
                     Toast.makeText(gamesimulator.this, "End of the First Quarter", Toast.LENGTH_SHORT).show();
                 }
@@ -735,19 +744,18 @@ public class gamesimulator extends AppCompatActivity {
             case 6:
                 Random r = new Random();
 
-                int freethrows1= r.nextInt(1);
+                int freethrows1 = r.nextInt(1);
 
                 if (possession % 2 == 0) {
 //                    event = teamName1 + " was fouled! AND1 !!!!!";
 
-                    if(freethrows1 == 0){
+                    if (freethrows1 == 0) {
 
                         event = teamName1 + " was fouled! AND1 !!!!!\n"
-                        + "Free Throw Missed";
+                                + "Free Throw Missed";
                         team1Score = team1Score + 2;
                         team1ScoreView.setText(team1Score.toString());
-                    }
-                    else if(freethrows1 == 1){
+                    } else if (freethrows1 == 1) {
 
                         event = teamName1 + " was fouled! AND1 !!!!!\n"
                                 + "Free Throw Made";
@@ -757,14 +765,13 @@ public class gamesimulator extends AppCompatActivity {
 
 
                 } else {
-                    if(freethrows1 == 0){
+                    if (freethrows1 == 0) {
 
                         event = teamName2 + " was fouled! AND1 !!!!!\n"
                                 + "Free Throw Missed";
                         team2Score = team2Score + 2;
                         team2ScoreView.setText(team2Score.toString());
-                    }
-                    else if(freethrows1 == 1){
+                    } else if (freethrows1 == 1) {
 
                         event = teamName2 + " was fouled! AND1 !!!!!\n"
                                 + "Free Throw Made";
@@ -935,8 +942,10 @@ public class gamesimulator extends AppCompatActivity {
 
 
     private void secondQ() {
+        if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+            Toast.makeText(gamesimulator.this, "Start of the Second Quarter", Toast.LENGTH_SHORT).show();
+        }
 
-        Toast.makeText(gamesimulator.this, "Start of the Second Quarter", Toast.LENGTH_SHORT).show();
 
         gameFeed.append("\nGet Ready.......\n");
 
@@ -1116,7 +1125,7 @@ public class gamesimulator extends AppCompatActivity {
             @Override
             public void run() {
                 //Do something after 100ms
-                if(gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+                if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
 
                     Toast.makeText(gamesimulator.this, "End of the Second Quarter", Toast.LENGTH_SHORT).show();
                 }
@@ -1129,20 +1138,27 @@ public class gamesimulator extends AppCompatActivity {
 
     private void halftime() {
 
-        Toast.makeText(gamesimulator.this, "Halftime", Toast.LENGTH_SHORT).show();
+
+        if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+            Toast.makeText(gamesimulator.this, "Halftime", Toast.LENGTH_SHORT).show();
+
+        }
 
     }
 
 
     private void thirdQ() {
 
-        Toast.makeText(gamesimulator.this, "Start of the Third Quarter", Toast.LENGTH_SHORT).show();
+        if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+            Toast.makeText(gamesimulator.this, "Start of the Third Quarter", Toast.LENGTH_SHORT).show();
+
+        }
+
 
         gameFeed.append("\nGet Ready.......\n");
 
 
         int tip = (int) Math.round(Math.random());
-
 
 
         //for(int x = 0; x < 15; x++) {
@@ -1320,7 +1336,7 @@ public class gamesimulator extends AppCompatActivity {
             @Override
             public void run() {
                 //Do something after 100ms
-                if(gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+                if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
 
                     Toast.makeText(gamesimulator.this, "End of the Third Quarter", Toast.LENGTH_SHORT).show();
                 }
@@ -1333,8 +1349,10 @@ public class gamesimulator extends AppCompatActivity {
     }
 
     private void fourthQ() {
+        if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+            Toast.makeText(gamesimulator.this, "Start of the Fourth Quarter", Toast.LENGTH_SHORT).show();
 
-        Toast.makeText(gamesimulator.this, "Start of the Fourth Quarter", Toast.LENGTH_SHORT).show();
+        }
 
         gameFeed.append("\nGet Ready.......\n");
 
@@ -1514,7 +1532,7 @@ public class gamesimulator extends AppCompatActivity {
             @Override
             public void run() {
                 //Do something after 100ms
-                if(gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+                if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
 
                     Toast.makeText(gamesimulator.this, "End of the Fourth Quarter", Toast.LENGTH_SHORT).show();
                 }
@@ -1527,40 +1545,49 @@ public class gamesimulator extends AppCompatActivity {
 
     private void endGame() {
 
-        Toast.makeText(gamesimulator.this, "BUZZZER SOUNDS!!! THATS IT!!!", Toast.LENGTH_SHORT).show();
-
-
-        if(team1Score > team2Score){
-
-
-            gameFeed.append("\nFinal Score\n");
-
-
-            gameFeed.append("\n"+ team1Score + " - " + team2Score  +"\n");
-            gameFeed.append("\n"+ teamName1 + " Wins!!!!!!!"+"\n");
-
-
+        if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+            Toast.makeText(gamesimulator.this, "BUZZZER SOUNDS!!! THATS IT!!!", Toast.LENGTH_SHORT).show();
         }
 
-        else if(team1Score < team2Score){
+            if (team1Score > team2Score) {
 
 
-            gameFeed.append("\nFinal Score\n");
+                gameFeed.append("\nFinal Score\n");
 
 
-            gameFeed.append("\n"+ team1Score + " - " + team2Score  +"\n");
-            gameFeed.append("\n"+ teamName2 + " Wins!!!!!!!"+"\n");
-        }
-        else{
-
-            gameFeed.append("\nFinal Score\n");
+                gameFeed.append("\n" + team1Score + " - " + team2Score + "\n");
+                gameFeed.append("\n" + teamName1 + " Wins!!!!!!!" + "\n");
 
 
-            gameFeed.append("\n"+ team1Score + " - " + team2Score  +"\n");
-            gameFeed.append("\n"+ "Its a TIE!!!!!!!"+"\n");
+
+            } else if (team1Score < team2Score) {
 
 
-        }    }
+                gameFeed.append("\nFinal Score\n");
+
+
+                gameFeed.append("\n" + team1Score + " - " + team2Score + "\n");
+                gameFeed.append("\n" + teamName2 + " Wins!!!!!!!" + "\n");
+
+
+            } else {
+
+                gameFeed.append("\nFinal Score\n");
+
+
+                gameFeed.append("\n" + team1Score + " - " + team2Score + "\n");
+                gameFeed.append("\n" + "Its a TIE!!!!!!!" + "\n");
+
+
+
+
+            }
+
+
+        takeScreenshot();
+
+
+    }
 
     public void back2Teams(View view) {
 
@@ -1616,7 +1643,36 @@ public class gamesimulator extends AppCompatActivity {
         super.onStop();
         stopPlayer();
     }
+    private void takeScreenshot() {
+        Date now = new Date();
+        android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
 
+        try {
+            // image naming and path  to include sd card  appending name you choose for file
+            Random rn = new Random();
+
+            String mPath = Environment.getExternalStorageDirectory().toString() + "/" + now + ".jpg";
+
+            // create bitmap screen capture
+            View v1 = getWindow().getDecorView().getRootView();
+            v1.setDrawingCacheEnabled(true);
+            Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
+            v1.setDrawingCacheEnabled(false);
+
+            File imageFile = new File(mPath);
+
+            FileOutputStream outputStream = new FileOutputStream(imageFile);
+            int quality = 100;
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+            outputStream.flush();
+            outputStream.close();
+
+
+        } catch (Throwable e) {
+            // Several error may come out with file handling or DOM
+            e.printStackTrace();
+        }
+    }
 
 
 }

@@ -2,13 +2,17 @@ package psu.ajm6684.myapplication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -46,6 +50,85 @@ public class MainActivity extends Activity {
         super.onStart();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         updateUiWithUser(currentUser);
+    }
+
+
+    private boolean checkPermissions() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            // Here, thisActivity is the current activity
+            requestPermissions();
+            return false;
+        }
+
+
+    }
+
+    private void requestPermissions() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0
+                );
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        }
+
+    }
+
+
+    private boolean checkPermissions2() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            // Here, thisActivity is the current activity
+            requestPermissions2();
+            return false;
+        }
+
+
+    }
+
+
+    private void requestPermissions2() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0
+                );
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        }
+
     }
 
 
@@ -156,8 +239,8 @@ public class MainActivity extends Activity {
         sharedPreferenceObj = new SharedPreference(MainActivity.this);
         if (sharedPreferenceObj.getApp_runFirst().equals("FIRST")) {
 
-            final AlertDialog d = new AlertDialog.Builder(MainActivity.this,R.style.MyDialogTheme)
-                    .setPositiveButton("Agree", new DialogInterface.OnClickListener() {
+            final AlertDialog d = new AlertDialog.Builder(MainActivity.this)
+                    .setPositiveButton("Close", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                            sharedPreferenceObj.setApp_runFirst("NO");
@@ -168,7 +251,7 @@ public class MainActivity extends Activity {
 
                     .setCancelable(false)
                     .setTitle("Fantasy Fanatics")
-                    .setMessage("Rate Freestyle 5 stars?")
+                        .setMessage("Thank you for downloading Freestyle")
                     .create();
 
             d.show();
@@ -177,6 +260,22 @@ public class MainActivity extends Activity {
 
 
             // App is not First Time Launch
+        }
+
+
+//        if (checkPermissions() != true) {
+//            ActivityCompat.requestPermissions(this,
+//                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+//
+//
+//        }
+
+
+        if (checkPermissions2() != true) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+
+
         }
 
     }
@@ -188,8 +287,29 @@ public class MainActivity extends Activity {
 
 
     public void openMyTeamsActivity() {
-        Intent confirmPage = new Intent(MainActivity.this, MyTeamsPage.class);
-        startActivity(confirmPage);
+
+        if (checkPermissions2() != true) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+            builder.setTitle("Allow Access");
+
+            builder.setCancelable(false);
+            builder.setMessage("Please allow us to have access to your storage next time")
+                    .setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    });
+            builder.create();
+            builder.show();
+        } else {
+
+            Intent confirmPage = new Intent(MainActivity.this, MyTeamsPage.class);
+            startActivity(confirmPage);
+
+        }
+
 
 
     }

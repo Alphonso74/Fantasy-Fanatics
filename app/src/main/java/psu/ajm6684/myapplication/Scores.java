@@ -1,7 +1,10 @@
 package psu.ajm6684.myapplication;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -121,6 +124,30 @@ public class Scores extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+
+        final MediaPlayer mp = MediaPlayer.create(Scores.this, R.raw.backboardshot);
+        mp.start();
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(getBaseContext(), MyTeamsPage.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                Scores.this.finish();
+
+            }
+        }, 600);
+
+
 
     }
 }

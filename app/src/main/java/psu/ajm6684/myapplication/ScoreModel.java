@@ -5,9 +5,9 @@ public class ScoreModel
     private String Match;
     private String Score;
 
-    private ScoreModel() {}
+    public ScoreModel() {}
 
-    private ScoreModel(String Match, String Score){
+    public ScoreModel(String Match, String Score){
         this.Match = Match;
         this.Score = Score;
     }

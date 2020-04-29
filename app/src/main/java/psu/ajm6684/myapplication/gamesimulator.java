@@ -1545,6 +1545,12 @@ public class gamesimulator extends AppCompatActivity {
 
     private void endGame() {
 
+        CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("Scores");
+
+        String Match = teamName1 + " vs. " + teamName2;
+        String Score;
+
+
         if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
             Toast.makeText(gamesimulator.this, "BUZZZER SOUNDS!!! THATS IT!!!", Toast.LENGTH_SHORT).show();
         }
@@ -1559,6 +1565,7 @@ public class gamesimulator extends AppCompatActivity {
                 gameFeed.append("\n" + teamName1 + " Wins!!!!!!!" + "\n");
 
 
+                Score = team1Score + " - " + team2Score;
 
             } else if (team1Score < team2Score) {
 
@@ -1568,6 +1575,7 @@ public class gamesimulator extends AppCompatActivity {
 
                 gameFeed.append("\n" + team1Score + " - " + team2Score + "\n");
                 gameFeed.append("\n" + teamName2 + " Wins!!!!!!!" + "\n");
+                Score = team1Score + " - " + team2Score;
 
 
             } else {
@@ -1578,10 +1586,14 @@ public class gamesimulator extends AppCompatActivity {
                 gameFeed.append("\n" + team1Score + " - " + team2Score + "\n");
                 gameFeed.append("\n" + "Its a TIE!!!!!!!" + "\n");
 
+                Score = team1Score + " - " + team2Score;
 
 
 
             }
+
+        collectionReference.add(new ScoreModel(Match,Score));
+
 
 
         takeScreenshot();

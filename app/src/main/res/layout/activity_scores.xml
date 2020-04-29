@@ -10,14 +10,14 @@
         android:id="@+id/recyclerView"
         android:layout_width="409dp"
         android:layout_height="670dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearlayout123" />
+        app:layout_constraintTop_toBottomOf="@+id/linearlayout123"
+        app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
         android:id="@+id/linearlayout123"
@@ -35,11 +35,11 @@
 
         <TextView
             android:id="@+id/scoresList"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
+            android:layout_marginStart="165dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:focusable="auto"
             android:fontFamily="@font/audiowide"
             android:text="@string/scorestext"
@@ -48,18 +48,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="72dp"
-            android:layout_marginEnd="16dp"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            tools:ignore="MissingConstraints">
-
-        </com.google.android.material.appbar.AppBarLayout>
 
     </LinearLayout>
 

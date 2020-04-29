@@ -44,6 +44,7 @@ public class Scores extends AppCompatActivity {
     String uid;
     FirebaseAuth auth;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +76,9 @@ public class Scores extends AppCompatActivity {
             }
         };
 
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
 
         /*
         firebaseAuth = FirebaseAuth.getInstance();

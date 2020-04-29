@@ -13,7 +13,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,16 +33,6 @@ public class Scores extends AppCompatActivity {
     TextView ScoresList;
     private RecyclerView recyclerView;
     private FirestoreRecyclerAdapter adapter;
-
-    CollectionReference Users;
-    DocumentReference ajm;
-
-    FirebaseFirestore firestore;
-    FirebaseAuth firebaseAuth;
-    FirebaseUser current;
-    String uid;
-    FirebaseAuth auth;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,23 +69,10 @@ public class Scores extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        /*
-        firebaseAuth = FirebaseAuth.getInstance();
-        Users = db.collection("Users");
-        current = firebaseAuth.getCurrentUser();
-
-        auth = FirebaseAuth.getInstance();
-        uid = current.getUid();
-        ajm = Users.document(current.getUid());
-
-        firestore = FirebaseFirestore.getInstance();
-         */
-
     }
 
     @Override
     public void onBackPressed() {
-
 
         final MediaPlayer mp = MediaPlayer.create(Scores.this, R.raw.backboardshot);
         mp.start();
@@ -112,8 +88,6 @@ public class Scores extends AppCompatActivity {
 
             }
         }, 600);
-
-
 
     }
 

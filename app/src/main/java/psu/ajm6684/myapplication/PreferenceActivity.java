@@ -45,9 +45,6 @@ public class PreferenceActivity  extends AppCompatActivity {
     DocumentReference mode;
 
 
-
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,12 +109,6 @@ public class PreferenceActivity  extends AppCompatActivity {
         //View currentFocus = getWindow().getCurrentFocus();
 
 
-
-
-
-
-
-
         mode = firestore.collection("Users").document(current.getUid());
 
         mode.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -157,8 +148,6 @@ public class PreferenceActivity  extends AppCompatActivity {
                 }
             }
         });
-
-
 
 
 

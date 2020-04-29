@@ -60,7 +60,20 @@ public class Scores extends AppCompatActivity {
                 .setQuery(query, ScoreModel.class)
                 .build();
 
+        adapter = new FirestoreRecyclerAdapter<ScoreModel, ScoreViewHolder>(options) {
+            @NonNull
+            @Override
+            public ScoreViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.score_list, parent, false);
+                return new ScoreViewHolder(view);
+            }
 
+            @Override
+            protected void onBindViewHolder(@NonNull ScoreViewHolder scoreViewHolder, int i, @NonNull ScoreModel scoreModel) {
+                scoreViewHolder.list_match.setText(scoreModel.getMatch());
+                scoreViewHolder.list_score.setText(scoreModel.getScore());
+            }
+        };
 
 
         /*

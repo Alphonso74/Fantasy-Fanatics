@@ -78,8 +78,6 @@ public class MyTeamsPage extends AppCompatActivity {
 
 
     RecyclerView recyclerView ;
-
-
     FirebaseUser current;
     Button preference;
     Button playGame;

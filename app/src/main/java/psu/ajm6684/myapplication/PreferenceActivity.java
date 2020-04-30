@@ -168,14 +168,8 @@ public class PreferenceActivity  extends AppCompatActivity {
                     firestore.collection("Users").document(current.getUid()).update("mode", "light");
                 }
 
-
-
             }
         });
-
-
-
-
 
 
 

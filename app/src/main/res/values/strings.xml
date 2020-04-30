@@ -44,6 +44,8 @@
     <string name="ScoreBoard">Score Board</string>
     <string name="scores">Scores</string>
     <string name="scorestext">Scores</string>
+    <string name="textview">TextView</string>
+
 
     <string-array name="spinner">
         <item>Guard</item>

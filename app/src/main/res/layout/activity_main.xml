@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffa500"
+    android:background="@drawable/basketballnight"
     tools:context=".MainActivity">
 
     <TextView
@@ -12,10 +12,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:fontFamily="@font/audiowide"
+        android:fontFamily="@font/alfa_slab_one"
         android:gravity="center"
         android:text="@string/ff"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:textColor="@color/orange"
+        android:textSize="44sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,8 +31,13 @@
         android:layout_marginTop="52dp"
         android:autofillHints="email"
         android:ems="10"
+        android:backgroundTint="@color/colorAccentNight"
+
         android:hint="@string/email"
+        android:textSize="24sp"
+        android:textColorHint="@color/colorAccentNight"
         android:inputType="textEmailAddress"
+        android:textColor="@color/colorAccentNight"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +51,10 @@
         android:layout_marginTop="96dp"
         android:autofillHints="@string/password"
         android:ems="10"
+        android:textColorHint="@color/colorAccentNight"
+        android:textColor="@color/colorAccentNight"
+        android:textSize="24sp"
+        android:backgroundTint="@color/colorAccentNight"
         android:gravity="center"
         android:hint="@string/password"
         android:inputType="textPassword"
@@ -52,29 +64,31 @@
         app:layout_constraintTop_toBottomOf="@+id/emailMainPage"
         tools:targetApi="o" />
 
+
     <Button
         android:id="@+id/confirmCreateAccount"
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
+        android:layout_width="129dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="84dp"
         android:layout_marginTop="80dp"
 
+        android:layout_marginEnd="16dp"
         android:text="@string/sign_up"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/confirmMainPage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordInputMainPage"
-        app:layout_constraintVertical_bias="0.0"
-        />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/confirmMainPage"
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="129dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="84dp"
-        android:layout_marginRight="84dp"
         android:text="@string/confirm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,6 +96,7 @@
         app:layout_constraintStart_toEndOf="@+id/confirmCreateAccount"
         app:layout_constraintTop_toBottomOf="@+id/passwordInputMainPage"
         app:layout_constraintVertical_bias="0.0" />
+
 
     <ProgressBar
         android:id="@+id/progressBar2"
@@ -93,4 +108,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/confirmCreateAccount" />
+
+    ,/
 </androidx.constraintlayout.widget.ConstraintLayout>

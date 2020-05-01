@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:background="#ffa500">
+    android:layout_height="match_parent" android:background="@drawable/basketballnight">
 
     <TextView
         android:id="@+id/createAccountText"
@@ -10,13 +10,18 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="74dp"
-        android:layout_marginEnd="108dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="73dp"
         android:fontFamily="@font/audiowide"
         android:gravity="center"
         android:text="@string/create_account"
         android:textAlignment="center"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:textColor="@color/orange"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        
+        />
 
     <EditText
         android:id="@+id/emailInputCreateAccount"
@@ -28,6 +33,12 @@
         android:layout_marginTop="67dp"
         android:autofillHints="email"
         android:ems="10"
+        android:backgroundTint="@color/colorAccentNight"
+
+        android:textColor="@color/colorAccentNight"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColorHint="@color/colorAccentNight"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
@@ -43,7 +54,13 @@
         android:layout_marginTop="58dp"
         android:autofillHints="Username"
         android:ems="10"
+        android:textColor="@color/colorAccentNight"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColorHint="@color/colorAccentNight"
         android:hint="UserName"
+        android:backgroundTint="@color/colorAccentNight"
+
         android:inputType="text"
         android:textAlignment="center"
         tools:targetApi="o" />
@@ -55,6 +72,12 @@
         android:layout_below="@+id/teamNameInputAddPlayer"
         android:layout_centerHorizontal="true"
         android:gravity="center"
+        android:textColor="@color/colorAccentNight"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:backgroundTint="@color/colorAccentNight"
+
+        android:textColorHint="@color/colorAccentNight"
         android:layout_marginTop="58dp"
         android:autofillHints="password"
         android:ems="10"

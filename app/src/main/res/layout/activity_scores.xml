@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#DDC26F">
+    android:layout_marginTop="8dp"
+    android:background="#ECE28A">
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_View"
         android:layout_width="0dp"
-        android:layout_height="670dp"
+        android:layout_height="650dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:paddingBottom="40dp"
@@ -29,29 +30,59 @@
         android:layout_height="50dp"
 
         android:layout_alignParentStart="true"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         android:weightSum="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <pl.droidsonroids.gif.GifImageView
+
+            android:id="@+id/gifspin4"
+            android:layout_width="34dp"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="false"
+            android:layout_centerHorizontal="false"
+            android:layout_marginStart="0dp"
+            android:layout_weight="1"
+            android:foregroundGravity="left|center"
+            android:src="@drawable/spin2"
+            app:layout_constraintBottom_toBottomOf="@id/gifspin5"
+            app:layout_constraintStart_toStartOf="@id/gifspin5"
+            app:layout_constraintTop_toTopOf="@id/gifspin5"
+            app:layout_constraintVertical_bias="5"
+            tools:ignore="MissingConstraints">
+
+        </pl.droidsonroids.gif.GifImageView>
 
         <TextView
             android:id="@+id/scoresList"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="165dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="8dp"
+            android:layout_height="46dp"
             android:focusable="auto"
             android:fontFamily="@font/audiowide"
             android:text="@string/scorestext"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="30sp" />
+
+        <pl.droidsonroids.gif.GifImageView
+
+            android:id="@+id/gifspin5"
+            android:layout_width="34dp"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="false"
+            android:layout_centerHorizontal="false"
+            android:layout_marginStart="0dp"
+            android:layout_weight="1"
+            android:foregroundGravity="left|center|right"
+            android:src="@drawable/spin2"
+            app:layout_constraintBottom_toBottomOf="@id/gifspin4"
+            app:layout_constraintStart_toStartOf="@id/gifspin4"
+            app:layout_constraintTop_toTopOf="@id/gifspin4"
+            app:layout_constraintVertical_bias="0.421"
+            tools:ignore="MissingConstraints">
+
+        </pl.droidsonroids.gif.GifImageView>
 
     </LinearLayout>
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/primaryTitleColorNight"
-    android:backgroundTint="#DDC26F"
+    android:backgroundTint="#ECE28A"
     android:padding="8dp">
 
     <androidx.cardview.widget.CardView
@@ -26,7 +26,7 @@
         <LinearLayout
             android:layout_width="358dp"
             android:layout_height="wrap_content"
-            android:background="#D68B8B"
+            android:background="#91C5D5"
             android:orientation="vertical"
             android:weightSum="10">
 

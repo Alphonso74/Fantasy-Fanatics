@@ -1,14 +1,18 @@
 package psu.ajm6684.myapplication;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,6 +37,8 @@ public class Scores extends AppCompatActivity {
     TextView ScoresList;
     private RecyclerView recyclerView;
     private FirestoreRecyclerAdapter adapter;
+    String team1;
+    String team2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,18 +62,94 @@ public class Scores extends AppCompatActivity {
             public ScoreViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.score_list, parent, false);
                 return new ScoreViewHolder(view);
+
+
+
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull ScoreViewHolder scoreViewHolder, int i, @NonNull ScoreModel scoreModel) {
+            protected void onBindViewHolder(@NonNull ScoreViewHolder scoreViewHolder, int i, @NonNull final ScoreModel scoreModel) {
                 scoreViewHolder.list_match.setText(scoreModel.getMatch());
                 scoreViewHolder.list_score.setText(scoreModel.getScore());
+
+
+                scoreViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+                        String teams = scoreModel.getMatch().toString();
+                        String[] pairs = teams.split("vs.");
+
+                        int count = 0;
+                        for (String team : pairs) {
+                            if(count == 0){
+
+
+                                team1 = team.trim();
+                            }
+                            else if(count == 1){
+
+                                team2 = team.trim();
+                            }
+
+                            count++;
+//                            Toast.makeText(Scores.this, team.trim(), Toast.LENGTH_SHORT).show();
+
+//                            System.out.println(team.trim());
+                        }
+                        AlertDialog.Builder alertDlg = new AlertDialog.Builder(new ContextThemeWrapper(Scores.this, android.R.style.Theme_Holo_Light));
+                        alertDlg.setTitle("Rematch?");
+                        alertDlg.setMessage("Would you you like to play this game again?");
+                        alertDlg.setCancelable(true);
+
+                        alertDlg.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+
+                        alertDlg.setPositiveButton("Rematch", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+
+                                Intent intent = new Intent(Scores.this, gamesimulator.class);
+                                intent.putExtra("Team1",team1);
+
+
+                                intent.putExtra("Team2",team2);
+
+                                startActivity(intent);
+
+
+                            }
+                        });
+
+                        alertDlg.show();
+
+
+
+//                        Toast.makeText(Scores.this, scoreModel.getScore().toString() + "\n" + scoreModel.getMatch().toString(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+
+
             }
+
+
+
         };
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+
+
+
 
     }
 

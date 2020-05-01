@@ -367,7 +367,7 @@ public class gamesimulator extends AppCompatActivity {
         gameFeed.append("\nStarting at the Center Position\n" + Center1 + "!\n");
 
 
-        gameFeed.append("\n" + teamName2 + "'s" + " Starting Five! \n");
+        gameFeed.append("\n\n\n\n" + teamName2 + "'s" + " Starting Five! \n");
 
         gameFeed.append("\nStarting at the Guard Position\n" + Guard2 + "!\n");
         gameFeed.append("\nStarting at the Shooting Guard Position\n" + GuardForward2 + "!\n");

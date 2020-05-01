@@ -276,6 +276,7 @@ public class gamesimulator extends AppCompatActivity {
                             //   Toast.makeText(gamesimulator.this, "The First Quarter Is Now Underway!", Toast.LENGTH_SHORT).show();
 
                             player = MediaPlayer.create(gamesimulator.this, R.raw.buzzer);
+                            play(gamesimulator.this);
                             firstQ();
                         }
 

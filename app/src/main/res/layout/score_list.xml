@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/primaryTitleColorNight"
-    android:backgroundTint="#F8F5F5"
+    android:backgroundTint="#DDC26F"
     android:padding="8dp">
 
     <androidx.cardview.widget.CardView

@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#DDC26F"
     android:orientation="vertical"
-    android:padding="16dp"
 
-    >
+    android:padding="16dp">
+
     <LinearLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
-
+        android:orientation="horizontal"
 
 
         >
@@ -34,7 +34,6 @@
             android:textStyle="bold" />
 
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -50,8 +49,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
 
             android:text="0"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -71,9 +70,9 @@
             android:id="@+id/dataFeed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
-
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
+
+            android:textSize="24sp"
             android:textStyle="bold" />
 
 
@@ -81,11 +80,11 @@
 
     <Button
         android:id="@+id/rungame"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginTop="20dp"
         android:text="Play Game"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/backButton"
@@ -95,7 +94,6 @@
         android:onClick="back2Teams"
         android:text="Finish Game"
         android:textSize="24sp" />
-
 
 
 </LinearLayout>

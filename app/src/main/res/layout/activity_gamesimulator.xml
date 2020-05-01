@@ -40,10 +40,11 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/audiowide"
             android:text="LETS PLAY"
-            android:textColor="@color/colorAccentNight"
 
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/colorAccentNight"
             android:textSize="32sp"
             android:textStyle="bold" />
 

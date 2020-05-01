@@ -32,6 +32,7 @@
         android:autofillHints="email"
         android:ems="10"
         android:backgroundTint="@color/colorAccentNight"
+        android:textCursorDrawable="@color/colorAccentNight"
 
         android:hint="@string/email"
         android:textSize="24sp"
@@ -51,6 +52,8 @@
         android:layout_marginTop="96dp"
         android:autofillHints="@string/password"
         android:ems="10"
+        android:textCursorDrawable="@color/colorAccentNight"
+
         android:textColorHint="@color/colorAccentNight"
         android:textColor="@color/colorAccentNight"
         android:textSize="24sp"

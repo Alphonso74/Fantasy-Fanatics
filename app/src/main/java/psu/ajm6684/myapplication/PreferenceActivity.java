@@ -67,18 +67,23 @@ public class PreferenceActivity  extends AppCompatActivity {
                                 final MediaPlayer mp = MediaPlayer.create(PreferenceActivity.this, R.raw.singledribble);
                                 mp.start();
 
+//                                Intent confirmPage = new Intent(PreferenceActivity.this, MainActivity.class);
+//                                startActivity(confirmPage);
+//                                System.exit(1);
 
-                                final Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        //Do something after 100ms
-                                        Intent confirmPage = new Intent(PreferenceActivity.this, MainActivity.class);
-                                        startActivity(confirmPage);
-                                        System.exit(1);
+                                FirebaseAuth.getInstance().signOut();
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                finish();
 
-                                    }
-                                }, 500);
+//                                final Handler handler = new Handler();
+//                                handler.postDelayed(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        //Do something after 100ms
+//
+//
+//                                    }
+//                                }, 500);
 
 
 

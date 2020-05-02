@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ECE28A"
     android:orientation="vertical"
-    android:padding="16dp"
-    >
+    android:padding="16dp">
 
 
     <TextView
@@ -26,21 +26,21 @@
         android:layout_marginTop="10dp">
 
 
-<!--        <TextView-->
-<!--            android:id="@+id/dataFeed"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textSize="24sp"-->
+        <!--        <TextView-->
+        <!--            android:id="@+id/dataFeed"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:textSize="24sp"-->
 
-<!--            android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-<!--            android:textStyle="bold" />-->
+        <!--            android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
+        <!--            android:textStyle="bold" />-->
 
 
         <LinearLayout
             android:id="@+id/teams"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"/>
+            android:orientation="vertical" />
 
     </ScrollView>
 
@@ -59,8 +59,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-       >
+        android:layout_height="100dp">
 
 
         <!--        <TextView-->
@@ -77,7 +76,7 @@
             android:id="@+id/matchups"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"/>
+            android:orientation="vertical" />
 
     </ScrollView>
 
@@ -87,30 +86,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Remove Team"
         android:onClick="clearFeed"
-        android:textSize="24sp"/>
+        android:text="Remove Team"
+        android:textSize="24sp" />
 
 
     <Button
         android:id="@+id/play_game"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Play Game"
         android:onClick="playgame"
-        android:textSize="24sp"/>
+        android:text="Play Game"
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/cancel"
-        android:layout_marginTop="1dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cancel Game"
+        android:layout_marginTop="1dp"
         android:onClick="back2Teams"
-        android:textSize="24sp"/>
-
-
-
+        android:text="Cancel Game"
+        android:textSize="24sp" />
 
 
 </LinearLayout>

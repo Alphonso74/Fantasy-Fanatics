@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
 
-    >
-<!--
+    android:background="#ECE28A">
+    <!--
     <TextView
         android:id="@+id/teamNameSubmit"
         android:layout_width="wrap_content"
@@ -28,12 +30,12 @@
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="-1dp"
-        android:maxLength="15"
         android:layout_marginEnd="27dp"
         android:autofillHints="Username"
         android:ems="10"
         android:hint="@string/team_name"
         android:inputType="text"
+        android:maxLength="15"
         tools:targetApi="o" />
 
     <ScrollView
@@ -91,7 +93,8 @@
         android:layout_marginEnd="162dp"
         android:fontFamily="@font/audiowide"
         android:gravity="center"
-        android:text="@string/myp" />
+        android:text="@string/myp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <TextView
         android:id="@+id/AvailablePText"
@@ -102,7 +105,8 @@
         android:layout_marginTop="5dp"
         android:fontFamily="@font/audiowide"
         android:gravity="center"
-        android:text="@string/availiabep" />
+        android:text="@string/availiabep"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <Spinner
         android:id="@+id/spinner"

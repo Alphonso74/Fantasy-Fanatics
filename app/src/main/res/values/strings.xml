@@ -45,6 +45,11 @@
     <string name="scores">Scores</string>
     <string name="scorestext">Scores</string>
     <string name="textview">TextView</string>
+    <string name="gif_lab">Gif Lab</string>
+    <string name="next">Next</string>
+    <string name="play">Play</string>
+    <string name="gifs">GIFS</string>
+    <string name="take_picture">Take Picture</string>
 
 
     <string-array name="spinner">

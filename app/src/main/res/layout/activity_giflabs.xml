@@ -15,7 +15,7 @@ tools:context=".giflabs">
         android:layout_alignParentEnd="true"
 
         android:gravity="clip_horizontal|center"
-        android:text="Gif Lab"
+        android:text="@string/gif_lab"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="48sp"
         android:textStyle="bold" />
@@ -40,7 +40,7 @@ tools:context=".giflabs">
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/gifviewer"
-        android:text="Next"
+        android:text="@string/next"
         android:textSize="50sp"
         />
 

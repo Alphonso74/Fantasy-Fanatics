@@ -275,7 +275,7 @@ public class gamesimulator extends AppCompatActivity {
                         if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
                             //   Toast.makeText(gamesimulator.this, "The First Quarter Is Now Underway!", Toast.LENGTH_SHORT).show();
 
-                            player = MediaPlayer.create(gamesimulator.this, R.raw.buzzer);
+//                            player = MediaPlayer.create(gamesimulator.this, R.raw.buzzer);
                             play(gamesimulator.this);
                             firstQ();
                         }
@@ -600,7 +600,7 @@ public class gamesimulator extends AppCompatActivity {
 
         r = new Random();
 
-        eventType = r.nextInt(15);
+        eventType = r.nextInt(18);
 
 
         switch (eventType) {
@@ -882,17 +882,17 @@ public class gamesimulator extends AppCompatActivity {
                 break;
             case 13:
                 if (possession % 2 == 0) {
+                    event = teamName1 + " made a 3!";
 
-                    event = teamName1 + " Missed!";
-
-
+                    team1Score = team1Score + 3;
+                    team1ScoreView.setText(team1Score.toString());
                 } else {
+                    event = teamName1 + " made a 3!";
 
-                    event = teamName2 + " Missed!";
-
+                    team2Score = team2Score + 3;
+                    team2ScoreView.setText(team2Score.toString());
 
                 }
-
                 possession++;
 
                 break;
@@ -925,6 +925,78 @@ public class gamesimulator extends AppCompatActivity {
 
                 }
 
+                possession++;
+
+                break;
+            case 16:
+
+                if (possession % 2 == 0) {
+
+                    event = teamName2 + " stole the ball from " + teamName1;
+
+                } else {
+
+                    event = teamName1 + " stole the ball from " + teamName2;
+
+
+                }
+
+                possession++;
+                break;
+            case 17:
+
+            if (possession % 2 == 0) {
+
+                event = teamName2 + " committed a foul! On the Floor!";
+
+
+            } else {
+                event = teamName1 + " committed a foul! On the Floor!";
+
+
+            }
+
+
+            break;
+
+            case 18:
+                Random e = new Random();
+
+                int freethrows12 = e.nextInt(1);
+
+                if (possession % 2 == 0) {
+//                    event = teamName1 + " was fouled! AND1 !!!!!";
+
+                    if (freethrows12 == 0) {
+
+                        event = teamName1 + " was fouled! AND1 !!!!!\n"
+                                + "Free Throw Missed";
+                        team1Score = team1Score + 2;
+                        team1ScoreView.setText(team1Score.toString());
+                    } else if (freethrows12 == 1) {
+
+                        event = teamName1 + " was fouled! AND1 !!!!!\n"
+                                + "Free Throw Made";
+                        team1Score = team1Score + 3;
+                        team1ScoreView.setText(team1Score.toString());
+                    }
+
+
+                } else {
+                    if (freethrows12 == 0) {
+
+                        event = teamName2 + " was fouled! AND1 !!!!!\n"
+                                + "Free Throw Missed";
+                        team2Score = team2Score + 2;
+                        team2ScoreView.setText(team2Score.toString());
+                    } else if (freethrows12 == 1) {
+
+                        event = teamName2 + " was fouled! AND1 !!!!!\n"
+                                + "Free Throw Made";
+                        team2Score = team2Score + 3;
+                        team2ScoreView.setText(team2Score.toString());
+                    }
+                }
                 possession++;
 
                 break;

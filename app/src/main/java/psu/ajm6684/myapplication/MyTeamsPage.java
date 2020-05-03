@@ -34,6 +34,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.View;
@@ -225,8 +226,24 @@ recyclerView = findViewById(R.id.recycler_view);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent confirmPage = new Intent(getApplicationContext(), AddTeamActivity.class);
-                startActivity(confirmPage);
+
+
+                final MediaPlayer mp = MediaPlayer.create(MyTeamsPage.this, R.raw.singledribble);
+                mp.start();
+
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent confirmPage = new Intent(getApplicationContext(), AddTeamActivity.class);
+                        startActivity(confirmPage);
+
+                    }
+                }, 500);
+
+
+
+
 
             }
         });

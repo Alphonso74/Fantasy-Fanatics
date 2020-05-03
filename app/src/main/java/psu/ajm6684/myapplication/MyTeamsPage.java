@@ -84,6 +84,8 @@ public class MyTeamsPage extends AppCompatActivity {
     Button score;
     String uid ;
 
+    Button giflabs;
+
     Button hide;
 //    Query specific ;
 
@@ -106,6 +108,7 @@ public class MyTeamsPage extends AppCompatActivity {
         current = firebaseAuth.getCurrentUser();
 
 
+        giflabs = (Button) findViewById(R.id.giflab);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 
@@ -146,6 +149,16 @@ public class MyTeamsPage extends AppCompatActivity {
 
 //        specific = Users.document("gGUiNmpauHhsnbDe6pYhr47ddB52").collection("Teams");
 
+
+
+        giflabs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent giflab = new Intent(getApplicationContext(), giflabs.class);
+                startActivity(giflab);
+            }
+        });
 
         //do not delete
         firebaseAuth = FirebaseAuth.getInstance();

@@ -393,16 +393,16 @@ public class gamesimulator extends AppCompatActivity {
 
         int tip = (int) Math.round(Math.random());
 
-        if (tip == 0) {
+        if ((tip % 2) == 0) {
 
             gameFeed.append("\n" + teamName1 + " Won the tip!\n");
 
-            possession = possession + 2;
+            possession = 0;
 
         } else {
 
             gameFeed.append("\n" + teamName2 + " Won the tip!\n");
-            possession++;
+            possession = 1;
 
         }
 
@@ -583,12 +583,13 @@ public class gamesimulator extends AppCompatActivity {
             public void run() {
                 //Do something after 100ms
                 if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+                    player = MediaPlayer.create(gamesimulator.this, R.raw.buzzer);
+                    play(gamesimulator.this);
 
                     Toast.makeText(gamesimulator.this, "End of the First Quarter", Toast.LENGTH_SHORT).show();
                 }
                 gameFeed.append("\n That Concludes the First Quarter\n");
 
-                play(gamesimulator.this);
             }
         }, 30000);
 
@@ -600,7 +601,7 @@ public class gamesimulator extends AppCompatActivity {
 
         r = new Random();
 
-        eventType = r.nextInt(18);
+        eventType = r.nextInt(15);
 
 
         switch (eventType) {
@@ -790,7 +791,7 @@ public class gamesimulator extends AppCompatActivity {
                     team1Score = team1Score + 3;
                     team1ScoreView.setText(team1Score.toString());
                 } else {
-                    event = teamName1 + " made a 3!";
+                    event = teamName2 + " made a 3!";
 
                     team2Score = team2Score + 3;
                     team2ScoreView.setText(team2Score.toString());
@@ -887,7 +888,7 @@ public class gamesimulator extends AppCompatActivity {
                     team1Score = team1Score + 3;
                     team1ScoreView.setText(team1Score.toString());
                 } else {
-                    event = teamName1 + " made a 3!";
+                    event = teamName2 + " made a 3!";
 
                     team2Score = team2Score + 3;
                     team2ScoreView.setText(team2Score.toString());
@@ -925,78 +926,6 @@ public class gamesimulator extends AppCompatActivity {
 
                 }
 
-                possession++;
-
-                break;
-            case 16:
-
-                if (possession % 2 == 0) {
-
-                    event = teamName2 + " stole the ball from " + teamName1;
-
-                } else {
-
-                    event = teamName1 + " stole the ball from " + teamName2;
-
-
-                }
-
-                possession++;
-                break;
-            case 17:
-
-            if (possession % 2 == 0) {
-
-                event = teamName2 + " committed a foul! On the Floor!";
-
-
-            } else {
-                event = teamName1 + " committed a foul! On the Floor!";
-
-
-            }
-
-
-            break;
-
-            case 18:
-                Random e = new Random();
-
-                int freethrows12 = e.nextInt(1);
-
-                if (possession % 2 == 0) {
-//                    event = teamName1 + " was fouled! AND1 !!!!!";
-
-                    if (freethrows12 == 0) {
-
-                        event = teamName1 + " was fouled! AND1 !!!!!\n"
-                                + "Free Throw Missed";
-                        team1Score = team1Score + 2;
-                        team1ScoreView.setText(team1Score.toString());
-                    } else if (freethrows12 == 1) {
-
-                        event = teamName1 + " was fouled! AND1 !!!!!\n"
-                                + "Free Throw Made";
-                        team1Score = team1Score + 3;
-                        team1ScoreView.setText(team1Score.toString());
-                    }
-
-
-                } else {
-                    if (freethrows12 == 0) {
-
-                        event = teamName2 + " was fouled! AND1 !!!!!\n"
-                                + "Free Throw Missed";
-                        team2Score = team2Score + 2;
-                        team2ScoreView.setText(team2Score.toString());
-                    } else if (freethrows12 == 1) {
-
-                        event = teamName2 + " was fouled! AND1 !!!!!\n"
-                                + "Free Throw Made";
-                        team2Score = team2Score + 3;
-                        team2ScoreView.setText(team2Score.toString());
-                    }
-                }
                 possession++;
 
                 break;
@@ -1199,11 +1128,11 @@ public class gamesimulator extends AppCompatActivity {
             public void run() {
                 //Do something after 100ms
                 if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+                    play(gamesimulator.this);
 
                     Toast.makeText(gamesimulator.this, "End of the Second Quarter", Toast.LENGTH_SHORT).show();
                 }
                 gameFeed.append("\n That Concludes the Second Quarter\n");
-                play(gamesimulator.this);
 
             }
         }, 30000);
@@ -1410,11 +1339,11 @@ public class gamesimulator extends AppCompatActivity {
             public void run() {
                 //Do something after 100ms
                 if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+                    play(gamesimulator.this);
 
                     Toast.makeText(gamesimulator.this, "End of the Third Quarter", Toast.LENGTH_SHORT).show();
                 }
                 gameFeed.append("\n That Concludes the Third Quarter\n");
-                play(gamesimulator.this);
 
             }
         }, 30000);
@@ -1606,11 +1535,11 @@ public class gamesimulator extends AppCompatActivity {
             public void run() {
                 //Do something after 100ms
                 if (gamesimulator.this.getWindow().getDecorView().getRootView().isShown() == true) {
+                    play(gamesimulator.this);
 
                     Toast.makeText(gamesimulator.this, "End of the Fourth Quarter", Toast.LENGTH_SHORT).show();
                 }
                 gameFeed.append("\n That Concludes the Fourth Quarter\n");
-                play(gamesimulator.this);
 
             }
         }, 30000);

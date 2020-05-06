@@ -67,7 +67,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
-            android:text="Center Forward" />
+            android:text="Center Forward:" />
 
         <TextView
             android:id="@+id/textView16"
@@ -77,7 +77,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
-            android:text="Center" />
+            android:text="Center:" />
 
 
         <TextView

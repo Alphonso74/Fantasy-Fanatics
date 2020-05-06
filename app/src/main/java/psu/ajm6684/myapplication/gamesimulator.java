@@ -99,7 +99,7 @@ public class gamesimulator extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         backButton = (Button) findViewById(R.id.backButton);
 
-
+        stopService(new Intent(this, MyService.class));
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,6 +114,7 @@ public class gamesimulator extends AppCompatActivity {
 
                         Intent confirmPage = new Intent(gamesimulator.this, MyTeamsPage.class);
                         confirmPage.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startService(new Intent(gamesimulator.this, MyService.class));
                         startActivity(confirmPage);
                         finish();
 

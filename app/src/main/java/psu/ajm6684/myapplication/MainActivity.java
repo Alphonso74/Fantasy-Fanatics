@@ -140,7 +140,7 @@ public class MainActivity extends Activity {
         confirm = findViewById(R.id.confirmMainPage);
         signup = findViewById(R.id.confirmCreateAccount);
 
-
+//        startService(new Intent(this, MyService.class));
         final EditText email = (EditText) findViewById(R.id.emailMainPage);
         final EditText password = (EditText) findViewById(R.id.passwordInputMainPage);
 
@@ -314,7 +314,20 @@ public class MainActivity extends Activity {
 
     }
 
+//    @Override
+//    protected void onPause() {
+//        // TODO Auto-generated method stub
+//        super.onPause();
+//
+//        stopService(new Intent(this, MyService.class));
+//    }
 
+//    @Override
+//    public void onResume() {
+//        super.onResume();  // Always call the superclass method first
+//        startService(new Intent(this, MyService.class));
+//        // re-sync the clock with player...
+//    }
 
 
 //    public void signupChangePage(View view)

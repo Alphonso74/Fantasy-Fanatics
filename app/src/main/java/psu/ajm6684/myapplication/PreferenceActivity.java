@@ -201,6 +201,12 @@ public class PreferenceActivity  extends AppCompatActivity {
 
 
     }
-
+//    @Override
+//    protected void onPause() {
+//        // TODO Auto-generated method stub
+//        super.onPause();
+//
+//        stopService(new Intent(this, MyService.class));
+//    }
 
 }

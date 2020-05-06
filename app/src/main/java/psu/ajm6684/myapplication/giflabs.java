@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -130,5 +131,13 @@ public class giflabs extends AppCompatActivity {
 
 
     }
+
+//    @Override
+//    protected void onPause() {
+//        // TODO Auto-generated method stub
+//        super.onPause();
+//
+//        stopService(new Intent(this, MyService.class));
+//    }
 
 }

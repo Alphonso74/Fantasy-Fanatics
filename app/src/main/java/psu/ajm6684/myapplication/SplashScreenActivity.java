@@ -46,6 +46,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
             setContentView(R.layout.splash_activity);
 
+        startService(new Intent(this, MyService.class));
 
     }
 //    private static int SPLASH_TIME_OUT = 4000;
